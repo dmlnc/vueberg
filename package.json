@@ -1,0 +1,112 @@
+{
+  "name": "gutentap",
+  "version": "0.0.1",
+  "private": false,
+  "type": "module",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "main": "./lib/guten-tap.umd.cjs",
+  "module": "./lib/guten-tap.js",
+  "exports": {
+    ".": {
+      "import": "./lib/guten-tap.js",
+      "require": "./lib/guten-tap.umd.cjs"
+    },
+    "./style.scss": {
+      "import": "./lib/style.scss",
+      "require": "./lib/style.scss"
+    }
+  },
+  "scripts": {
+    "serve": "npx vite --host",
+    "build": "npx vite build && npx vite build -c vite.demo.config.js",
+    "build:lib": "npx vite build",
+    "build:demo": "npx vite build -c vite.demo.config.js"
+  },
+  "dependencies": {
+    "@babel/eslint-parser": "^7.24.5",
+    "@gocapsule/column-extension": "^1.0.0-beta-3",
+    "@tiptap/extension-blockquote": "^2.0.0",
+    "@tiptap/extension-bold": "^2.4.0",
+    "@tiptap/extension-bubble-menu": "^2.0.0",
+    "@tiptap/extension-bullet-list": "^2.4.0",
+    "@tiptap/extension-code": "^2.4.0",
+    "@tiptap/extension-code-block": "^2.4.0",
+    "@tiptap/extension-document": "^2.4.0",
+    "@tiptap/extension-dropcursor": "^2.4.0",
+    "@tiptap/extension-floating-menu": "^2.4.0",
+    "@tiptap/extension-gapcursor": "^2.4.0",
+    "@tiptap/extension-hard-break": "^2.4.0",
+    "@tiptap/extension-heading": "^2.4.0",
+    "@tiptap/extension-highlight": "^2.0.0",
+    "@tiptap/extension-history": "^2.4.0",
+    "@tiptap/extension-horizontal-rule": "^2.4.0",
+    "@tiptap/extension-italic": "^2.4.0",
+    "@tiptap/extension-link": "^2.0.0",
+    "@tiptap/extension-list-item": "^2.4.0",
+    "@tiptap/extension-ordered-list": "^2.4.0",
+    "@tiptap/extension-paragraph": "^2.4.0",
+    "@tiptap/extension-placeholder": "^2.0.0",
+    "@tiptap/extension-strike": "^2.4.0",
+    "@tiptap/extension-subscript": "^2.0.0",
+    "@tiptap/extension-superscript": "^2.0.0",
+    "@tiptap/extension-text": "^2.4.0",
+    "@tiptap/extension-text-align": "^2.0.0",
+    "@tiptap/extension-typography": "^2.4.0",
+    "@tiptap/extension-youtube": "^2.0.0",
+    "@tiptap/pm": "^2.4.0",
+    "@tiptap/suggestion": "^2.0.0",
+    "@tiptap/vue-3": "^2.4.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "core-js": "^3.8.3",
+    "jenesius-vue-modal": "^1.11.1",
+    "sass-loader": "^13.1.0",
+    "tippy.js": "^6.3.7",
+    "vite": "^4.3.9",
+    "vue": "^3.2.40"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@typescript-eslint/parser": "^7.5.0",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "autoprefixer": "^10.4.12",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "postcss": "^8.4.17",
+    "sass": "^1.77.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser"
+    },
+    "rules": {}
+  },
+  "eslintIgnore": [
+    "dist",
+    "node_modules",
+    "lib"
+  ],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  }
+}
