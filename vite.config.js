@@ -30,7 +30,7 @@ export default defineConfig({
       // name.js (es module)
       // name.umd.cjs) (common js module)
       // default fileName is the name option of package.json
-      fileName: "guten-tap",
+      fileName: "vueberg",
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
