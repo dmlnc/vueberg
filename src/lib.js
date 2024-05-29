@@ -2,6 +2,6 @@ import VueBergComponent from "@/components/VueBerg.vue";
 
 export const VueBerg = VueBergComponent;
 
-import BaseBlockComponent from "@/components/BaseBlock.vue";
+import BaseVueBergBlockComponent from "@/components/BaseVueBergBlock.vue";
 
-export const BaseBlock = BaseBlockComponent;
+export const BaseVueBergBlock = BaseVueBergBlockComponent;

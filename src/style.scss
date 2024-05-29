@@ -864,6 +864,7 @@ html{
     border-radius: var(--vueberg-border-radius);
     width: 100%;
     max-width: var(--vueberg-modal-max-width);
+    outline: none;
 
     &-md{
       max-width: var(--vueberg-modal-max-width-md);
@@ -884,6 +885,7 @@ html{
       display: flex;
       justify-content: space-between;
       max-height: 80px;
+      align-items: center;
 
       &-close{
         color: var(--vueberg-color-muted);

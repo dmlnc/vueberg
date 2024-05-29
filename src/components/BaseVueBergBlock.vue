@@ -14,11 +14,10 @@
         {{ vueBergBlock?.title }}
       </div>
       <div class="vueberg-customblock-header-mode" v-if="vueBergBlock?.vueBergBlock?.hasPreviewMode !== false ">
-        <span @click="toggleMode">{{ isPreviewMode ? 'Редактировать' : 'Просмотр' }}</span>
+        <span @click="toggleMode">{{ isPreviewMode ? editLabel : previewLabel }}</span>
       </div>
     </div>
     <div class="vueberg-customblock-body">
-      <!-- {{ allowedBlocks }} -->
       <slot :isEditable="isEditable" :isPreviewMode="isPreviewModeComputed" :vueBergBlock="vueBergBlock"  />
     </div>
   </node-view-wrapper>
@@ -26,26 +25,23 @@
 
 <script>
 import { NodeViewWrapper, nodeViewProps } from "@tiptap/vue-3";
-import { TextSelection } from 'prosemirror-state';
-
 export default {
   props: nodeViewProps,
 
   components: {
     NodeViewWrapper,
-    // NodeViewContent,
   },
   data() {
     return {
       isPreviewMode: false,
       isEditable: this.editor.isEditable,
       vueBergBlock: this.editor.storage.vuebergBlocks.getBlockTool(this.node.type.name, false),
+      editLabel:  this.editor.commands.getTranslation('control.edit'),
+      previewLabel:  this.editor.commands.getTranslation('control.preview'),
+
     }
   },
-  mounted(){
-   
-    // this.vueBergBlock = this.editor.storage.vuebergBlocks.getBlockTool(this.node.type.name);
-  },
+  mounted(){},
   computed:{
     isPreviewModeComputed(){
       if(!this.isEditable){
@@ -61,19 +57,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.editable-wrapper {
-  border: 1px solid #ccc;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-.editable-wrapper.preview {
-  background-color: #f9f9f9;
-}
-.wrapper-header {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 8px;
-}
-</style>

@@ -2,7 +2,6 @@ import { mergeAttributes, Node } from "@tiptap/core";
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
 
 import Notification from './Notification.vue'
-import { Plugin, PluginKey } from '@tiptap/pm/state'
 
 export default Node.create({
   name: 'notification',

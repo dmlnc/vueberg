@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       showContent: false,
-      extensions: [VueComponent, Notification],
+      extensions: [Notification],
       editable: true,
       // alignmentTools: [
       //   [
@@ -81,10 +81,13 @@ export default {
           blocks: [
             {
               title: "Notification",
-              description: 'Описание',
               name: "notification",
+
+              description: 'Описание',
               icon: '<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke-width="0" stroke="currentColor" fill="currentColor"  focusable="false"><path d="M4 4v1.5h16V4H4zm8 8.5h8V11h-8v1.5zM4 20h16v-1.5H4V20zm4-8c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path></svg>',
+              
               insertCommand: ({ editor, range }) => {
+
                 editor
                   .chain()
                   .focus()
@@ -93,42 +96,31 @@ export default {
                   // .insertContent('<div><notification type="0"></notification></div>')
                   .run();
               },
-              inlineTools: true, 
-              alignTools: true,
-              variants: true,
-              allowedBlocks: {
-                paragraph: true,
-                heading: true,
-              },
-              variants: true,
-              canBeConverted: false,
               isActiveTest: (editor) => editor.isActive("notification"),
+
+              settings: {
+                allowedBlocks: {
+                  paragraph: true,
+                  heading: true,
+                },
+                isDefaultCommand: true,
+                variants: true,
+                blockWidth: true,
+                textAlign: true,
+              },
+
+              toolbar: {
+                inlineTools: true, 
+                alignTools: {
+                  textAlign: true,
+                  blockWidth: true,
+                },
+                canBeConverted: false,
+              },
+
               vueBergBlock:{
                 hasPreviewMode: false
               }
-            },
-            {
-              title: "Sample Vue component",
-              description: 'Описание',
-              name: "vueComponent",
-              icon: '<svg  width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32"><path d="M24.3,4h-4.8L16,9.6L13,4H2l14,24L30,4L24.3,4z M5.5,6h3.4L16,18.4L23.1,6h3.4L16,24L5.5,6z"/></svg>',
-              insertCommand: ({ editor, range }) => {
-                editor
-                  .chain()
-                  .focus()
-                  .deleteRange(range)
-                  .insertContent(
-                    '<div><vue-component count="0"></vue-component></div>'
-                  )
-                  .run();
-              },
-              inlineTools: false,
-              alignTools: {
-                blockWidth: true
-              },
-              variants: false,
-              canBeConverted: false,
-              isActiveTest: (editor) => editor.isActive("vueComponent"),
             },
           ]
         }

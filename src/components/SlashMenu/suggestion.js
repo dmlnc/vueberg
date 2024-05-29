@@ -5,28 +5,33 @@ import SlashMenu from "./SlashMenu.vue";
 
 export default function (count) {
   return {
-    items: ({ query, editor }) => { 
+    items: ({ query, editor }) => {
       const allowedBlocks = editor.storage.vuebergBlocks.getAllowedBlocks(
         editor.storage.vuebergBlocks.currentNode, 
         editor.storage.vuebergBlocks.getFlatBlocks()
-      )
-
-      return allowedBlocks.filter(block => { 
-        if (!query) {
-          if(allowedBlocks.length > count){
-            return block?.isDefaultCommand && !block?.hideCommand;
-          } else{
-            return !block?.hideCommand;
-          }
+      );
+    
+      let filteredBlocks = allowedBlocks.filter(block => !block.hideCommand);
+    
+      if (!query) {
+        let defaultBlocks = filteredBlocks.filter(block => block.isDefaultCommand);
+        if (defaultBlocks.length >= count) {
+          filteredBlocks = defaultBlocks;
         } else {
-          const lowerCaseQuery = query.toLowerCase();
+          let additionalBlocks = filteredBlocks.filter(block => !block.isDefaultCommand);
+          filteredBlocks = defaultBlocks.concat(additionalBlocks).slice(0, count);
+        }
+      } else {
+        const lowerCaseQuery = query.toLowerCase();
+        filteredBlocks = filteredBlocks.filter(block => {
           const matchesTitle = block.title.toLowerCase().startsWith(lowerCaseQuery);
           const matchesKeywords = block.keywords && block.keywords.some(keyword => keyword.toLowerCase().startsWith(lowerCaseQuery));
-          
-          return (matchesTitle || matchesKeywords) && !block?.hideCommand; 
-        } 
-      }).slice(0, count); 
-    },   
+          return matchesTitle || matchesKeywords;
+        });
+      }
+    
+      return filteredBlocks.slice(0, count);
+    },
 
     render: () => {
       let component;
@@ -56,6 +61,7 @@ export default function (count) {
             // props,
             // editor: props.editor,
           });
+          // console.log(props)
 
           if (!props.clientRect) {
             return;
@@ -99,10 +105,13 @@ export default function (count) {
             return true;
           }
 
+          console.log('onKeyDown', props);
           return component?.ref?.onKeyDown(props);
         },
 
         onExit() {
+          console.log('onExit');
+
           if (popup) {
             popup[0].destroy();
           }

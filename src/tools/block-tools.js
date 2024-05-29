@@ -6,15 +6,17 @@ export default function () {
   
   return [
     {
-      name: 'typography',
       title: 'Текст',
+      name: 'typography',
+
       blocks: [
         {
           title: "Заголовок",
+          name: "heading",
           keywords: ["h1","h2","h3","heading"],
           description: 'Просто заголовок страницы',
-          name: "heading",
           icon: '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" focusable="false"><path d="M6.2 5.2v13.4l5.8-4.8 5.8 4.8V5.2z"></path></svg>',
+          
           insertCommand: ({ editor, range }) => {
             editor
               .chain()
@@ -26,22 +28,29 @@ export default function () {
           convertCommand: (editor) => {
             editor.chain().focus().toggleHeading({ level: 2 }).run();
           },
-
-          allowedBlocks: true,
-          isDefaultCommand: true,
-          
-          inlineTools: true, 
-          alignTools: {
-            textAlign: true,
-            blockWidth: true,
-          },
-          variants: false,
-          canBeConverted: {
-            paragraph: true,
-            list: true,
-            // blockquote: true,
-          },
           isActiveTest: (editor) => editor.isActive("heading"),
+
+          settings: {
+            allowedBlocks: true,
+            isDefaultCommand: true,
+            variants: false,
+            blockWidth: true,
+            textAlign: true,
+          },
+
+          toolbar: {
+            inlineTools: true, 
+            alignTools: {
+              textAlign: true,
+              blockWidth: true,
+            },
+            canBeConverted: {
+              paragraph: true,
+              bulletList: true,
+              // blockquote: true,
+            },
+          },
+
           tools: [
             {
               title: "Заголовок 1 ур.",
@@ -74,27 +83,39 @@ export default function () {
         },
         {
           title: "Текст",
-          description: 'Описание',
-          keywords: ["paragraph","text"],
           name: "paragraph",
+          keywords: ["paragraph","text"],
+          description: 'Описание',
           icon: '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" focusable="false"><path d="M18.3 4H9.9v-.1l-.9.2c-2.3.4-4 2.4-4 4.8s1.7 4.4 4 4.8l.7.1V20h1.5V5.5h2.9V20h1.5V5.5h2.7V4z"></path></svg>',
+          
           insertCommand: ({ editor, range }) => {
             editor.chain().focus().deleteRange(range).setNode("paragraph").run();
           },
           convertCommand: (editor) => {
             editor.chain().focus().setParagraph().run();
           },
-          allowedBlocks: true,
-          isDefaultCommand: true,
-          inlineTools: true, 
-          alignTools: true,
-          variants: true,
-          canBeConverted: {
-            heading: true,
-            list: true,
-            // blockquote: true,
-          },
           isActiveTest: (editor) => editor.isActive("paragraph"),
+
+          settings: {
+            allowedBlocks: true,
+            isDefaultCommand: true,
+            variants: true,
+            blockWidth: true,
+            textAlign: true,
+          },
+
+          toolbar: {
+            inlineTools: true, 
+            alignTools: {
+              textAlign: true,
+              blockWidth: true,
+            },
+            canBeConverted: {
+              heading: true,
+              bulletList: true,
+              // blockquote: true,
+            },
+          },
           tools: [
             {
               title: "Обычный",
@@ -120,25 +141,35 @@ export default function () {
           title: "Список",
           name: "bulletList",
           keywords: ["ul","li","ol","list"],
+          description: 'Описание',
           icon: '<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke-width="0" stroke="currentColor" fill="currentColor"  focusable="false"><path d="M4 4v1.5h16V4H4zm8 8.5h8V11h-8v1.5zM4 20h16v-1.5H4V20zm4-8c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path></svg>',
+          
           insertCommand: ({ editor, range }) => {
             editor.chain().focus().deleteRange(range).toggleBulletList().run();
           },
           convertCommand: (editor) => {
             editor.chain().focus().toggleBulletList().run();
           },
-          inlineTools: true, 
-          alignTools: false,
-          isDefaultCommand: true,
-          allowedBlocks: false,
-          variants: false,
-          canBeConverted: {
-            heading: true,
-            paragraph: true,
-            // blockquote: true,
-          },
-          
           isActiveTest: (editor) => editor.isActive("bulletList") || editor.isActive("orderedList"),
+
+
+          settings: {
+            allowedBlocks: false,
+            isDefaultCommand: true,
+            variants: false,
+            blockWidth: false,
+            textAlign: false,
+          },
+
+          toolbar: {
+            inlineTools: true, 
+            alignTools: false,
+            canBeConverted: {
+              heading: true,
+              paragraph: true,
+              // blockquote: true,
+            },
+          },
           tools: [
             {
               title: "Список",
@@ -203,22 +234,15 @@ export default function () {
     },
     // Медиа - youtube
     {
-      name: 'media',
       title: 'Медиа',
+      name: 'media',
       blocks: [
         {
           title: "YouTube",
           name: "youtube",
           keywords: ["yt"],
           icon: '<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="24" height="24" version="1.1" viewBox="0 0 461.001 461.001"><path fill="currentColor" d="M365.257 67.393H95.744C42.866 67.393 0 110.259 0 163.137v134.728c0 52.878 42.866 95.744 95.744 95.744h269.513c52.878 0 95.744-42.866 95.744-95.744V163.137c0-52.878-42.866-95.744-95.744-95.744zm-64.751 169.663-126.06 60.123c-3.359 1.602-7.239-.847-7.239-4.568V168.607c0-3.774 3.982-6.22 7.348-4.514l126.06 63.881c3.748 1.899 3.683 7.274-.109 9.082z"/></svg>',
-          inlineTools: false, 
-          alignTools: {
-            blockWidth: true,
-          },
-          variants: false,
-          canBeConverted: false,
-          isDefaultCommand: true,
-          isActiveTest: (editor) => editor.isActive("youtube"),
+
           insertCommand: async ({ editor, range }) => {
             editor.chain().focus().deleteRange(range).run();
             let finished = false;
@@ -247,11 +271,9 @@ export default function () {
                 return;
               }
               youtubeUrl = form[0].value;
-
               if(youtubeUrl == null){
                 return;
               }
-              
               if(isValidYoutubeUrl(youtubeUrl)){
                 finished = true;
               } else{
@@ -259,22 +281,37 @@ export default function () {
                 text = editor.commands.getTranslation('blockTools.youtube.form.error')
               }
             }
-
             editor.chain().focus().setYoutubeVideo({ src: youtubeUrl}).run();
-
           },
+          isActiveTest: (editor) => editor.isActive("youtube"),
+
+          settings: {
+            allowedBlocks: false,
+            isDefaultCommand: true,
+            variants: false,
+            blockWidth: true,
+            textAlign: false,
+          },
+
+          toolbar: {
+            inlineTools: false, 
+            alignTools: {
+              blockWidth: true,
+              textAlign: false,
+            },
+            canBeConverted: false
+          },
+
           tools: [
             {
               title: "Ссылка youtube",
               name: "youtubeLink",
               icon: '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" focusable="false"><path d="M15.6 7.2H14v1.5h1.6c2 0 3.7 1.7 3.7 3.7s-1.7 3.7-3.7 3.7H14v1.5h1.6c2.8 0 5.2-2.3 5.2-5.2 0-2.9-2.3-5.2-5.2-5.2zM4.7 12.4c0-2 1.7-3.7 3.7-3.7H10V7.2H8.4c-2.9 0-5.2 2.3-5.2 5.2 0 2.9 2.3 5.2 5.2 5.2H10v-1.5H8.4c-2 0-3.7-1.7-3.7-3.7zm4.6.9h5.3v-1.5H9.3v1.5z"></path></svg>',
               command: async (editor) => {
-
                 let finished = false;
                 let value = editor.getAttributes("youtube").src;
                 let text = null;
                 let youtubeUrl = null;
-
                 while(!finished){
                   let form = await editor.commands.promptModal(
                     {
@@ -296,11 +333,9 @@ export default function () {
                     return;
                   }
                   youtubeUrl = form[0].value;
-
                   if(youtubeUrl == null){
                     return;
                   }
-                  
                   if(isValidYoutubeUrl(youtubeUrl)){
                     finished = true;
                   } else{
@@ -308,7 +343,6 @@ export default function () {
                     text = editor.commands.getTranslation('blockTools.youtube.form.error')
                   }
                 }
-
                 editor.chain().focus().setYoutubeVideo({
                   src: youtubeUrl,
                 }).run()
@@ -319,27 +353,38 @@ export default function () {
         },
       ]
     },
-    // Другое - HR
     {
-      name: 'other',
       title: 'Другое',
+      name: 'other',
       blocks: [
         {
           title: "Разделитель",
-          keywords: ["hr", "horizontal"],
           name: "horizontalRule",
+          keywords: ["hr", "horizontal"],
           icon: '<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M20.2 7v4H3.8V7H2.2v9h1.6v-3.5h16.4V16h1.6V7z"></path></svg>',
+          
           insertCommand: ({ editor, range }) => {
             editor.chain().focus().deleteRange(range).setHorizontalRule().run();
           },
-          inlineTools: false,
-          alignTools: {
-            blockWidth: true,
-          },
-          variants: true,
-          canBeConverted: false,
           isActiveTest: (editor) => editor.isActive("horizontalRule"),
 
+          settings: {
+            allowedBlocks: false,
+            isDefaultCommand: false,
+            variants: true,
+            blockWidth: true,
+            textAlign: false,
+          },
+
+          toolbar: {
+            inlineTools: false, 
+            alignTools: {
+              blockWidth: true,
+              textAlign: false,
+            },
+            canBeConverted: false
+          },
+          
           tools: [
             {
               title: "Обычный",
@@ -371,7 +416,7 @@ export default function () {
       //   link: true,
       //   Bold: true,
       // },
- // alignTools: {
+      // alignTools: {
       //   textAlign: true,
       //   blockWidth: true,
       // },

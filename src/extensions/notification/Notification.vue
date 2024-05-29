@@ -1,5 +1,5 @@
 <template>
-    <BaseBlock v-bind="$props">
+    <BaseVueBergBlock v-bind="$props">
       <template v-slot="{ isPreviewMode }">
         <div class="vuebergBlock-notification" :data-variant="node.attrs.variant">
             <div class="vuebergBlock-notification-settings" contenteditable="false" v-if="!isPreviewMode">
@@ -13,11 +13,11 @@
             <node-view-content class="vuebergBlock-notification-content" />
         </div>
       </template>
-    </BaseBlock>
+    </BaseVueBergBlock>
 </template>
   
 <script>
-import BaseBlock from '@/components/BaseBlock.vue'
+import BaseVueBergBlock from '@/components/BaseVueBergBlock.vue'
 import { NodeViewContent, nodeViewProps } from "@tiptap/vue-3";
   
 
@@ -25,7 +25,7 @@ export default {
   props: nodeViewProps,
 
   components: {
-      BaseBlock,
+      BaseVueBergBlock,
       NodeViewContent,
   },
   data(){

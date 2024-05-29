@@ -90,10 +90,10 @@ export const VuebergBlocks = Extension.create({
         const blockTool = this.getBlockByName(currentNode.type.name);
         const contentExpr = currentNode.type.spec.content;
         if (blockTool) {
-          if (blockTool.allowedBlocks === false) {
+          if (blockTool.settings?.allowedBlocks === false) {
             return [];
-          } else if (typeof blockTool.allowedBlocks === 'object') {
-            blocks = blocks.filter(block => blockTool.allowedBlocks[block.name]);
+          } else if (typeof blockTool.settings?.allowedBlocks === 'object') {
+            blocks = blocks.filter(block => blockTool.settings?.allowedBlocks[block.name]);
           }
         }
       
@@ -103,7 +103,7 @@ export const VuebergBlocks = Extension.create({
         }
 
         if ((contentExpr.includes('text') || contentExpr.includes('inline'))) {
-          if (currentNode.depth === 1 && (blockTool?.allowedBlocks === true || typeof blockTool?.allowedBlocks === 'object')) {
+          if (currentNode.depth === 1 && (blockTool?.settings?.allowedBlocks === true || typeof blockTool?.settings?.allowedBlocks === 'object')) {
             return blocks;
           } else{
             return [];

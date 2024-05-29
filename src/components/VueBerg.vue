@@ -2,12 +2,10 @@
   <div class="vueberg" style="position: relative;" ref="vueberg">
     <widget-container-modal />
 
-    
-
     <bubble-menu
       pluginKey="mainMenu"
       :should-show="shouldShowMainToolbar"
-      :updateDelay="0"
+      :updateDelay="250"
       v-if="editor"
       :editor="editor"
       :class="{
@@ -27,6 +25,7 @@
       <Toolbar
         v-if="currentBlockTool?.nodeType !== undefined"
         :editor="editor"
+        :currentBlockTool="currentBlockTool"
         :settings="mergedSettings"
         :inlineTools="allInlineTools"
         :alignmentTools="allAlignmentTools"
@@ -79,7 +78,7 @@ import VuebergBlocks from "../extensions/vueberg-blocks/index.js";
 import { ModalExtension } from "./Modal/modal.js";
 import Variants from "../extensions/variants/index";
 import defaultBlockTools from "../tools/block-tools.js";
-import defaultExtensions from "../tools/default-extensions.js";
+import defaultExtensions from "../extensions/default-extensions.js";
 import defaultInlineTools from "../tools/inline-tools.js";
 import defaultAlignmentTools from "../tools/alignment-tools.js";
 import BlocksModal from "@/components/Modal/BlocksModal.vue";
@@ -156,6 +155,8 @@ export default {
       // EventListners
       handleMouseMove: null,
       handleResize: null,
+
+      currentBlockTool: null,
     };
   },
 
@@ -187,25 +188,19 @@ export default {
   },
 
   computed: {
-    currentBlockTool(){
-      if(!this.editor){
-        return null;
-      }
-      return this.editor.storage.vuebergBlocks.currentBlockTool
-    },
     mergedSettings() {
       return { ...this.defaultSettings, ...this.settings };
     },
     blocksWithVariant() {
-      return this.filterBlocks(block => block?.variants);
+      return this.filterBlocks(block => block?.settings?.variants);
     },
     blocksWithBlockWidth() {
       return this.filterBlocks(block => 
-        (typeof block.alignTools === 'object' && block.alignTools.blockWidth) || block.alignTools);
+        (block.settings?.blockWidth === true));
     },
     blocksWithTextAlign() {
       return this.filterBlocks(block => 
-        (typeof block.alignTools === 'object' && block.alignTools.textAlign) || block.alignTools);
+        (block.settings?.textAlign === true));
     },
   },
 
@@ -244,12 +239,6 @@ export default {
         onUpdate: this.handleEditorUpdate,
         onSelectionUpdate: this.updateCurrentBlockTool,
       });
-
-      // this.editor.commands.setContent(
-      //   this.mode == "json" ? { type: "doc", content: this.modelValue } : this.modelValue
-      // );
-
-      // this.editor.setEditable(this.editable);
     },
     handleEditorUpdate() {
       this.updateCurrentBlockTool();
@@ -290,7 +279,8 @@ export default {
       });
     },
     shouldShowMainToolbar({editor, state, view}) {
-
+      // const node = GetCurrentNode(editor);
+      // this.currentBlockTool = this.editor.storage.vuebergBlocks.getBlockTool(node.type.name);
       return this.editable && view.hasFocus() && editor.isActive() && this.modelValue;
     },
     shouldShowFloatingMenu({editor, state, view}){
@@ -314,7 +304,7 @@ export default {
       
     },
     updateCurrentBlockTool() {
-      this.editor.storage.vuebergBlocks.getBlockTool(this.editor.commands.getCurrentNodeName());
+      this.currentBlockTool = this.editor.storage.vuebergBlocks.getBlockTool(this.editor.commands.getCurrentNodeName());
     },
     getMenuCoords() {
       return GetCurrentBlockCoords(this.editor);

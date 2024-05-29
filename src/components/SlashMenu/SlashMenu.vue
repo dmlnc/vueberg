@@ -89,6 +89,11 @@ export default {
         this.enterHandler();
         return true;
       }
+
+      if (event.key === "Tab") {
+        this.showAll();
+        return true;
+      }
       return false;
     },
 

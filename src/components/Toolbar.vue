@@ -28,7 +28,7 @@
             <menu-button
               :label="currentBlockTool?.title"
               :content="currentBlockTool?.icon"
-              :class="(currentBlockTool?.canBeConverted && canBeConvertedTo.length) ? 'vueberg-button-secondary' : ''"
+              :class="(currentBlockTool?.toolbar?.canBeConverted && canBeConvertedTo.length) ? 'vueberg-button-secondary' : ''"
             />
             <template #dropdown>
               <div class="vueberg-toolbar-transform-to">{{transformToLabel}}</div>
@@ -119,10 +119,10 @@ export default {
     vuebergWidth: {
       required: true,
     },
-    // currentBlockTool: {
-    //   type: Object,
-    //   required: true,
-    // },
+    currentBlockTool: {
+      type: Object,
+      required: true,
+    },
     inlineTools: {
       type: Array,
       default: () => [],
@@ -163,12 +163,12 @@ export default {
 
   computed: {
     
-    currentBlockTool(){
-      if(!this.editor){
-        return null;
-      }
-      return this.editor.storage.vuebergBlocks.currentBlockTool
-    },
+    // currentBlockTool(){
+    //   if(!this.editor){
+    //     return null;
+    //   }
+    //   return this.editor.storage.vuebergBlocks.currentBlockTool
+    // },
     currentNode(){
       if(!this.editor){
         return null;
@@ -177,17 +177,17 @@ export default {
     },
 
     canBeConvertedTo(){
-      if (this.currentBlockTool?.canBeConverted === false) {
+      if (this.currentBlockTool?.toolbar?.canBeConverted === false) {
         return [];
       }
 
       return this.editor.storage.vuebergBlocks.getFlatBlocks().filter(tool => {
-        return this.currentBlockTool?.canBeConverted[tool.name] && tool.convertCommand;
+        return this.currentBlockTool?.toolbar?.canBeConverted[tool.name] && tool.convertCommand;
       });
     },
 
     activeAlignmentTools() {
-      if (!this.currentBlockTool?.alignTools) {
+      if (!this.currentBlockTool?.toolbar?.alignTools) {
         return [];
       }
 
@@ -200,7 +200,7 @@ export default {
         return true;
       };
 
-      if (this.currentBlockTool.alignTools === true) {
+      if (this.currentBlockTool.toolbar?.alignTools === true) {
         return this.alignmentTools
           .filter(filterAlignmentTools)
           .filter((alignmentToolGroup) =>
@@ -210,10 +210,10 @@ export default {
           );
       }
 
-      if (typeof this.currentBlockTool.alignTools === 'object') {
+      if (typeof this.currentBlockTool.toolbar?.alignTools === 'object') {
         return this.alignmentTools
           .filter(filterAlignmentTools)
-          .filter((alignmentToolGroup) => this.currentBlockTool.alignTools[alignmentToolGroup.name])
+          .filter((alignmentToolGroup) => this.currentBlockTool.toolbar?.alignTools[alignmentToolGroup.name])
           .filter((alignmentToolGroup) => alignmentToolGroup.tools.length > 0);
       }
 
@@ -329,9 +329,9 @@ export default {
         },
         {
           type: 'inlineTools',
-          condition: this.currentBlockTool?.inlineTools,
+          condition: this.currentBlockTool?.toolbar?.inlineTools,
           buttons: (() => {
-            const inlineTools = this.currentBlockTool?.inlineTools;
+            const inlineTools = this.currentBlockTool?.toolbar?.inlineTools;
 
             if (inlineTools === true) {
               // Возвращаем все инструменты, если inlineTools равно true

@@ -21,9 +21,9 @@ import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import Highlight from "@tiptap/extension-highlight";
 import Typography from '@tiptap/extension-typography'
-import { Youtube } from "../extensions/youtube";
-import { TrailingNode } from "../extensions/trailing-node";
-import Localize from "../extensions/localize";
+import { Youtube } from "./youtube";
+import { TrailingNode } from "./trailing-node";
+import Localize from "./localize";
 
 import SlashMenu from "@/components/SlashMenu/slash-menu.js";
 import slashMenuSuggestion from "@/components/SlashMenu/suggestion.js";
