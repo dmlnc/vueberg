@@ -1,16 +1,16 @@
-# gutentap
+# vueberg
 
-[Demo here](http://gutentap.letsdance.agency)
+[Demo here](http://vueberg.letsdance.agency)
 
 ## Project setup
 
-Install with `npm install gutentap`.
+Install with `npm install vueberg`.
 
 ```
-import { GutenTap }  from "gutentap"
-import 'gutentap/style.css'
+import { VueBerg }  from "vueberg"
+import 'vueberg/style.css'
 
-<GutenTap v-model="content" mode="json" />
+<VueBerg v-model="content" mode="json" />
 ```
 
 Mode can be json or html.

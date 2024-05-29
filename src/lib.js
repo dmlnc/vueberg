@@ -1,6 +1,6 @@
-import GutenTapComponent from "@/components/GutenTap.vue";
+import VueBergComponent from "@/components/VueBerg.vue";
 
-export const GutenTap = GutenTapComponent;
+export const VueBerg = VueBergComponent;
 
 import BaseBlockComponent from "@/components/BaseBlock.vue";
 

@@ -1,109 +1,109 @@
 html{
 
-  --gutentap-font-size: 14px;
-  --gutentap-placeholder-color: #8C8C8C;
-  --gutentap-color-primary: #1890FF;
-  --gutentap-color-muted: #8C8C8C;
-  --gutentap-color-secondary: #F5F5F5;
+  --vueberg-font-size: 14px;
+  --vueberg-placeholder-color: #8C8C8C;
+  --vueberg-color-primary: #1890FF;
+  --vueberg-color-muted: #8C8C8C;
+  --vueberg-color-secondary: #F5F5F5;
 
 
 
-  --gutentap-block-default-width: 600px;
-  --gutentap-block-wide-width: 800px;
-  --gutentap-block-full-width: none;
-  --gutentap-block-full-width-padding-right: 0;
-  --gutentap-block-full-width-padding-left: 0;
+  --vueberg-block-default-width: 600px;
+  --vueberg-block-wide-width: 800px;
+  --vueberg-block-full-width: none;
+  --vueberg-block-full-width-padding-right: 0;
+  --vueberg-block-full-width-padding-left: 0;
 
   
-  --gutentap-block-padding-right: 0.5rem;
-  --gutentap-block-padding-left: 0.5rem;
-  --gutentap-border-radius: 5px;
+  --vueberg-block-padding-right: 0.5rem;
+  --vueberg-block-padding-left: 0.5rem;
+  --vueberg-border-radius: 5px;
 
-  --gutentap-tooltip-max-width: 150px;
-  --gutentap-tooltip-font-size: 12px;
-  --gutentap-tooltip-padding: 5px 10px;
-  --gutentap-tooltip-color: #fff;
-  --gutentap-tooltip-background: rgba(0, 0, 0, 0.8);
-  --gutentap-tooltip-z-index: 999;
+  --vueberg-tooltip-max-width: 150px;
+  --vueberg-tooltip-font-size: 12px;
+  --vueberg-tooltip-padding: 5px 10px;
+  --vueberg-tooltip-color: #fff;
+  --vueberg-tooltip-background: rgba(0, 0, 0, 0.8);
+  --vueberg-tooltip-z-index: 999;
   
-  --gutentap-dropdown-background: #fff;
-  --gutentap-dropdown-z-index: 10;
-  --gutentap-dropdown-shadow: 0px 20px 27px rgba(0, 0, 0, 0.05);
-  --gutentap-dropdown-max-width: 250px;
-  --gutentap-dropdown-max-height: 400px;
-  --gutentap-dropdown-button-border-bottom: 1px solid #595959;
-  --gutentap-dropdown-border: 1px solid #595959;
-  --gutentap-dropdown-padding: 8px;
+  --vueberg-dropdown-background: #fff;
+  --vueberg-dropdown-z-index: 10;
+  --vueberg-dropdown-shadow: 0px 20px 27px rgba(0, 0, 0, 0.05);
+  --vueberg-dropdown-max-width: 250px;
+  --vueberg-dropdown-max-height: 400px;
+  --vueberg-dropdown-button-border-bottom: 1px solid #595959;
+  --vueberg-dropdown-border: 1px solid #595959;
+  --vueberg-dropdown-padding: 8px;
 
-  --gutentap-button-padding: 2px;
-  --gutentap-button-text-color: #434343;
-  --gutentap-button-icon-color: #1F1F1F;
-  --gutentap-button-active-background: #1F1F1F;
-  --gutentap-button-active-icon-color: #fff;
-  --gutentap-button-active-text-color: #fff;
+  --vueberg-button-padding: 2px;
+  --vueberg-button-text-color: #434343;
+  --vueberg-button-icon-color: #1F1F1F;
+  --vueberg-button-active-background: #1F1F1F;
+  --vueberg-button-active-icon-color: #fff;
+  --vueberg-button-active-text-color: #fff;
 
-  --gutentap-button-size: 30px;
-  --gutentap-button-size-md: 35px;
-  --gutentap-button-size-lg: 40px;
-  --gutentap-button-size-xl: 45px;
-  --gutentap-button-svg-size: 25px;
-  --gutentap-button-svg-size-md: 30px;
-  --gutentap-button-svg-size-lg: 35px;
-  --gutentap-button-svg-size-xl: 40px;
+  --vueberg-button-size: 30px;
+  --vueberg-button-size-md: 35px;
+  --vueberg-button-size-lg: 40px;
+  --vueberg-button-size-xl: 45px;
+  --vueberg-button-svg-size: 25px;
+  --vueberg-button-svg-size-md: 30px;
+  --vueberg-button-svg-size-lg: 35px;
+  --vueberg-button-svg-size-xl: 40px;
 
-  --gutentap-button-primary-color: #fff;
-  --gutentap-button-text-only-padding: 8px 15px 8px 15px;
-  --gutentap-button-text-padding: 8px 15px 8px 5px;
-  --gutentap-button-text-svg-margin-right: 8px;
-  --gutentap-button-text-svg-size: 20px;
-  --gutentap-button-secondary-background: #F5F5F5;
-
-
-  --gutentap-toolbar-max-width: 600px;
-  --gutentap-toolbar-background: #fff;
-  --gutentap-toolbar-border-color: #595959;
-  --gutentap-toolbar-padding: 6px;
-  --gutentap-toolbar-shadow: 0px 20px 27px rgba(0, 0, 0, 0.05);
-  --gutentap-toolbar-separator-color: #D9D9D9;
-  --gutentap-toolbar-gap: 10px;
-
-  --gutentap-slash-menu-background: #fff;
-  --gutentap-slash-menu-border-color: #595959;
-  --gutentap-slash-menu-shadow: 0px 20px 27px rgba(0, 0, 0, 0.05);
-  --gutentap-slash-menu-max-width: 280px;
-  --gutentap-slash-menu-min-width: 200px;
-  --gutentap-slash-menu-padding: 7px 7px 7px 7px;
-  // --gutentap-slash-menu-body-max-height: 200px;
-
-  --gutentap-modal-z-index: 99999;
-  --gutentap-modal-background: #fff;
-  --gutentap-modal-border-color: #595959;
-  --gutentap-modal-max-width: 420px;
-  --gutentap-modal-max-width-md: 600px;
-  --gutentap-modal-max-width-lg: 900px;
-  --gutentap-modal-body-padding: 10px 15px;
-  --gutentap-modal-header-padding: 10px 15px;
-  --gutentap-modal-header-border-bottom: #D9D9D9;
-  --gutentap-modal-title-font-size: 16px;
-  --gutentap-modal-backdrop-background: rgba(62, 62, 62, 0.129);
+  --vueberg-button-primary-color: #fff;
+  --vueberg-button-text-only-padding: 8px 15px 8px 15px;
+  --vueberg-button-text-padding: 8px 15px 8px 5px;
+  --vueberg-button-text-svg-margin-right: 8px;
+  --vueberg-button-text-svg-size: 20px;
+  --vueberg-button-secondary-background: #F5F5F5;
 
 
+  --vueberg-toolbar-max-width: 600px;
+  --vueberg-toolbar-background: #fff;
+  --vueberg-toolbar-border-color: #595959;
+  --vueberg-toolbar-padding: 6px;
+  --vueberg-toolbar-shadow: 0px 20px 27px rgba(0, 0, 0, 0.05);
+  --vueberg-toolbar-separator-color: #D9D9D9;
+  --vueberg-toolbar-gap: 10px;
+
+  --vueberg-slash-menu-background: #fff;
+  --vueberg-slash-menu-border-color: #595959;
+  --vueberg-slash-menu-shadow: 0px 20px 27px rgba(0, 0, 0, 0.05);
+  --vueberg-slash-menu-max-width: 280px;
+  --vueberg-slash-menu-min-width: 200px;
+  --vueberg-slash-menu-padding: 7px 7px 7px 7px;
+  // --vueberg-slash-menu-body-max-height: 200px;
+
+  --vueberg-modal-z-index: 99999;
+  --vueberg-modal-background: #fff;
+  --vueberg-modal-border-color: #595959;
+  --vueberg-modal-max-width: 420px;
+  --vueberg-modal-max-width-md: 600px;
+  --vueberg-modal-max-width-lg: 900px;
+  --vueberg-modal-body-padding: 10px 15px;
+  --vueberg-modal-header-padding: 10px 15px;
+  --vueberg-modal-header-border-bottom: #D9D9D9;
+  --vueberg-modal-title-font-size: 16px;
+  --vueberg-modal-backdrop-background: rgba(62, 62, 62, 0.129);
 
 
-  --gutentap-input-height: 40px;
-  --gutentap-input-border-color: #595959;
-  --gutentap-input-padding: 5px 10px;
-
-  --gutentap-hr-gap: 1rem;
-  --gutentap-hr-gap-md: 2rem;
-  --gutentap-hr-gap-lg: 3rem;
 
 
-  --gutentap-block-item-icon-size: 30px;
-  --gutentap-block-item-icon-background:  #F5F5F5;
-  --gutentap-block-item-title-size: 12px;
-  --gutentap-block-item-description-size: 10px;
-  --gutentap-block-item-padding: 5px;
+  --vueberg-input-height: 40px;
+  --vueberg-input-border-color: #595959;
+  --vueberg-input-padding: 5px 10px;
+
+  --vueberg-hr-gap: 1rem;
+  --vueberg-hr-gap-md: 2rem;
+  --vueberg-hr-gap-lg: 3rem;
+
+
+  --vueberg-block-item-icon-size: 30px;
+  --vueberg-block-item-icon-background:  #F5F5F5;
+  --vueberg-block-item-title-size: 12px;
+  --vueberg-block-item-description-size: 10px;
+  --vueberg-block-item-padding: 5px;
   
 
 }
@@ -127,7 +127,7 @@ html{
 }
 
 
-.gutentap {
+.vueberg {
   // Access style
   
   &-customblock{
@@ -135,9 +135,9 @@ html{
     margin-bottom: 1rem;
 
     &--outline{
-      & .gutentap-customblock-body{
-        border: 2px solid var(--gutentap-color-secondary);
-        border-radius: var(--gutentap-border-radius);
+      & .vueberg-customblock-body{
+        border: 2px solid var(--vueberg-color-secondary);
+        border-radius: var(--vueberg-border-radius);
       }
     }
     &--has-header{
@@ -146,14 +146,14 @@ html{
 
 
     &:hover{
-      & .gutentap-customblock-header-mode{
-        color: var(--gutentap-color-primary);
+      & .vueberg-customblock-header-mode{
+        color: var(--vueberg-color-primary);
       }
     }
 
     &-body{
-      padding-left: var(--gutentap-block-padding-left);
-      padding-right: var(--gutentap-block-padding-right);
+      padding-left: var(--vueberg-block-padding-left);
+      padding-right: var(--vueberg-block-padding-right);
 
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
@@ -162,12 +162,12 @@ html{
     &-header{
       // position: absolute;
       width: 100%;
-      padding-left: calc(var(--gutentap-block-padding-left) + 10px);
-      padding-right: var(--gutentap-block-padding-right);
+      padding-left: calc(var(--vueberg-block-padding-left) + 10px);
+      padding-right: var(--vueberg-block-padding-right);
 
       // padding-right: 0;
-      // border-right: 2px solid var(--gutentap-color-secondary);
-      // border-left: 2px solid var(--gutentap-color-secondary);
+      // border-right: 2px solid var(--vueberg-color-secondary);
+      // border-left: 2px solid var(--vueberg-color-secondary);
 
       // height: 25px;
       display: flex;
@@ -177,9 +177,9 @@ html{
 
       &-title{
         font-size: 14px;
-        background: var(--gutentap-color-secondary);
-        border-top-left-radius: var(--gutentap-border-radius);
-        border-top-right-radius: var(--gutentap-border-radius);
+        background: var(--vueberg-color-secondary);
+        border-top-left-radius: var(--vueberg-border-radius);
+        border-top-right-radius: var(--vueberg-border-radius);
 
         padding: 0 10px 0 5px;
         max-width: 200px;
@@ -199,7 +199,7 @@ html{
       &-mode{
         font-size: 12px;
         cursor: pointer;
-        color: var(--gutentap-color-muted);
+        color: var(--vueberg-color-muted);
       }
     }
   }
@@ -208,20 +208,20 @@ html{
     // height: 10px;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    padding-top: var(--gutentap-hr-gap);
-    padding-bottom: var(--gutentap-hr-gap);
+    padding-top: var(--vueberg-hr-gap);
+    padding-bottom: var(--vueberg-hr-gap);
     border: 0;
     // border-width: 0 0 1px 0;
     position: relative;
 
     &[data-variant="medium"] {
-      padding-top: var(--gutentap-hr-gap-md);
-      padding-bottom: var(--gutentap-hr-gap-md);
+      padding-top: var(--vueberg-hr-gap-md);
+      padding-bottom: var(--vueberg-hr-gap-md);
     }
 
     &[data-variant="large"] {
-      padding-top: var(--gutentap-hr-gap-lg);
-      padding-bottom: var(--gutentap-hr-gap-lg);
+      padding-top: var(--vueberg-hr-gap-lg);
+      padding-bottom: var(--vueberg-hr-gap-lg);
     }
 
     &:after{
@@ -229,7 +229,7 @@ html{
       display: block;
       width: 100%;
       height: 1px;
-      background: var(--gutentap-color-muted);
+      background: var(--vueberg-color-muted);
     }
   }
 
@@ -238,11 +238,11 @@ html{
   }
 
   &-youtube-figure{
-    background-color: var(--gutentap-color-secondary);
+    background-color: var(--vueberg-color-secondary);
     // padding-bottom: 1rem;
     padding: 0.5rem;
     text-align: center;
-    border-radius: calc(var(--gutentap-border-radius) * 2);
+    border-radius: calc(var(--vueberg-border-radius) * 2);
     margin: 0 0 2rem 0;
 
     &:not([data-block-width="full"]){
@@ -256,7 +256,7 @@ html{
       height: 0;
       overflow: hidden;
       max-width: 100%;
-      background: var(--gutentap-color-secondary); 
+      background: var(--vueberg-color-secondary); 
       &:before{
         position: absolute;
         // z-index: 999;
@@ -283,7 +283,7 @@ html{
   }
 
   & .ProseMirror[contenteditable=false]{
-    & .gutentap-youtube-figure-container:before{
+    & .vueberg-youtube-figure-container:before{
       display: none;
     }
   }
@@ -302,38 +302,38 @@ html{
     &::after {
       content: attr(data-tooltip);
       width: max-content;
-      max-width: var(--gutentap-tooltip-max-width);
+      max-width: var(--vueberg-tooltip-max-width);
       transition: all 0.3s;
-      font-size: var(--gutentap-tooltip-font-size);
-      padding:var(--gutentap-tooltip-padding);
-      color: var(--gutentap-tooltip-color);
-      background: var(--gutentap-tooltip-background);
-      border-radius: var(--gutentap-border-radius); 
+      font-size: var(--vueberg-tooltip-font-size);
+      padding:var(--vueberg-tooltip-padding);
+      color: var(--vueberg-tooltip-color);
+      background: var(--vueberg-tooltip-background);
+      border-radius: var(--vueberg-border-radius); 
       position: absolute;
       top: calc(100% + 15px);
       left: 50%;
       transform: translateX(-50%) translateY(-10px);
       opacity: 0;
-      z-index: var(--gutentap-tooltip-z-index); 
+      z-index: var(--vueberg-tooltip-z-index); 
       pointer-events: none;
     }
   }
 
   & [data-block-width="wide"] {
-    max-width: var(--gutentap-block-wide-width) !important;
+    max-width: var(--vueberg-block-wide-width) !important;
   }
 
   & [data-block-width="full"] {
-    max-width: var(--gutentap-block-full-width)!important;
-    padding-left: var(--gutentap-block-full-width-padding-left) !important;
-    padding-right: var(--gutentap-block-full-width-padding-right) !important;
+    max-width: var(--vueberg-block-full-width)!important;
+    padding-left: var(--vueberg-block-full-width-padding-left) !important;
+    padding-right: var(--vueberg-block-full-width-padding-right) !important;
 
-    &.gutentap-customblock{
-      & .gutentap-customblock-body{
-        padding-left: var(--gutentap-block-full-width-padding-left) ;
-        padding-right: var(--gutentap-block-full-width-padding-right) ;
-        padding-top: var(--gutentap-block-full-width-padding-left) ;
-        padding-bottom: var(--gutentap-block-full-width-padding-right) ;
+    &.vueberg-customblock{
+      & .vueberg-customblock-body{
+        padding-left: var(--vueberg-block-full-width-padding-left) ;
+        padding-right: var(--vueberg-block-full-width-padding-right) ;
+        padding-top: var(--vueberg-block-full-width-padding-left) ;
+        padding-bottom: var(--vueberg-block-full-width-padding-right) ;
         border: 0;
       }
     }
@@ -350,19 +350,19 @@ html{
     position: relative;
 
     &-dropdown {
-      z-index: var(--gutentap-dropdown-z-index);
-      background-color: var(--gutentap-dropdown-background);
-      box-shadow: var(--gutentap-dropdown-shadow);
+      z-index: var(--vueberg-dropdown-z-index);
+      background-color: var(--vueberg-dropdown-background);
+      box-shadow: var(--vueberg-dropdown-shadow);
       display: none; 
       overflow: hidden; 
       white-space: nowrap; 
       position: absolute;
       top: calc(100% + 15px);
-      max-width: var(--gutentap-dropdown-max-width);
-      max-height: var(--gutentap-dropdown-max-height);
-      border-radius: var(--gutentap-border-radius);
-      padding: var(--gutentap-dropdown-padding);
-      border: var(--gutentap-dropdown-border) ;
+      max-width: var(--vueberg-dropdown-max-width);
+      max-height: var(--vueberg-dropdown-max-height);
+      border-radius: var(--vueberg-border-radius);
+      padding: var(--vueberg-dropdown-padding);
+      border: var(--vueberg-dropdown-border) ;
 
       &--left {
         left: 0; // left-0
@@ -376,9 +376,9 @@ html{
         overflow: auto;
       }
 
-      & .gutentap-button{
+      & .vueberg-button{
         // height: 40px;
-        // border-bottom: var(--gutentap-dropdown-button-border-bottom); 
+        // border-bottom: var(--vueberg-dropdown-button-border-bottom); 
         // border-radius: 0;
 
         &:last-child{
@@ -386,20 +386,20 @@ html{
         }
 
         &-active{
-          background-color: var(--gutentap-color-secondary);
-          color: var(--gutentap-button-text-color);
+          background-color: var(--vueberg-color-secondary);
+          color: var(--vueberg-button-text-color);
           font-weight: bold;
           & svg{
-            color: var(--gutentap-button-text-color);
-            // color: var(--gutentap-primary-olor);
+            color: var(--vueberg-button-text-color);
+            // color: var(--vueberg-primary-olor);
           }
 
           &:hover{
-            color:  var(--gutentap-button-active-text-color);
-            background-color:  var(--gutentap-button-active-background);
+            color:  var(--vueberg-button-active-text-color);
+            background-color:  var(--vueberg-button-active-background);
 
             & svg{
-              color:  var(--gutentap-button-active-text-color);
+              color:  var(--vueberg-button-active-text-color);
             }
 
           }
@@ -412,8 +412,8 @@ html{
   &-block-item{
     display: flex;
     align-items: center;
-    padding: var(--gutentap-block-item-padding);
-    border-radius: var(--gutentap-border-radius);
+    padding: var(--vueberg-block-item-padding);
+    border-radius: var(--vueberg-border-radius);
 
     &--column{
       display: flex;
@@ -428,31 +428,31 @@ html{
       &:hover,
       &:focus,
       &:active{
-        & .gutentap-block-item{
+        & .vueberg-block-item{
           &-icon{
-            color: var(--gutentap-color-primary);
+            color: var(--vueberg-color-primary);
           }
           &-info-title{
-            color: var(--gutentap-color-primary);
+            color: var(--vueberg-color-primary);
           }
         }
       }
-      & .gutentap-block-item{
+      & .vueberg-block-item{
         
         &-icon{
           margin-right: 0;
           margin-bottom: 6px;
-          width: calc(var(--gutentap-block-item-icon-size) + 10px);
-          height: calc(var(--gutentap-block-item-icon-size) + 10px);
-          flex: 0 0calc(var(--gutentap-block-item-icon-size) + 10px);
+          width: calc(var(--vueberg-block-item-icon-size) + 10px);
+          height: calc(var(--vueberg-block-item-icon-size) + 10px);
+          flex: 0 0calc(var(--vueberg-block-item-icon-size) + 10px);
           & svg{
-            max-width: var(--gutentap-block-item-icon-size);
-            max-height: var(--gutentap-block-item-icon-size);
+            max-width: var(--vueberg-block-item-icon-size);
+            max-height: var(--vueberg-block-item-icon-size);
           }
         }
         &-info{
           text-align: center;
-          max-width: calc(100% - var(--gutentap-block-item-padding));
+          max-width: calc(100% - var(--vueberg-block-item-padding));
           &-title{
             line-height: 1.3;
             margin-bottom: 5px;
@@ -460,43 +460,43 @@ html{
         }
       }
     }
-    &.gutentap-block-item--selected{
-      background: var(--gutentap-color-secondary);
+    &.vueberg-block-item--selected{
+      background: var(--vueberg-color-secondary);
       
     }
 
-    &.gutentap-block-item--clickable{
+    &.vueberg-block-item--clickable{
       cursor: pointer;
       &:hover,
       &:focus,
       &:active{
-        background: var(--gutentap-color-secondary);
+        background: var(--vueberg-color-secondary);
       }
     }
 
    
 
     &-icon{
-      background: var(--gutentap-block-item-icon-background);
-      width: var(--gutentap-block-item-icon-size);
-      height: var(--gutentap-block-item-icon-size);
-      flex: 0 0 var(--gutentap-block-item-icon-size);
-      border-radius: var(--gutentap-border-radius);
+      background: var(--vueberg-block-item-icon-background);
+      width: var(--vueberg-block-item-icon-size);
+      height: var(--vueberg-block-item-icon-size);
+      flex: 0 0 var(--vueberg-block-item-icon-size);
+      border-radius: var(--vueberg-border-radius);
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 10px;
       & svg{
-        max-height: calc(var(--gutentap-block-item-icon-size) - 10px);
-        max-width: calc(var(--gutentap-block-item-icon-size) - 10px);
+        max-height: calc(var(--vueberg-block-item-icon-size) - 10px);
+        max-width: calc(var(--vueberg-block-item-icon-size) - 10px);
 
       }
     }
     &-info{
       width: 100%;
-      max-width: calc(100% - var(--gutentap-block-item-icon-size) - 10px);
+      max-width: calc(100% - var(--vueberg-block-item-icon-size) - 10px);
       &-title{
-        font-size: var( --gutentap-block-item-title-size);
+        font-size: var( --vueberg-block-item-title-size);
         line-height: 1;
       }
       &-description{
@@ -506,8 +506,8 @@ html{
         line-height: 1;
         width: 100%;
         white-space: nowrap;
-        color: var(--gutentap-color-muted);
-        font-size: var(--gutentap-block-item-description-size);
+        color: var(--vueberg-color-muted);
+        font-size: var(--vueberg-block-item-description-size);
       }
     }
   }
@@ -515,16 +515,16 @@ html{
   &-button {
     display: flex;
     width: 100%;
-    font-size: var(--gutentap-font-size);
-    padding: var(--gutentap-button-padding);
+    font-size: var(--vueberg-font-size);
+    padding: var(--vueberg-button-padding);
     flex-direction: row;
     align-items: center;
-    color: var(--gutentap-button-text-color);
-    border-radius: var(--gutentap-border-radius);
+    color: var(--vueberg-button-text-color);
+    border-radius: var(--vueberg-border-radius);
     background: none;
     border: 1px solid transparent;
     cursor: pointer;
-    height: var(--gutentap-button-size);
+    height: var(--vueberg-button-size);
 
     &-blocks{
       font-size: 18px;
@@ -532,106 +532,106 @@ html{
     }
 
     &[disabled]{
-      color: var(--gutentap-color-muted);
+      color: var(--vueberg-color-muted);
       pointer-events: none;
       cursor: not-allowed;
 
       & svg{
-        color: var(--gutentap-color-muted);
+        color: var(--vueberg-color-muted);
       }
     }
 
-    &:not(.gutentap-button-text){
-      width: var(--gutentap-button-size);
+    &:not(.vueberg-button-text){
+      width: var(--vueberg-button-size);
       & svg{
-        flex: 0 0 var(--gutentap-button-svg-size);
+        flex: 0 0 var(--vueberg-button-svg-size);
       }
     }
 
     &-md{
-      height: var(--gutentap-button-size-md);
-      &:not(.gutentap-button-text){
-        width: var(--gutentap-button-size-md);
+      height: var(--vueberg-button-size-md);
+      &:not(.vueberg-button-text){
+        width: var(--vueberg-button-size-md);
         & svg{
-          flex: 0 0 var(--gutentap-button-svg-size-md);
+          flex: 0 0 var(--vueberg-button-svg-size-md);
         }
       }
     }
 
     &-lg{
-      height: var(--gutentap-button-size-lg);
-      &:not(.gutentap-button-text){
-        width: var(--gutentap-button-size-lg);
+      height: var(--vueberg-button-size-lg);
+      &:not(.vueberg-button-text){
+        width: var(--vueberg-button-size-lg);
         & svg{
-          flex: 0 0 var(--gutentap-button-svg-size-lg);
+          flex: 0 0 var(--vueberg-button-svg-size-lg);
         }
       }
     }
     &-xl{
-      height: var(--gutentap-button-size-xl);
-      &:not(.gutentap-button-text){
-        width: var(--gutentap-button-size-xl);
+      height: var(--vueberg-button-size-xl);
+      &:not(.vueberg-button-text){
+        width: var(--vueberg-button-size-xl);
         & svg{
-          flex: 0 0 var(--gutentap-button-svg-size-xl);
+          flex: 0 0 var(--vueberg-button-svg-size-xl);
         }
       }
     }
 
     & svg{
-      color:var(--gutentap-button-icon-color)
+      color:var(--vueberg-button-icon-color)
     }
 
     &:hover {
-      color: var(--gutentap-color-primary);
+      color: var(--vueberg-color-primary);
       & svg{
-        color: var(--gutentap-color-primary);
+        color: var(--vueberg-color-primary);
       }
     }
 
     &-active {
-      background: var(--gutentap-button-active-background);
-      color: var(--gutentap-button-active-text-color); 
+      background: var(--vueberg-button-active-background);
+      color: var(--vueberg-button-active-text-color); 
       & svg{
-        color: var(--gutentap-button-active-icon-color); 
+        color: var(--vueberg-button-active-icon-color); 
       }
       &:hover {
         & svg{
-          color: var(--gutentap-button-active-icon-color);
+          color: var(--vueberg-button-active-icon-color);
         }
       }
     }
 
     &-primary{
-      background: var(--gutentap-color-primary);
-      color:  var(--gutentap-button-primary-color);
+      background: var(--vueberg-color-primary);
+      color:  var(--vueberg-button-primary-color);
       & svg{
-        color:  var(--gutentap-button-primary-color);
+        color:  var(--vueberg-button-primary-color);
       }
 
       &:hover{
-        color:  var(--gutentap-button-primary-color);
+        color:  var(--vueberg-button-primary-color);
 
       }
     }
     
     &-text{
 
-      &.gutentap-button-text-only{
-        padding:  var(--gutentap-button-text-only-padding); 
+      &.vueberg-button-text-only{
+        padding:  var(--vueberg-button-text-only-padding); 
       }
-      &:not(.gutentap-button-text-only){
-        padding:  var(--gutentap-button-text-padding); 
+      &:not(.vueberg-button-text-only){
+        padding:  var(--vueberg-button-text-padding); 
       }
 
       & svg{
         
-        margin-right: var(--gutentap-button-text-svg-margin-right);
-        flex: 0 0 var(--gutentap-button-text-svg-size);
+        margin-right: var(--vueberg-button-text-svg-margin-right);
+        flex: 0 0 var(--vueberg-button-text-svg-size);
       }
     }
 
     &-secondary{
-      background: var(--gutentap-button-secondary-background);
+      background: var(--vueberg-button-secondary-background);
     }
 
     &-group{
@@ -643,74 +643,74 @@ html{
         gap: 2px;
       }
 
-      &:not(.gutentap-button-group-column):not(.gutentap-button-group-separate),
-      &:not(.gutentap-button-group-separate){
-        &>.gutentap-button{
+      &:not(.vueberg-button-group-column):not(.vueberg-button-group-separate),
+      &:not(.vueberg-button-group-separate){
+        &>.vueberg-button{
           border-radius: 0;
           &:not(:last-child){
             border-right: 0;
           }
           
           &:first-child{
-            border-top-left-radius: var(--gutentap-border-radius);
-            border-bottom-left-radius: var(--gutentap-border-radius);
+            border-top-left-radius: var(--vueberg-border-radius);
+            border-bottom-left-radius: var(--vueberg-border-radius);
           }
           &:last-child{
-            border-top-right-radius: var(--gutentap-border-radius);
-            border-bottom-right-radius: var(--gutentap-border-radius);
+            border-top-right-radius: var(--vueberg-border-radius);
+            border-bottom-right-radius: var(--vueberg-border-radius);
           }
         }
-        &>.gutentap-menu-item{
-          &:not(:last-child)>.gutentap-button{
+        &>.vueberg-menu-item{
+          &:not(:last-child)>.vueberg-button{
             border-right: 0;
           }
-          &>.gutentap-button{
+          &>.vueberg-button{
             border-radius: 0;
           }
-          &:first-child>.gutentap-button{
-            border-top-left-radius: var(--gutentap-border-radius);
-            border-bottom-left-radius: var(--gutentap-border-radius);
+          &:first-child>.vueberg-button{
+            border-top-left-radius: var(--vueberg-border-radius);
+            border-bottom-left-radius: var(--vueberg-border-radius);
           }
-          &:last-child>.gutentap-button{
-            border-top-right-radius: var(--gutentap-border-radius);
-            border-bottom-right-radius: var(--gutentap-border-radius);
+          &:last-child>.vueberg-button{
+            border-top-right-radius: var(--vueberg-border-radius);
+            border-bottom-right-radius: var(--vueberg-border-radius);
           }
         }
       }
 
       &-column{
         flex-direction: column!important;
-        &>.gutentap-button{
+        &>.vueberg-button{
           border-radius: 0;
           &:not(:last-child){
             border-bottom: 0;
           }
           
           &:first-child{
-            border-top-left-radius: var(--gutentap-border-radius);
-            border-top-right-radius: var(--gutentap-border-radius);
+            border-top-left-radius: var(--vueberg-border-radius);
+            border-top-right-radius: var(--vueberg-border-radius);
           }
           &:last-child{
-            border-bottom-right-radius: var(--gutentap-border-radius);
-            border-bottom-left-radius: var(--gutentap-border-radius);
+            border-bottom-right-radius: var(--vueberg-border-radius);
+            border-bottom-left-radius: var(--vueberg-border-radius);
 
           }
         }
-        &>.gutentap-menu-item{
-          &:not(:last-child)>.gutentap-button{
+        &>.vueberg-menu-item{
+          &:not(:last-child)>.vueberg-button{
             border-bottom: 0;
           }
-          &>.gutentap-button{
+          &>.vueberg-button{
             border-radius: 0;
           }
-          &:first-child>.gutentap-button{
-            border-top-left-radius: var(--gutentap-border-radius);
-            border-top-right-radius: var(--gutentap-border-radius);
+          &:first-child>.vueberg-button{
+            border-top-left-radius: var(--vueberg-border-radius);
+            border-top-right-radius: var(--vueberg-border-radius);
 
           }
-          &:last-child>.gutentap-button{
-            border-bottom-left-radius: var(--gutentap-border-radius);
-            border-bottom-right-radius: var(--gutentap-border-radius);
+          &:last-child>.vueberg-button{
+            border-bottom-left-radius: var(--vueberg-border-radius);
+            border-bottom-right-radius: var(--vueberg-border-radius);
           }
         }
 
@@ -726,18 +726,18 @@ html{
   }
 
   &-toolbar {
-    font-size: var(--gutentap-font-size);
-    background: var(--gutentap-toolbar-background);
-    max-width: var(--gutentap-toolbar-max-width);
+    font-size: var(--vueberg-font-size);
+    background: var(--vueberg-toolbar-background);
+    max-width: var(--vueberg-toolbar-max-width);
     display: flex;
     flex-direction: row;
-    border: 1px solid  var(--gutentap-toolbar-border-color);
-    border-radius: var(--gutentap-border-radius);
-    padding: var(--gutentap-toolbar-padding);
-    box-shadow:  var(--gutentap-toolbar-shadow);
+    border: 1px solid  var(--vueberg-toolbar-border-color);
+    border-radius: var(--vueberg-border-radius);
+    padding: var(--vueberg-toolbar-padding);
+    box-shadow:  var(--vueberg-toolbar-shadow);
 
     &-transform-to{
-      color: var(--gutentap-color-muted);
+      color: var(--vueberg-color-muted);
       font-size: 12px;
       // text-align: center;
       margin-bottom: 3px;
@@ -745,18 +745,18 @@ html{
 
     &-wrapper{
       transition: transform 0s, opacity 0.3s;
-      // margin-left: var(--gutentap-block-padding-left)!important;
+      // margin-left: var(--vueberg-block-padding-left)!important;
     }
-    & > .gutentap-button-group:not(:last-child){
-      margin-right: var(--gutentap-toolbar-gap);
-      padding-right: var(--gutentap-toolbar-gap);
-      border-right: 1px solid var(--gutentap-toolbar-separator-color);
+    & > .vueberg-button-group:not(:last-child){
+      margin-right: var(--vueberg-toolbar-gap);
+      padding-right: var(--vueberg-toolbar-gap);
+      border-right: 1px solid var(--vueberg-toolbar-separator-color);
     }
 
     &-order {
       margin-right: 5px;
   
-      & .gutentap-button--toolbar-order {
+      & .vueberg-button--toolbar-order {
         justify-content: center;
 
         width: 20px;
@@ -785,21 +785,21 @@ html{
   }
 
   &-slash-menu{
-    background: var(--gutentap-slash-menu-background);
-    border-radius: var(--gutentap-border-radius);
-    border: 1px solid var(--gutentap-slash-menu-border-color);
-    box-shadow:  var(--gutentap-slash-menu-shadow);
-    max-width: var(--gutentap-slash-menu-max-width);
-    min-width: var(--gutentap-slash-menu-min-width);
-    padding: var(--gutentap-slash-menu-padding);
+    background: var(--vueberg-slash-menu-background);
+    border-radius: var(--vueberg-border-radius);
+    border: 1px solid var(--vueberg-slash-menu-border-color);
+    box-shadow:  var(--vueberg-slash-menu-shadow);
+    max-width: var(--vueberg-slash-menu-max-width);
+    min-width: var(--vueberg-slash-menu-min-width);
+    padding: var(--vueberg-slash-menu-padding);
 
     &-show-all{
-      border-top: 1px solid var(--gutentap-color-secondary);
+      border-top: 1px solid var(--vueberg-color-secondary);
       margin-top: 5px;
       padding: 5px 5px 0 5px;
       font-size: 12px;
       text-align: center;
-      color: var(--gutentap-color-primary);
+      color: var(--vueberg-color-primary);
       cursor: pointer;
     }
 
@@ -808,7 +808,7 @@ html{
       padding: 10px 10px;
       line-height: 1;
       text-align: center;
-      color: var(--gutentap-color-muted);
+      color: var(--vueberg-color-muted);
     }
 
     &-body{
@@ -826,7 +826,7 @@ html{
       align-items: center;
       gap: 5px;
       justify-content: flex-end;
-      & > .gutentap-button{
+      & > .vueberg-button{
         width: auto;
       }
     }
@@ -835,21 +835,21 @@ html{
       margin-bottom: 10px;
       & label{
         font-size: 12px;
-        color: var(--gutentap-color-muted);
+        color: var(--vueberg-color-muted);
         display: block;
         margin-bottom: 5px;
       }
       & small{
-        color: var(--gutentap-color-muted);
+        color: var(--vueberg-color-muted);
       }
     }
 
     &-control{
-      height: var(--gutentap-input-height);
-      border-radius: var(--gutentap-border-radius);
+      height: var(--vueberg-input-height);
+      border-radius: var(--vueberg-border-radius);
       width: 100%;
-      border: 1px solid var(--gutentap-input-border-color);
-      padding: var(--gutentap-input-padding);
+      border: 1px solid var(--vueberg-input-border-color);
+      padding: var(--vueberg-input-padding);
       outline: none;
       box-sizing: border-box;
       box-shadow: none;
@@ -857,47 +857,47 @@ html{
   }
 
   &-modal{
-    background: var(--gutentap-modal-background);
+    background: var(--vueberg-modal-background);
     position: relative;
-    border: 1px solid var(--gutentap-modal-border-color);
+    border: 1px solid var(--vueberg-modal-border-color);
     z-index: 2;
-    border-radius: var(--gutentap-border-radius);
+    border-radius: var(--vueberg-border-radius);
     width: 100%;
-    max-width: var(--gutentap-modal-max-width);
+    max-width: var(--vueberg-modal-max-width);
 
     &-md{
-      max-width: var(--gutentap-modal-max-width-md);
+      max-width: var(--vueberg-modal-max-width-md);
     }
     &-lg{
-      max-width: var(--gutentap-modal-max-width-lg);
+      max-width: var(--vueberg-modal-max-width-lg);
     }
 
     &-body{
-      padding: var(--gutentap-modal-body-padding);
+      padding: var(--vueberg-modal-body-padding);
       overflow: auto;
       max-height: calc(100vh - 90px);
     }
 
     &-header{
-      padding: var(--gutentap-modal-header-padding);
-      border-bottom: 1px solid var(--gutentap-modal-header-border-bottom);
+      padding: var(--vueberg-modal-header-padding);
+      border-bottom: 1px solid var(--vueberg-modal-header-border-bottom);
       display: flex;
       justify-content: space-between;
       max-height: 80px;
 
       &-close{
-        color: var(--gutentap-color-muted);
+        color: var(--vueberg-color-muted);
         cursor: pointer;
 
         &:hover,
         &:focus,
         &:active{
-          color: var(--gutentap-color-primary);
+          color: var(--vueberg-color-primary);
         }
       }
 
       &-title{
-        font-size: var(--gutentap-modal-title-font-size);
+        font-size: var(--vueberg-modal-title-font-size);
       }
     }
 
@@ -912,7 +912,7 @@ html{
 
     &-backdrop{
       z-index: 1;
-      background: var(--gutentap-modal-backdrop-background); 
+      background: var(--vueberg-modal-backdrop-background); 
       position: absolute;
       width: 100%;
       height: 100%;
@@ -923,7 +923,7 @@ html{
 
   & .modal-container{
     background-color: transparent!important;
-    z-index: var(--gutentap-modal-z-index);
+    z-index: var(--vueberg-modal-z-index);
   }
 
 
@@ -933,15 +933,15 @@ html{
   
 
   .prosemirror-dropcursor-block {
-    animation: GutenTapScaleIn 0.3s ease-out forwards;
+    animation: VueBergScaleIn 0.3s ease-out forwards;
     transform: scale(0);
-    background-color: var(--gutentap-color-secondary);
+    background-color: var(--vueberg-color-secondary);
     height: 4px;
-    border-radius: var(--gutentap-border-radius);
+    border-radius: var(--vueberg-border-radius);
     position: relative !important;
   }
 
-  @keyframes GutenTapScaleIn {
+  @keyframes VueBergScaleIn {
     0% {
       transform: scale(0);
     }
@@ -956,12 +956,12 @@ html{
 
   .ProseMirror{
     & > *{
-      max-width: var(--gutentap-block-default-width);
+      max-width: var(--vueberg-block-default-width);
       margin-left: auto;
       margin-right: auto;
-      &:not(.gutentap-customblock){
-        padding-left: var(--gutentap-block-padding-left);
-        padding-right: var(--gutentap-block-padding-right);
+      &:not(.vueberg-customblock){
+        padding-left: var(--vueberg-block-padding-left);
+        padding-right: var(--vueberg-block-padding-right);
       }
 
       :first-child {
@@ -1021,7 +1021,7 @@ html{
       &:before{
         content: attr(data-placeholder);
         float: left;
-        color: var(--gutentap-placeholder-color);
+        color: var(--vueberg-placeholder-color);
         pointer-events: none;
         height: 0;
       }
@@ -1031,7 +1031,7 @@ html{
         &::before {
           content: attr(data-placeholder);
           float: left;
-          color: var(--gutentap-placeholder-color);
+          color: var(--vueberg-placeholder-color);
           pointer-events: none;
           height: 0;
         }

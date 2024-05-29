@@ -174,11 +174,11 @@ export const Youtube = Node.create<YoutubeOptions>({
       {
         "data-youtube-video": "",
         "data-block-width": blockWidth,
-        class: "gutentap-youtube-figure",
+        class: "vueberg-youtube-figure",
       },
       [
         "div",
-        { class: "gutentap-youtube-figure-container" },
+        { class: "vueberg-youtube-figure-container" },
         [
           "iframe",
           mergeAttributes(

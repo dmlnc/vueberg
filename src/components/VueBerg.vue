@@ -1,5 +1,5 @@
 <template>
-  <div class="gutentap" style="position: relative;" ref="gutentap">
+  <div class="vueberg" style="position: relative;" ref="vueberg">
     <widget-container-modal />
 
     
@@ -11,9 +11,9 @@
       v-if="editor"
       :editor="editor"
       :class="{
-        'gutentap-bubble-menu-hidden': isTyping,
+        'vueberg-bubble-menu-hidden': isTyping,
       }"
-      class="gutentap-bubble-menu"
+      class="vueberg-bubble-menu"
       :tippy-options="{
         delay: [0, 300], 
         duration: [300, 400],
@@ -21,7 +21,7 @@
         placement: 'top-start',
         getReferenceClientRect: getMenuCoords,
         onCreate: (instance) =>
-          instance.popper.classList.add('gutentap-toolbar-wrapper'),
+          instance.popper.classList.add('vueberg-toolbar-wrapper'),
       }"
     >
       <Toolbar
@@ -30,7 +30,7 @@
         :settings="mergedSettings"
         :inlineTools="allInlineTools"
         :alignmentTools="allAlignmentTools"
-        :gutentapWidth="gutentapWidth"
+        :vuebergWidth="vuebergWidth"
       />
     </bubble-menu>
 
@@ -48,7 +48,7 @@
     >
       <menu-button
         @click="openBlocksModal"
-        class="gutentap-button-primary gutentap-button-text-only  gutentap-button-blocks"
+        class="vueberg-button-primary vueberg-button-text-only  vueberg-button-blocks"
         content="+"
       />
     </floating-menu>
@@ -60,9 +60,6 @@
       ref="editor"
       :editor="editor"
     />
-
-    
-
     
   </div>
 </template>
@@ -76,49 +73,47 @@ import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
 import { container as WidgetContainerModal } from "jenesius-vue-modal";
 import { GetCurrentBlockCoords, GetCurrentBlockEndCoords, GetCurrentNode } from "../utils/pm-utils.js";
-import { mergeArrays } from "../utils/utils";
-import BlockWidth from "../extensions/block-width";
-import GutentapBlocks from "../extensions/gutentap-blocks";
+import { mergeArrays } from "../utils/utils.js";
+import BlockWidth from "../extensions/block-width/index.js";
+import VuebergBlocks from "../extensions/vueberg-blocks/index.js";
 import { ModalExtension } from "./Modal/modal.js";
-import Variants from "../extensions/variants";
-import SlashMenu from "./SlashMenu/slash-menu.js";
-import slashMenuSuggestion from "./SlashMenu/suggestion.js";
-import defaultBlockTools from "../tools/block-tools";
-import defaultExtensions from "../tools/default-extensions";
-import defaultInlineTools from "../tools/inline-tools";
-import defaultAlignmentTools from "../tools/alignment-tools";
+import Variants from "../extensions/variants/index";
+import defaultBlockTools from "../tools/block-tools.js";
+import defaultExtensions from "../tools/default-extensions.js";
+import defaultInlineTools from "../tools/inline-tools.js";
+import defaultAlignmentTools from "../tools/alignment-tools.js";
 import BlocksModal from "@/components/Modal/BlocksModal.vue";
-// import "@gocapsule/column-extension/src/index.css";
-
-
 
 export default {
   props: {
     modelValue: {},
-    settings: {
-      type: Object,
-      default: () => ({}),
-    },
     editable: {
       default: true,
-    },
-    placeholder: {
-      type: String,
-      default: "Начните писать",
     },
     mode: {
       type: String,
       default: "html",
     },
+    settings: {
+      type: Object,
+      default: () => ({
+        defaultExtensions: {}
+      }),
+    },
+   
+    // TODO:
+    placeholder: {
+      type: String,
+      default: "Начните писать",
+    },
+
+
+   
     extensions: {
       type: Array,
       default: () => [],
     },
-    
-    slashMenu: {
-      type: [Array, Boolean],
-      default: () => [],
-    },
+
     blockTools: {
       type: Array,
       default: () => [],
@@ -131,6 +126,7 @@ export default {
       type: [Array, Boolean],
       default: () => [],
     },
+
   },
 
   components: {
@@ -146,7 +142,7 @@ export default {
 
   data() {
     return {
-      gutentapWidth: 0,
+      vuebergWidth: 0,
       editor: null,
       defaultSettings: {
         defaultExtensions: {},
@@ -165,7 +161,7 @@ export default {
 
   created() {
     this.handleMouseMove = this.cancelTyping.bind(this);
-    this.handleResize = this.updateGutentapWidth.bind(this);
+    this.handleResize = this.updateVuebergWidth.bind(this);
     window.addEventListener("mousemove", this.handleMouseMove);
     window.addEventListener('resize', this.handleResize);
   },
@@ -176,7 +172,7 @@ export default {
   },
 
   mounted() {
-    this.updateGutentapWidth();
+    this.updateVuebergWidth();
     this.initializeEditor();
   },
 
@@ -195,7 +191,7 @@ export default {
       if(!this.editor){
         return null;
       }
-      return this.editor.storage.gutentapBlocks.currentBlockTool
+      return this.editor.storage.vuebergBlocks.currentBlockTool
     },
     mergedSettings() {
       return { ...this.defaultSettings, ...this.settings };
@@ -235,7 +231,7 @@ export default {
       this.editor = new Editor({
         extensions: [
           ...enabledExtensions,
-          GutentapBlocks.configure({ blocks: allBlockToolsFiltered }),
+          VuebergBlocks.configure({ blocks: allBlockToolsFiltered }),
           Placeholder.configure({ considerAnyAsEmpty: true, placeholder: this.placeholder }),
           BlockWidth.configure({ types: this.blocksWithBlockWidth }),
           Variants.configure({ types: this.blocksWithVariant }),
@@ -280,18 +276,12 @@ export default {
         }
       });
 
-      if (this.slashMenu !== false) {
-        enabledExtensions.push(SlashMenu.configure({
-          suggestion: slashMenuSuggestion(5),
-        }));
-      }
-
       return enabledExtensions;
     },
-    updateGutentapWidth() {
-      const gutentapRef = this.$refs.gutentap;
-      if (gutentapRef) {
-        this.gutentapWidth = gutentapRef.clientWidth;
+    updateVuebergWidth() {
+      const vuebergRef = this.$refs.vueberg;
+      if (vuebergRef) {
+        this.vuebergWidth = vuebergRef.clientWidth;
       }
     },
     cancelTyping() {
@@ -318,13 +308,13 @@ export default {
         return false
       }
       const node = GetCurrentNode(editor);
-      const hasAllowedBlocks = editor.storage.gutentapBlocks.hasAllowedBlocks(node)
+      const hasAllowedBlocks = editor.storage.vuebergBlocks.hasAllowedBlocks(node)
 
       return hasAllowedBlocks;
       
     },
     updateCurrentBlockTool() {
-      this.editor.storage.gutentapBlocks.getBlockTool(this.editor.commands.getCurrentNodeName());
+      this.editor.storage.vuebergBlocks.getBlockTool(this.editor.commands.getCurrentNodeName());
     },
     getMenuCoords() {
       return GetCurrentBlockCoords(this.editor);
@@ -338,5 +328,5 @@ export default {
 
 <style lang="scss">
 @import "@/style.scss";
-@import "@/style.css";
+// @import "@/style.css";
 </style>

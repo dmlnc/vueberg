@@ -1,10 +1,10 @@
 <template>
-    <div class="gutentap-block-item">
-        <div class="gutentap-block-item-icon" v-html="icon">
+    <div class="vueberg-block-item">
+        <div class="vueberg-block-item-icon" v-html="icon">
         </div>
-        <div class="gutentap-block-item-info">
-            <div class="gutentap-block-item-info-title"> {{ title }} </div>
-            <div v-if="description" class="gutentap-block-item-info-description">{{ description }}</div>
+        <div class="vueberg-block-item-info">
+            <div class="vueberg-block-item-info-title"> {{ title }} </div>
+            <div v-if="description" class="vueberg-block-item-info-description">{{ description }}</div>
         </div>
     </div>
   </template>

@@ -2,8 +2,8 @@ import { Extension } from '@tiptap/core';
 import { GetCurrentNode } from "../../utils/pm-utils"
 
 
-export const GutentapBlocks = Extension.create({
-  name: 'gutentapBlocks',
+export const VuebergBlocks = Extension.create({
+  name: 'vuebergBlocks',
 
   addOptions() {
     return {
@@ -43,7 +43,7 @@ export const GutentapBlocks = Extension.create({
     const duplicates = blockNames.filter((name, index, self) => self.indexOf(name) !== index);
 
     if (duplicates.length > 0) {
-      console.warn(`[GutentapBlocks]: Duplicate block names found: ${[...new Set(duplicates)].join(', ')}`);
+      console.warn(`[VuebergBlocks]: Duplicate block names found: ${[...new Set(duplicates)].join(', ')}`);
     }
   },
 

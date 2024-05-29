@@ -1,16 +1,16 @@
 <template>
     <BaseBlock v-bind="$props">
       <template v-slot="{ isPreviewMode }">
-        <div class="gutentapBlock-notification" :data-variant="node.attrs.variant">
-            <div class="gutentapBlock-notification-settings" contenteditable="false" v-if="!isPreviewMode">
+        <div class="vuebergBlock-notification" :data-variant="node.attrs.variant">
+            <div class="vuebergBlock-notification-settings" contenteditable="false" v-if="!isPreviewMode">
                 <div 
                     v-for="style in variants" 
-                    :class="{'gutentapBlock-notification-settings--active': variant == style.key}" 
+                    :class="{'vuebergBlock-notification-settings--active': variant == style.key}" 
                     @click.prevent="setVariant(style.key)" 
                     :style="`background-color:${style.color}`">
                 </div>
             </div>
-            <node-view-content class="gutentapBlock-notification-content" />
+            <node-view-content class="vuebergBlock-notification-content" />
         </div>
       </template>
     </BaseBlock>
@@ -67,7 +67,7 @@ export default {
 </script>
   
 <style lang="scss">
-.gutentapBlock-notification{
+.vuebergBlock-notification{
    
     position: relative;
     padding: 1rem 1rem;
@@ -125,9 +125,9 @@ export default {
             width: 15px;
             height: 15px;
             flex: 0 0 15px;
-            border: 2px solid var(--gutentap-color-secondary);
+            border: 2px solid var(--vueberg-color-secondary);
             border-radius: 50%;
-            &.gutentapBlock-notification-settings--active{
+            &.vuebergBlock-notification-settings--active{
                 border: 2px solid #fff;
             }
         }

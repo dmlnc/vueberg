@@ -6,9 +6,9 @@ import SlashMenu from "./SlashMenu.vue";
 export default function (count) {
   return {
     items: ({ query, editor }) => { 
-      const allowedBlocks = editor.storage.gutentapBlocks.getAllowedBlocks(
-        editor.storage.gutentapBlocks.currentNode, 
-        editor.storage.gutentapBlocks.getFlatBlocks()
+      const allowedBlocks = editor.storage.vuebergBlocks.getAllowedBlocks(
+        editor.storage.vuebergBlocks.currentNode, 
+        editor.storage.vuebergBlocks.getFlatBlocks()
       )
 
       return allowedBlocks.filter(block => { 
@@ -35,7 +35,7 @@ export default function (count) {
       return {
         onStart: (props) => {
 
-          const hasAllowedBlocks = props.editor.storage.gutentapBlocks.hasAllowedBlocks(props.editor.storage.gutentapBlocks.currentNode)
+          const hasAllowedBlocks = props.editor.storage.vuebergBlocks.hasAllowedBlocks(props.editor.storage.vuebergBlocks.currentNode)
           if(!hasAllowedBlocks){
             return false;
           }
@@ -70,7 +70,7 @@ export default function (count) {
             trigger: "manual",
             placement: "bottom-start",
             onCreate: (instance) =>
-              instance.popper.classList.add('gutentap-slash-menu-wrapper'),
+              instance.popper.classList.add('vueberg-slash-menu-wrapper'),
           });
         },
 

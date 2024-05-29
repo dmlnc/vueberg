@@ -1,25 +1,25 @@
 <template>
   <node-view-wrapper
-    class="gutentap-customblock" 
+    class="vueberg-customblock" 
     :data-block-width="node.attrs.blockWidth"
     :class="{
-      ['gutentap-customblock--' + (gutenTapBlock?.name || '')]: true,
-      'gutentap-customblock--outline': isEditable,
-      'gutentap-customblock--has-header': isEditable,
+      ['vueberg-customblock--' + (vueBergBlock?.name || '')]: true,
+      'vueberg-customblock--outline': isEditable,
+      'vueberg-customblock--has-header': isEditable,
     }"
   >
-    <div contenteditable="false" v-if="isEditable && gutenTapBlock?.name" class="gutentap-customblock-header">
-      <div class="gutentap-customblock-header-title">
-        <span class="gutentap-customblock-header-title-icon" v-html="gutenTapBlock?.icon "></span>
-        {{ gutenTapBlock?.title }}
+    <div contenteditable="false" v-if="isEditable && vueBergBlock?.name" class="vueberg-customblock-header">
+      <div class="vueberg-customblock-header-title">
+        <span class="vueberg-customblock-header-title-icon" v-html="vueBergBlock?.icon "></span>
+        {{ vueBergBlock?.title }}
       </div>
-      <div class="gutentap-customblock-header-mode" v-if="gutenTapBlock?.gutenTapBlock?.hasPreviewMode !== false ">
+      <div class="vueberg-customblock-header-mode" v-if="vueBergBlock?.vueBergBlock?.hasPreviewMode !== false ">
         <span @click="toggleMode">{{ isPreviewMode ? 'Редактировать' : 'Просмотр' }}</span>
       </div>
     </div>
-    <div class="gutentap-customblock-body">
+    <div class="vueberg-customblock-body">
       <!-- {{ allowedBlocks }} -->
-      <slot :isEditable="isEditable" :isPreviewMode="isPreviewModeComputed" :gutenTapBlock="gutenTapBlock"  />
+      <slot :isEditable="isEditable" :isPreviewMode="isPreviewModeComputed" :vueBergBlock="vueBergBlock"  />
     </div>
   </node-view-wrapper>
 </template>
@@ -39,12 +39,12 @@ export default {
     return {
       isPreviewMode: false,
       isEditable: this.editor.isEditable,
-      gutenTapBlock: this.editor.storage.gutentapBlocks.getBlockTool(this.node.type.name, false),
+      vueBergBlock: this.editor.storage.vuebergBlocks.getBlockTool(this.node.type.name, false),
     }
   },
   mounted(){
    
-    // this.gutenTapBlock = this.editor.storage.gutentapBlocks.getBlockTool(this.node.type.name);
+    // this.vueBergBlock = this.editor.storage.vuebergBlocks.getBlockTool(this.node.type.name);
   },
   computed:{
     isPreviewModeComputed(){

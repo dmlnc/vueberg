@@ -1,14 +1,11 @@
 <template>
   <div class="">
     <div class="" style="min-height: 300px; max-width: 1000px; margin: 50px auto;  padding: 15px; border: 1px solid #000; margin-top: 100px">
-       
         <button
           @click.prevent="editable = !editable"
           v-text="editable ? 'Editable' : 'Read only'"
-          class="rounded-full border-2 py-2 px-4"
         />
-
-        <gutentap
+        <vueberg
           v-model="content"
           :editable="editable"
           mode="json"
@@ -41,14 +38,12 @@
           :slashMenu="[]"
         />
       </div>
-     
-      
   </div>
 </template>
 
 <script>
-import { extensions, useEditor } from "@tiptap/vue-3";
-import Gutentap from "./components/GutenTap.vue";
+
+import Vueberg from "./components/VueBerg.vue";
 import sampleContent from "./content.json";
 import VueComponent from "./extensions/vue-component";
 import Notification from "./extensions/notification";
@@ -57,7 +52,7 @@ import Notification from "./extensions/notification";
 export default {
   name: "App",
   components: {
-    Gutentap,
+    Vueberg,
   },
   data() {
     return {
@@ -81,11 +76,6 @@ export default {
       // ],
 
       blockTools: [
-      // daa: [
-      // {
-      //     name: "paragraph",
-      //     title: "123",
-      // },
         {
           name: 'media',
           blocks: [
@@ -99,7 +89,7 @@ export default {
                   .chain()
                   .focus()
                   .deleteRange(range)
-                  .insertContent('<div data-gutentap-block="notification"><p></p></div>')
+                  .insertContent('<div data-vueberg-block="notification"><p></p></div>')
                   // .insertContent('<div><notification type="0"></notification></div>')
                   .run();
               },
@@ -113,7 +103,7 @@ export default {
               variants: true,
               canBeConverted: false,
               isActiveTest: (editor) => editor.isActive("notification"),
-              gutenTapBlock:{
+              vueBergBlock:{
                 hasPreviewMode: false
               }
             },
@@ -149,6 +139,3 @@ export default {
 };
 </script>
 
-<style>
-/* @tailwind base; */
-</style>

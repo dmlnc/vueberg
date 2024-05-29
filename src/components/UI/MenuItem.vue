@@ -1,14 +1,14 @@
 <template>
-  <div class="gutentap-menu-item" @click="toggleDropdown">
+  <div class="vueberg-menu-item" @click="toggleDropdown">
     <slot></slot>
     <div
       v-if="hasDropdown"
       :class="{
-        'gutentap-menu-item-dropdown--left': align === 'left',
-        'gutentap-menu-item-dropdown--right': align === 'right',
-        'gutentap-menu-item-dropdown--open': showDropdown
+        'vueberg-menu-item-dropdown--left': align === 'left',
+        'vueberg-menu-item-dropdown--right': align === 'right',
+        'vueberg-menu-item-dropdown--open': showDropdown
       }"
-      class="gutentap-menu-item-dropdown"
+      class="vueberg-menu-item-dropdown"
       ref="dropdown"
     >
       <slot name="dropdown"></slot>
@@ -75,7 +75,7 @@ export default {
     activeClass: {
       type: String,
       required: false,
-      default: 'gutentap-menu-item--active',
+      default: 'vueberg-menu-item--active',
     },
     active: {
       type: Boolean,

@@ -30,12 +30,12 @@ export default Node.create({
   parseHTML() {
     return [
       {
-        tag: 'div[data-gutentap-block="notification"]',
+        tag: 'div[data-vueberg-block="notification"]',
       },
     ];
   },
   renderHTML({ HTMLAttributes }) {
-    return ['div', mergeAttributes(HTMLAttributes, { 'data-gutentap-block': 'notification', class: 'gutentapBlock-notification' }), 0];
+    return ['div', mergeAttributes(HTMLAttributes, { 'data-vueberg-block': 'notification', class: 'vuebergBlock-notification' }), 0];
   },
 
   addNodeView() {

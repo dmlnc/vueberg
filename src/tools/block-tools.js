@@ -5,7 +5,6 @@ import {
 export default function () {
   
   return [
-    // Текст - heading, paragraph, list, blockquote 
     {
       name: 'typography',
       title: 'Текст',

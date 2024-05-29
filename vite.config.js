@@ -24,7 +24,7 @@ export default defineConfig({
 
       // the exposed global variable
       // is required when formats includes 'umd' or 'iife'
-      name: "GutenTap",
+      name: "VueBerg",
 
       // the proper extensions will be added, ie:
       // name.js (es module)
@@ -37,7 +37,7 @@ export default defineConfig({
       // into your library
       external: ["vue"],
       output: {
-        name: "GutenTap",
+        name: "VueBerg",
         exports: "named",
         // Provide global variables to use in the UMD build
         // for externalized deps

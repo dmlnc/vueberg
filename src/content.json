@@ -9,7 +9,7 @@
     "content": [
       {
         "type": "text",
-        "text": "Welcome to Gutentap!"
+        "text": "Welcome to Vueberg!"
       }
     ]
   },
@@ -82,7 +82,7 @@
             "type": "bold"
           }
         ],
-        "text": "Gutentap"
+        "text": "Vueberg"
       },
       {
         "type": "text",

@@ -1,4 +1,3 @@
-// import { Decoration, DecorationSet } from "prosemirror-view";
 import { Slice, Fragment } from "@tiptap/pm/model";
 import { ReplaceStep } from "@tiptap/pm/transform";
 import { Selection } from "@tiptap/pm/state";
@@ -6,28 +5,23 @@ import { Selection } from "@tiptap/pm/state";
 export const GetCurrentNode = function (editor, depth = 0) {
   const { $anchor, $from } = editor.view.state.selection;
 
-  // Прямая попытка найти узел после текущей позиции
   const nodeAfter = $from.nodeAfter;
   if (nodeAfter && nodeAfter.type.name === 'horizontalRule') {
     return { ...nodeAfter, depth: $anchor.depth + 1, parent: $anchor.node($anchor.depth) };
   }
 
-  // Проверка последнего выбранного узла во view
   if (editor.view.lastSelectedViewDesc && editor.view.lastSelectedViewDesc.node.type.name === 'horizontalRule') {
     const hrNode = editor.view.lastSelectedViewDesc.node;
     return { ...hrNode, depth: $anchor.depth + 1, parent: $anchor.node($anchor.depth) };
   }
 
-  // Ищем узел на заданной глубине или ближайший узел выше
   let lookingDepth = ($anchor.depth - depth > 1) ? $anchor.depth - depth : 1;
   let node = $anchor.node(lookingDepth);
 
-  // Исключение узлов типа paragraph на ненулевой глубине
   if (node && node.type.name === 'paragraph' && lookingDepth !== 1) {
     node = null;
   }
 
-  // Итерация для поиска узла на высших уровнях, если не найден на заданной глубине
   while (!node && depth < $anchor.depth) {
     depth++;
     lookingDepth = $anchor.depth - depth;
@@ -35,7 +29,6 @@ export const GetCurrentNode = function (editor, depth = 0) {
     node = $anchor.node(lookingDepth);
   }
 
-  // Добавляем информацию о глубине и родителе, если узел найден
   if (node) {
     let parentNode = lookingDepth > 1 ? $anchor.node(lookingDepth - 1) : null;
     return {
@@ -48,8 +41,6 @@ export const GetCurrentNode = function (editor, depth = 0) {
   
   return null;
 }
-
-
 
 export const GetCurrentBlockCoords = function (editor) {
   const { state, view } = editor;
@@ -64,19 +55,6 @@ export const GetCurrentBlockCoords = function (editor) {
 };
 
 
-// export const GetTopLevelBlockEndCoords = function (view) {
-//   const $pos = view.state.selection.$from;
-//   let from = $pos.start($pos.depth);
-//   let node = view.nodeDOM(from);
-  
-//   if (!node) {
-//     return null;
-//   }
-
-//   let coords = node.getBoundingClientRect();
-//   return new DOMRect(coords.right, coords.bottom, 0, 0);
-// };
-
 export const GetCurrentBlockEndCoords = function (editor) {
   const pos = editor.view.state.selection.from;
   const element = editor.$pos(pos).element
@@ -86,9 +64,6 @@ export const GetCurrentBlockEndCoords = function (editor) {
   } 
   return new DOMRect(0, 0, 0, 0);
 };
-
-
-
 
 // export const GetTableRowCoords = function (view) {
 //   const pos = view.state.selection.$from;
@@ -136,49 +111,6 @@ export const GetTopLevelNode = function (view) {
   }
   return selectionStart.node(1);
 };
-
-// export const GetNodeTree = function (view) {
-//   let nodes = [];
-//   let selectionStart = view.state.selection.$from;
-
-//   if (selectionStart.node(1) == null && view.lastSelectedViewDesc) {
-//     return [view.lastSelectedViewDesc.node.type.name];
-//   }
-
-//   let depth = selectionStart.depth;
-//   while (depth >= 0) {
-//     nodes.push(selectionStart.node(depth).type.name);
-//     depth--;
-//   }
-//   return nodes.reverse();
-// };
-
-
-// export const GetTopLevelBlockCoords = function (view) {
-//   const $pos = view.state.selection.$from;
-//   let from = $pos.before(1);
-//   let coords = view.coordsAtPos(from);
-//   return new DOMRect(coords.left, coords.top, 0, 0);
-// };
-
-
-// export const GetTopLevelBlock = function (editor) {
-//   const selectionStart = editor.view.state.selection.$from;
-//   let parentNode = editor.view.domAtPos(selectionStart.posAtIndex(0, 1)).node;
-//   if (parentNode == editor.view.dom) {
-//     return editor.view.lastSelectedViewDesc?.nodeDOM;
-//   }
-
-//   // Sometimes we get a node that isn't the top-level parent; e.g. codeBlock gives us the <code> not the wrapping <pre>
-//   while (
-//     parentNode != editor.view.dom &&
-//     parentNode.parentNode != editor.view.dom
-//   ) {
-//     parentNode = parentNode.parentNode;
-//   }
-
-//   return parentNode;
-// };
 
 let mapChildren = function (node, callback) {
   const array = [];

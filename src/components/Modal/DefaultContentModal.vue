@@ -1,16 +1,16 @@
 <template>
-  <div class="gutentap-modal-layout">
-      <div class="gutentap-modal-backdrop" @click="clickBackdrop"></div>
-      <div class="gutentap-modal" :class="`gutentap-modal-${size}`">
-          <div class="gutentap-modal-header" v-if="showHeader">
-              <div class="gutentap-modal-header-title">
+  <div class="vueberg-modal-layout">
+      <div class="vueberg-modal-backdrop" @click="clickBackdrop"></div>
+      <div class="vueberg-modal" :class="`vueberg-modal-${size}`">
+          <div class="vueberg-modal-header" v-if="showHeader">
+              <div class="vueberg-modal-header-title">
                   {{ title }}
               </div>
-              <div class="gutentap-modal-header-close" v-if="closable" @click="hideModal">
+              <div class="vueberg-modal-header-close" v-if="closable" @click="hideModal">
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g><path id="Vector" d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
               </div>
           </div>
-          <div class="gutentap-modal-body" v-if="content" v-html="content"></div>
+          <div class="vueberg-modal-body" v-if="content" v-html="content"></div>
       </div>
   </div>
 </template>

@@ -1,12 +1,12 @@
 <template>
-    <div class="gutentap-toolbar">
-      <div class="gutentap-button-group gutentap-button-group-separate">
-        <div class="gutentap-button-group gutentap-button-group-column gutentap-toolbar-order ">
+    <div class="vueberg-toolbar">
+      <div class="vueberg-button-group vueberg-button-group-separate">
+        <div class="vueberg-button-group vueberg-button-group-column vueberg-toolbar-order ">
           <button
             @click.prevent="moveNode('UP')"
             :disabled="!canMoveNodeUp()"
             :data-tooltip="upLabel"
-            class="gutentap-button--toolbar-order gutentap-button"
+            class="vueberg-button--toolbar-order vueberg-button"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false" viewBox="6.5 8 11 5.6">
               <path d="M6.5 12.4L12 8l5.5 4.4-.9 1.2L12 10l-4.5 3.6-1-1.2z"></path>
@@ -16,34 +16,34 @@
             @click.prevent="moveNode('DOWN')"
             :disabled="!canMoveNodeDown()"
             :data-tooltip="downLabel"
-            class="gutentap-button--toolbar-order gutentap-button"
+            class="vueberg-button--toolbar-order vueberg-button"
           >
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" viewBox="6.5 10.4 11 5.6">
             <path d="M17.5 11.6 12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"></path>
           </svg>
           </button>
         </div>
-        <div class="gutentap-button-group gutentap-button-group-separate" v-if="currentBlockTool?.icon && currentBlockTool?.name">
+        <div class="vueberg-button-group vueberg-button-group-separate" v-if="currentBlockTool?.icon && currentBlockTool?.name">
           <menu-item>
             <menu-button
               :label="currentBlockTool?.title"
               :content="currentBlockTool?.icon"
-              :class="(currentBlockTool?.canBeConverted && canBeConvertedTo.length) ? 'gutentap-button-secondary' : ''"
+              :class="(currentBlockTool?.canBeConverted && canBeConvertedTo.length) ? 'vueberg-button-secondary' : ''"
             />
             <template #dropdown>
-              <div class="gutentap-toolbar-transform-to">{{transformToLabel}}</div>
+              <div class="vueberg-toolbar-transform-to">{{transformToLabel}}</div>
               <menu-button
                 v-for="tool in canBeConvertedTo"
                 :content="tool.icon + ' ' + tool.title"
                 :key="tool.title"
                 @click.prevent="runConvertCommand(tool)"
-                class="gutentap-button-text gutentap-button-md"
+                class="vueberg-button-text vueberg-button-md"
               />
             </template>
           </menu-item>
         </div>
       </div>
-      <div class="gutentap-button-group gutentap-button-group-separate" v-if="activeAlignmentTools.length">
+      <div class="vueberg-button-group vueberg-button-group-separate" v-if="activeAlignmentTools.length">
         <menu-item
           v-for="(alignmentToolGroup, key) in activeAlignmentTools"
           :key="key"
@@ -55,7 +55,7 @@
           />
           <template #dropdown>
             <menu-button
-              class="gutentap-button-text gutentap-button-md"
+              class="vueberg-button-text vueberg-button-md"
               v-for="tool in alignmentToolGroup.tools"
               :key="tool.title"
               :content="tool.icon + ' ' + tool.title"
@@ -66,7 +66,7 @@
         </menu-item>
       </div>
       <template v-for="group in firstMenuItems">
-        <div v-if="group.condition"  :key="group.type" class="gutentap-button-group gutentap-button-group-separate">
+        <div v-if="group.condition"  :key="group.type" class="vueberg-button-group vueberg-button-group-separate">
           <menu-button
             v-for="(button, index) in group.buttons"
             :key="index"
@@ -79,16 +79,16 @@
           ></menu-button>
         </div>
       </template>
-      <div class="gutentap-button-group gutentap-button-group-separate" v-if="editor && remainingMenuItems.length">
+      <div class="vueberg-button-group vueberg-button-group-separate" v-if="editor && remainingMenuItems.length">
         <menu-item align="right">
-          <menu-button class="gutentap-button-secondary" @click.prevent :label="moreLabel" :content="moreIcon"></menu-button>
+          <menu-button class="vueberg-button-secondary" @click.prevent :label="moreLabel" :content="moreIcon"></menu-button>
           <template #dropdown>
             <template v-for="group in remainingMenuItems">
               <menu-button
                 v-if="group.condition"
                 v-for="(button, index) in group.buttons"
                 :key="index"
-                class="gutentap-button-md gutentap-button-text"
+                class="vueberg-button-md vueberg-button-text"
                 :content="button.icon + button.label"
                 :activeClass="button.activeClass"
                 @click.prevent="button.click"
@@ -116,7 +116,7 @@ export default {
       type: [Object, Function],
       required: true,
     },
-    gutentapWidth: {
+    vuebergWidth: {
       required: true,
     },
     // currentBlockTool: {
@@ -167,13 +167,13 @@ export default {
       if(!this.editor){
         return null;
       }
-      return this.editor.storage.gutentapBlocks.currentBlockTool
+      return this.editor.storage.vuebergBlocks.currentBlockTool
     },
     currentNode(){
       if(!this.editor){
         return null;
       }
-      return this.editor.storage.gutentapBlocks.currentNode
+      return this.editor.storage.vuebergBlocks.currentNode
     },
 
     canBeConvertedTo(){
@@ -181,7 +181,7 @@ export default {
         return [];
       }
 
-      return this.editor.storage.gutentapBlocks.getFlatBlocks().filter(tool => {
+      return this.editor.storage.vuebergBlocks.getFlatBlocks().filter(tool => {
         return this.currentBlockTool?.canBeConverted[tool.name] && tool.convertCommand;
       });
     },
@@ -268,11 +268,11 @@ export default {
 
     menuCount() {
       // Получаем ширину контейнера, в котором будут располагаться кнопки
-      let width = this.gutentapWidth > 700 ? 700 : this.gutentapWidth;
+      let width = this.vuebergWidth > 700 ? 700 : this.vuebergWidth;
       // Получаем значения CSS-переменных
-      const buttonSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--gutentap-button-size')) || 30;
-      const buttonGroupGap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--gutentap-toolbar-gap')) || 2;
-      const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--gutentap-toolbar-group-margin')) || 10 );
+      const buttonSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-button-size')) || 30;
+      const buttonGroupGap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-gap')) || 2;
+      const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-group-margin')) || 10 );
       const separatorWidth = 1; // Ширина разделителя между группами кнопок
       // Отступ от краев
       width -= 15; 
@@ -372,7 +372,7 @@ export default {
               click: () => this.deleteNode(this.currentBlockTool?.nodeType),
               icon: this.deleteIcon,
               label: this.deleteLabel,
-              activeClass: 'gutentap-button-text-danger',
+              activeClass: 'vueberg-button-text-danger',
               disabled: false,
               active: true
             }
@@ -397,7 +397,7 @@ export default {
 
     runConvertCommand(tool){
       tool.convertCommand(this.editor);
-      this.editor.storage.gutentapBlocks.getBlockTool(this.editor.commands.getCurrentNodeName());
+      this.editor.storage.vuebergBlocks.getBlockTool(this.editor.commands.getCurrentNodeName());
     },
 
     moveNode(dir = "UP") {

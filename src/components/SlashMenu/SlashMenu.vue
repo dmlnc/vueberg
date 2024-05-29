@@ -1,10 +1,10 @@
 <template>
-  <div class="gutentap-slash-menu">
-    <div class="gutentap-slash-menu-body gutentap-block-item--column" v-if="items.length">
+  <div class="vueberg-slash-menu">
+    <div class="vueberg-slash-menu-body vueberg-block-item--column" v-if="items.length">
       <template v-for="(item, index) in items">
         <BlockItem
-          class="gutentap-block-item--clickable"
-          :class="selectedIndex == index ? 'gutentap-block-item--selected' : ''"
+          class="vueberg-block-item--clickable"
+          :class="selectedIndex == index ? 'vueberg-block-item--selected' : ''"
           @click.prevent="selectItem(index)"
           :icon="item.icon"
           :title="item.title"
@@ -12,8 +12,8 @@
         />
       </template>
     </div>
-    <div class="gutentap-slash-menu-empty" v-else>{{ nothingFoundLabel }}</div>
-    <div class="gutentap-slash-menu-show-all" v-if="hiddenItems > 0" @click="showAll">{{ showAllLabel }} <small>(+{{hiddenItems}})</small></div>
+    <div class="vueberg-slash-menu-empty" v-else>{{ nothingFoundLabel }}</div>
+    <div class="vueberg-slash-menu-show-all" v-if="hiddenItems > 0" @click="showAll">{{ showAllLabel }} <small>(+{{hiddenItems}})</small></div>
   </div>
 </template>
 
@@ -44,9 +44,9 @@ export default {
   },
   computed:{
     hiddenItems(){
-      return this.editor.storage.gutentapBlocks.getAllowedBlocks(
-        this.editor.storage.gutentapBlocks.currentNode, 
-        this.editor.storage.gutentapBlocks.getFlatBlocks()
+      return this.editor.storage.vuebergBlocks.getAllowedBlocks(
+        this.editor.storage.vuebergBlocks.currentNode, 
+        this.editor.storage.vuebergBlocks.getFlatBlocks()
       ).length - this.items.length
     }
   },

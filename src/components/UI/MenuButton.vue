@@ -1,6 +1,6 @@
 <template>
   <button
-    class="gutentap-button"
+    class="vueberg-button"
     :data-tooltip="label"
     :class="active ? activeClass : ''"
     v-html="content"
@@ -21,7 +21,7 @@ export default {
     activeClass: {
       type: String,
       required: false,
-      default: "gutentap-button-active",
+      default: "vueberg-button-active",
     },
     active: {
       type: Boolean,

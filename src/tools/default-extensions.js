@@ -25,6 +25,9 @@ import { Youtube } from "../extensions/youtube";
 import { TrailingNode } from "../extensions/trailing-node";
 import Localize from "../extensions/localize";
 
+import SlashMenu from "@/components/SlashMenu/slash-menu.js";
+import slashMenuSuggestion from "@/components/SlashMenu/suggestion.js";
+
 
 export default function () {
   
@@ -58,6 +61,13 @@ export default function () {
           name: 'Link',
           extension: Link.configure({ openOnClick: false })
         },
+        {
+          name: 'slashMenu',
+          extension: SlashMenu.configure({
+            suggestion: slashMenuSuggestion(5),
+          })
+        },
+        
         { name: 'Typography', extension: Typography },
         {
           name: 'Youtube',
