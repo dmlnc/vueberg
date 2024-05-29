@@ -21,15 +21,7 @@ export default defineConfig({
       // the entry file that is loaded whenever someone imports
       // your plugin in their app
       entry: resolve(__dirname, "src/lib.js"),
-
-      // the exposed global variable
-      // is required when formats includes 'umd' or 'iife'
       name: "VueBerg",
-
-      // the proper extensions will be added, ie:
-      // name.js (es module)
-      // name.umd.cjs) (common js module)
-      // default fileName is the name option of package.json
       fileName: "vueberg",
     },
     rollupOptions: {

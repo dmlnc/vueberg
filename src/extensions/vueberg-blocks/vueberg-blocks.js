@@ -1,5 +1,5 @@
 import { Extension } from '@tiptap/core';
-import { GetCurrentNode } from "../../utils/pm-utils"
+import { GetCurrentNode } from "@/utils/pm-utils"
 
 
 export const VuebergBlocks = Extension.create({

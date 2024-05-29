@@ -35,7 +35,7 @@
 
 
     <floating-menu 
-      v-if="currentBlockTool" 
+      v-if="currentBlockTool && editor" 
       :updateDelay="1000"
       :should-show="shouldShowFloatingMenu"
       :editor="editor" 

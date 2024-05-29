@@ -61,7 +61,6 @@ export default function (count) {
             // props,
             // editor: props.editor,
           });
-          // console.log(props)
 
           if (!props.clientRect) {
             return;
@@ -105,12 +104,10 @@ export default function (count) {
             return true;
           }
 
-          console.log('onKeyDown', props);
           return component?.ref?.onKeyDown(props);
         },
 
         onExit() {
-          console.log('onExit');
 
           if (popup) {
             popup[0].destroy();

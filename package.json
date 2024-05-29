@@ -7,12 +7,12 @@
     "lib",
     "dist"
   ],
-  "main": "./lib/guten-tap.umd.cjs",
-  "module": "./lib/guten-tap.js",
+  "main": "./lib/vueberg.umd.cjs",
+  "module": "./lib/vueberg.js",
   "exports": {
     ".": {
-      "import": "./lib/guten-tap.js",
-      "require": "./lib/guten-tap.umd.cjs"
+      "import": "./lib/vueberg.js",
+      "require": "./lib/vueberg.umd.cjs"
     },
     "./style.scss": {
       "import": "./lib/style.scss",

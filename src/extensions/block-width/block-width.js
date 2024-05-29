@@ -1,5 +1,5 @@
 import { Extension } from "@tiptap/core"
-import { GetTopLevelNode } from "../../utils/pm-utils"
+import { GetTopLevelNode } from "@/utils/pm-utils"
 
 export const BlockWidth = Extension.create({
   name: "blockWidth",

@@ -119,7 +119,7 @@ export default {
               },
 
               vueBergBlock:{
-                hasPreviewMode: false
+                hasPreviewMode: true
               }
             },
           ]

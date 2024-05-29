@@ -58,19 +58,13 @@ export const GetCurrentBlockCoords = function (editor) {
 
 
 export const GetCurrentBlockEndCoords = function (editor) {
-  // console.log('GetCurrentBlockEndCoords');
-  // return new DOMRect(0, 0, 0, 0);
-
   const pos = editor.view.state.selection.from;
   const element = editor.$pos(pos).element
   if(element){
     const coords = element.getBoundingClientRect();
-    // console.log('GetCurrentBlockEndCoords', new DOMRect(coords.x + coords.width - 50, coords.top + (coords.height / 2) , 0, 0));
-    
+   
     return new DOMRect(coords.x + coords.width - 50, coords.top + (coords.height / 2) , 0, 0);
   } 
-  // console.log('GetCurrentBlockEndCoords 0000');
-
   return new DOMRect(0, 0, 0, 0);
 };
 

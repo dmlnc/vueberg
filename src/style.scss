@@ -128,6 +128,10 @@ html{
 
 
 .vueberg {
+
+  & *{
+    box-sizing: border-box;
+  }
   // Access style
   
   &-customblock{
@@ -200,6 +204,16 @@ html{
         font-size: 12px;
         cursor: pointer;
         color: var(--vueberg-color-muted);
+        background: var(--vueberg-color-secondary);
+        border-top-left-radius: var(--vueberg-border-radius);
+        border-top-right-radius: var(--vueberg-border-radius);
+        padding: 5px;
+
+        & div{
+          height: 10px;
+          // margin-top: 4px;
+        }
+        
       }
     }
   }
@@ -972,22 +986,6 @@ html{
     }
     &:focus-visible {
       outline: none;
-    }
-
-    & .column-block {
-      width: 100%;
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 1fr;
-      gap: 24px;
-      padding: 8px 0;
-      & .column {
-        overflow: auto;
-        border: 1px gray dashed;
-        border-radius: 8px;
-        padding: 8px;
-        margin: -8px;
-      }
     }
     
   
