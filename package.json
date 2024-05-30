@@ -1,6 +1,6 @@
 {
   "name": "vueberg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "type": "module",
   "files": [
@@ -13,10 +13,6 @@
     ".": {
       "import": "./lib/vueberg.js",
       "require": "./lib/vueberg.umd.cjs"
-    },
-    "./style.scss": {
-      "import": "./lib/style.scss",
-      "require": "./lib/style.scss"
     }
   },
   "scripts": {

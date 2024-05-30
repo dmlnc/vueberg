@@ -14,7 +14,6 @@ Import and use VueBerg in your Vue 3 project:
 
 ```
 import { VueBerg } from 'vueberg';
-import 'vueberg/style.css';
 
 <VueBerg v-model="content" mode="json" />
 ```
