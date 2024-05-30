@@ -132,5 +132,6 @@ export default {
 </script>
 
 <style lang="scss">
- @import "@/style.css";
+@import "@/style.scss";
+// @import "@/style.css";
 </style>
