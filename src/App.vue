@@ -15,6 +15,7 @@
           :extensions="extensions"
           :settings="{
             defaultExtensions: {
+              SlashMenu: true,
               Heading: {
                 enabled: true,
                 options:{
@@ -35,7 +36,6 @@
               }
             }
           }"
-          :slashMenu="[]"
         />
       </div>
   </div>
@@ -46,7 +46,7 @@
 import Vueberg from "./components/VueBerg.vue";
 import sampleContent from "./content.json";
 import VueComponent from "./extensions/vue-component";
-import Notification from "./extensions/notification";
+import Notification from "./vueberg-blocks/notification";
 
 
 export default {
@@ -131,3 +131,7 @@ export default {
 };
 </script>
 
+<style lang="scss">
+@import "@/style.scss";
+// @import "@/style.css";
+</style>

@@ -14,7 +14,7 @@ export default function () {
           title: "Заголовок",
           name: "heading",
           keywords: ["h1","h2","h3","heading"],
-          description: 'Просто заголовок страницы',
+          description: 'Блок для заголовков',
           icon: '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" focusable="false"><path d="M6.2 5.2v13.4l5.8-4.8 5.8 4.8V5.2z"></path></svg>',
           
           insertCommand: ({ editor, range }) => {
@@ -32,6 +32,7 @@ export default function () {
 
           settings: {
             allowedBlocks: true,
+            hideCommand: false,
             isDefaultCommand: true,
             variants: false,
             blockWidth: true,
@@ -85,7 +86,7 @@ export default function () {
           title: "Текст",
           name: "paragraph",
           keywords: ["paragraph","text"],
-          description: 'Описание',
+          description: 'Текстовый блок',
           icon: '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" focusable="false"><path d="M18.3 4H9.9v-.1l-.9.2c-2.3.4-4 2.4-4 4.8s1.7 4.4 4 4.8l.7.1V20h1.5V5.5h2.9V20h1.5V5.5h2.7V4z"></path></svg>',
           
           insertCommand: ({ editor, range }) => {
@@ -141,7 +142,7 @@ export default function () {
           title: "Список",
           name: "bulletList",
           keywords: ["ul","li","ol","list"],
-          description: 'Описание',
+          description: 'Маркированный или нумерованный список',
           icon: '<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke-width="0" stroke="currentColor" fill="currentColor"  focusable="false"><path d="M4 4v1.5h16V4H4zm8 8.5h8V11h-8v1.5zM4 20h16v-1.5H4V20zm4-8c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path></svg>',
           
           insertCommand: ({ editor, range }) => {
@@ -173,7 +174,7 @@ export default function () {
           tools: [
             {
               title: "Список",
-              name: "bulletList",
+              name: "Маркированный список",
               icon: '<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke-width="1"  fill="currentColor"  focusable="false"><path d="M4 4v1.5h16V4H4zm8 8.5h8V11h-8v1.5zM4 20h16v-1.5H4V20zm4-8c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z"></path></svg>',
               command: (editor) => {
                 editor.chain().focus().toggleBulletList().run();
@@ -181,7 +182,7 @@ export default function () {
               isActiveTest: (editor) => editor.isActive("bulletList"),
             },
             {
-              title: "Нумер. список",
+              title: "Нумерованный список",
               name: "orderedList",
               icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h24v24H0z" stroke="none"/><path d="M11 6h9M11 12h9M12 18h8M4 16a2 2 0 114 0c0 .591-.5 1-1 1.5L4 20h4M6 10V4L4 6"/></svg>',
               command: (editor) => {
@@ -241,6 +242,7 @@ export default function () {
           title: "YouTube",
           name: "youtube",
           keywords: ["yt"],
+          description: 'Вставка видео YouTube',
           icon: '<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="24" height="24" version="1.1" viewBox="0 0 461.001 461.001"><path fill="currentColor" d="M365.257 67.393H95.744C42.866 67.393 0 110.259 0 163.137v134.728c0 52.878 42.866 95.744 95.744 95.744h269.513c52.878 0 95.744-42.866 95.744-95.744V163.137c0-52.878-42.866-95.744-95.744-95.744zm-64.751 169.663-126.06 60.123c-3.359 1.602-7.239-.847-7.239-4.568V168.607c0-3.774 3.982-6.22 7.348-4.514l126.06 63.881c3.748 1.899 3.683 7.274-.109 9.082z"/></svg>',
 
           insertCommand: async ({ editor, range }) => {
@@ -361,6 +363,7 @@ export default function () {
           title: "Разделитель",
           name: "horizontalRule",
           keywords: ["hr", "horizontal"],
+          description: 'Горизонтальная линия',
           icon: '<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M20.2 7v4H3.8V7H2.2v9h1.6v-3.5h16.4V16h1.6V7z"></path></svg>',
           
           insertCommand: ({ editor, range }) => {

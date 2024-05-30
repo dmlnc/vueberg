@@ -31,17 +31,9 @@
         "content": [
           {
             "type": "text",
-            "text": "Заголовок"
+            "text": "Custom VueBerg block"
           }
         ]
-      },
-      {
-        "type": "horizontalRule",
-        "attrs": {
-          "blockWidth": "normal",
-          "variant": "default",
-          "textAlign": "left"
-        }
       },
       {
         "type": "paragraph",
@@ -61,7 +53,7 @@
                 "type": "italic"
               }
             ],
-            "text": "Текст"
+            "text": "Example of custom block with block+ content but allowed only <h> and <p>"
           }
         ]
       }
@@ -230,6 +222,25 @@
               {
                 "type": "text",
                 "text": "shows contextual options (e.g. select this list item and you'll see options to change the list type or increase/decrease the indentation)"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "listItem",
+        "content": [
+          {
+            "type": "paragraph",
+            "attrs": {
+              "blockWidth": "normal",
+              "variant": "default",
+              "textAlign": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "responsive design"
               }
             ]
           }

@@ -7,18 +7,17 @@ export default function (count) {
   return {
     items: ({ query, editor }) => {
       const allowedBlocks = editor.storage.vuebergBlocks.getAllowedBlocks(
-        editor.storage.vuebergBlocks.currentNode, 
-        editor.storage.vuebergBlocks.getFlatBlocks()
+        editor.storage.vuebergBlocks.currentNode
       );
     
-      let filteredBlocks = allowedBlocks.filter(block => !block.hideCommand);
+      let filteredBlocks = allowedBlocks.filter(block => !block.settings?.hideCommand);
     
       if (!query) {
-        let defaultBlocks = filteredBlocks.filter(block => block.isDefaultCommand);
+        let defaultBlocks = filteredBlocks.filter(block => block.settings?.isDefaultCommand);
         if (defaultBlocks.length >= count) {
           filteredBlocks = defaultBlocks;
         } else {
-          let additionalBlocks = filteredBlocks.filter(block => !block.isDefaultCommand);
+          let additionalBlocks = filteredBlocks.filter(block => !block.settings?.isDefaultCommand);
           filteredBlocks = defaultBlocks.concat(additionalBlocks).slice(0, count);
         }
       } else {

@@ -25,6 +25,9 @@ import { Youtube } from "./youtube";
 import { TrailingNode } from "./trailing-node";
 import Localize from "./localize";
 
+
+
+
 import SlashMenu from "@/components/SlashMenu/slash-menu.js";
 import slashMenuSuggestion from "@/components/SlashMenu/suggestion.js";
 
@@ -124,7 +127,6 @@ export default function () {
                 up: 'Вверх',
                 down: 'Ввниз',
                 transformTo: 'Заменить:'
-
               }
             }
           })

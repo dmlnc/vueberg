@@ -24,10 +24,11 @@
           </button>
         </div>
         <div class="vueberg-button-group vueberg-button-group-separate" v-if="currentBlockTool?.icon && currentBlockTool?.name">
-          <menu-item>
+          <menu-item :hasDropdown="currentBlockTool?.toolbar?.canBeConverted && canBeConvertedTo.length>0">
             <menu-button
               :label="currentBlockTool?.title"
               :content="currentBlockTool?.icon"
+             
               :class="(currentBlockTool?.toolbar?.canBeConverted && canBeConvertedTo.length) ? 'vueberg-button-secondary' : ''"
             />
             <template #dropdown>
@@ -45,6 +46,7 @@
       </div>
       <div class="vueberg-button-group vueberg-button-group-separate" v-if="activeAlignmentTools.length">
         <menu-item
+          :hasDropdown="true"
           v-for="(alignmentToolGroup, key) in activeAlignmentTools"
           :key="key"
         >
@@ -80,7 +82,7 @@
         </div>
       </template>
       <div class="vueberg-button-group vueberg-button-group-separate" v-if="editor && remainingMenuItems.length">
-        <menu-item align="right">
+        <menu-item align="right" :hasDropdown="true">
           <menu-button class="vueberg-button-secondary" @click.prevent :label="moreLabel" :content="moreIcon"></menu-button>
           <template #dropdown>
             <template v-for="group in remainingMenuItems">
@@ -163,12 +165,6 @@ export default {
 
   computed: {
     
-    // currentBlockTool(){
-    //   if(!this.editor){
-    //     return null;
-    //   }
-    //   return this.editor.storage.vuebergBlocks.currentBlockTool
-    // },
     currentNode(){
       if(!this.editor){
         return null;
@@ -190,11 +186,8 @@ export default {
       if (!this.currentBlockTool?.toolbar?.alignTools) {
         return [];
       }
-
-      // Фильтрация инструментов выравнивания на основе allowNested
       const filterAlignmentTools = (alignmentToolGroup) => {
         if (this.currentNode?.depth > 1) {
-          // Если глубина узла больше 0, проверяем allowNested
           return alignmentToolGroup.allowNested;
         }
         return true;
@@ -267,9 +260,7 @@ export default {
     },
 
     menuCount() {
-      // Получаем ширину контейнера, в котором будут располагаться кнопки
       let width = this.vuebergWidth > 700 ? 700 : this.vuebergWidth;
-      // Получаем значения CSS-переменных
       const buttonSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-button-size')) || 30;
       const buttonGroupGap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-gap')) || 2;
       const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-group-margin')) || 10 );
@@ -366,7 +357,7 @@ export default {
         },
         {
           type: 'control',
-          condition: this.editor.can().deleteNode(this.currentBlockTool?.nodeType),
+          condition: true || this.editor.can().deleteNode(this.currentBlockTool?.nodeType),
           buttons: [
             {
               click: () => this.deleteNode(this.currentBlockTool?.nodeType),

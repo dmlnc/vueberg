@@ -82,6 +82,7 @@ import defaultExtensions from "../extensions/default-extensions.js";
 import defaultInlineTools from "../tools/inline-tools.js";
 import defaultAlignmentTools from "../tools/alignment-tools.js";
 import BlocksModal from "@/components/Modal/BlocksModal.vue";
+import UniqueId from "../extensions/unique-id";
 
 export default {
   props: {
@@ -99,15 +100,10 @@ export default {
         defaultExtensions: {}
       }),
     },
-   
-    // TODO:
     placeholder: {
       type: String,
       default: "Начните писать",
     },
-
-
-   
     extensions: {
       type: Array,
       default: () => [],
@@ -231,6 +227,7 @@ export default {
           BlockWidth.configure({ types: this.blocksWithBlockWidth }),
           Variants.configure({ types: this.blocksWithVariant }),
           TextAlign.configure({ types: this.blocksWithTextAlign }),
+          UniqueId.configure({ types: this.filterBlocks(block => (block))}),
           ModalExtension,
           ...this.extensions,
         ],
@@ -279,8 +276,6 @@ export default {
       });
     },
     shouldShowMainToolbar({editor, state, view}) {
-      // const node = GetCurrentNode(editor);
-      // this.currentBlockTool = this.editor.storage.vuebergBlocks.getBlockTool(node.type.name);
       return this.editable && view.hasFocus() && editor.isActive() && this.modelValue;
     },
     shouldShowFloatingMenu({editor, state, view}){
@@ -316,7 +311,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "@/style.scss";
-// @import "@/style.css";
-</style>

@@ -1,13 +1,43 @@
 import { Extension } from '@tiptap/core';
-import { GetCurrentNode } from "@/utils/pm-utils"
+import { Plugin } from 'prosemirror-state';
+import { GetCurrentNode } from "@/utils/pm-utils";
 
+// Плагин для контроля вставки
+const controlInsertionPlugin = (allowedBlocks) => {
+  return new Plugin({
+    filterTransaction(transaction, state) {
+      if(allowedBlocks === true){
+        return true;
+      }
+      allowedBlocks.push('text')
+      allowedBlocks.push('paragraph')
+
+      const { doc, selection } = state;
+      const { from, to } = selection;
+
+      // Проверяем, если блоки, которые пытаются вставить, разрешены
+      let allowInsertion = true;
+      transaction.steps.forEach(step => {
+        if (step.slice && step.slice.content) {
+          step.slice.content.forEach(node => {
+            if (!allowedBlocks.includes(node.type.name)) {
+              allowInsertion = false;
+            }
+          });
+        }
+      });
+
+      return allowInsertion;
+    }
+  });
+};
 
 export const VuebergBlocks = Extension.create({
   name: 'vuebergBlocks',
 
   addOptions() {
     return {
-      blocks: [],
+      blocks: []
     };
   },
 
@@ -20,17 +50,24 @@ export const VuebergBlocks = Extension.create({
 
       getCurrentNode: (cache = true) => ({ editor }) => {
         const node = GetCurrentNode(editor)
-
+        
+        // Пример использования функции для изменения разрешенных блоков
+        // editor.commands.updateAllowedBlocks(['paragraph', 'bulletList']);
         if(cache == true){
           this.storage.currentNode = node;
+        
         }
        
         return node;
-      }
+      },
           
+      // updateInsertionPlugin: (newBlocks) => ({ editor }) => {
+      //   // this.options.allowedBlocks = newBlocks;
+      //   // Обновляем состояние редактора, чтобы применить новые разрешенные блоки
+      //   editor.view.updateState(editor.state.reconfigure({ plugins: editor.state.plugins }));
+      // }
     }
   },
-
 
   onCreate() {
     this.options.blocks.forEach(group => {
@@ -45,6 +82,9 @@ export const VuebergBlocks = Extension.create({
     if (duplicates.length > 0) {
       console.warn(`[VuebergBlocks]: Duplicate block names found: ${[...new Set(duplicates)].join(', ')}`);
     }
+
+    // Добавляем плагин для контроля вставки
+    // this.editor.registerPlugin(controlInsertionPlugin(true));
   },
 
   addStorage() {
@@ -52,6 +92,7 @@ export const VuebergBlocks = Extension.create({
       flatBlocksCache: null,
       currentBlockTool: null,
       currentNode: null,
+      allowedBlocks: true,
 
       getFlatBlocks: (transformFn = block => block) => {
         if (!this.flatBlocksCache) {
@@ -80,12 +121,28 @@ export const VuebergBlocks = Extension.create({
       },
 
       hasAllowedBlocks(currentNode) {
-        const allowedBlocks = this.getAllowedBlocks(currentNode, this.getFlatBlocks());
+        const allowedBlocks = this.getAllowedBlocks(currentNode);
         return allowedBlocks.length > 0;
+      },
+
+      getAllowedBlocks(currentNode) {
+        // console.log(currentNode);
+        if(typeof this.allowedBlocks == Object && this.allowedBlocks.currentNode.attrs.id == currentNode.attrs.i){
+          this.allowedBlocks.currentNode.attrs.id != currentNode.attrs.i
+        }
+        
+        this.allowedBlocks = {
+          node: currentNode,
+          blocks: this.loadAllowedBlocks(currentNode, this.getFlatBlocks())
+        };
+        
+        // this.commands.updateInsertionPlugin(this.allowedBlocks.blocks);
+        
+        return this.allowedBlocks.blocks;
       },
       
 
-      getAllowedBlocks(currentNode, blocks) {
+      loadAllowedBlocks(currentNode, blocks) {
 
         const blockTool = this.getBlockByName(currentNode.type.name);
         const contentExpr = currentNode.type.spec.content;
@@ -128,7 +185,7 @@ export const VuebergBlocks = Extension.create({
 
       getAllowedBlocksByGroups(currentNode) {
         const allBlocks = this.getAllBlocks();
-        const allowedBlocks = this.getAllowedBlocks(currentNode, this.getFlatBlocks());
+        const allowedBlocks = this.getAllowedBlocks(currentNode,);
       
         const allowedBlockNames = new Set(allowedBlocks.map(block => block.name));
       

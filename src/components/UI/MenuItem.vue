@@ -23,11 +23,6 @@ export default {
       showDropdown: false,
     };
   },
-  computed: {
-    hasDropdown() {
-      return !!this.$slots.dropdown;
-    },
-  },
   methods: {
     toggleDropdown() {
       if (this.hasDropdown) {
@@ -63,6 +58,10 @@ export default {
     iconName: {
       type: String,
       required: false,
+    },
+    hasDropdown:{
+      type: Boolean,
+      default: false,
     },
     iconSvg: {
       type: String,
