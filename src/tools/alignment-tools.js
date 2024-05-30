@@ -38,6 +38,7 @@ export default function () {
       allowNested: false,
       tools: [
         {
+          name: "blockWidthNormal",
           title: "Обычный блок",
           icon: '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 15h14V9H5v6zm0 4.8h14v-1.5H5v1.5zM5 4.2v1.5h14V4.2H5z"></path></svg>',
           command: (editor) => {
@@ -47,6 +48,7 @@ export default function () {
             editor.isActive({ blockWidth: "normal" }),
         },
         {
+          name: "blockWidthWide",
           title: "Широкий блок",
           icon: '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 9v6h14V9H5zm11-4.8H8v1.5h8V4.2zM8 19.8h8v-1.5H8v1.5z"></path></svg>',
           command: (editor) => {
@@ -56,6 +58,7 @@ export default function () {
             editor.isActive(topLevelNodeType, { blockWidth: "wide" }),
         },
         {
+          name: "blockWidthFull",
           title: "На всю ширину",
           icon: '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 4v11h14V4H5zm3 15.8h8v-1.5H8v1.5z"></path></svg>',
           command: (editor) => {

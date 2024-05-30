@@ -96,6 +96,9 @@ In your Vue component:
     </template>
   </BaseVueBergBlock>
 </template>
+<script>
+  import { BaseVueBergBlock } from 'vueberg';
+</script
 ```
 
 ### Inline Tool Example
