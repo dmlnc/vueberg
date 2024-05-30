@@ -357,7 +357,7 @@ export default {
         },
         {
           type: 'control',
-          condition: true || this.editor.can().deleteNode(this.currentBlockTool?.nodeType),
+          condition: this.editor.can().deleteNode(this.currentBlockTool?.nodeType),
           buttons: [
             {
               click: () => this.deleteNode(this.currentBlockTool?.nodeType),
