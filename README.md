@@ -183,6 +183,7 @@ settings: {
 
 - [ ] Toolbar instantly destroys on first click
 - [ ] Toolbar don`t show delete icon on HR - tiptap .can().deleteNode() return false
+- [ ] [[Bug]: Cannot parse generated html from YouTube extension #4089](https://github.com/ueberdosis/tiptap/issues/4089)
 
 ## CSS Variables
 

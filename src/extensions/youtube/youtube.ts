@@ -88,6 +88,11 @@ export const Youtube = Node.create<YoutubeOptions>({
     return {
       src: {
         default: null,
+        // parseHTML: element => {
+        //   console.log(element);
+        //   element.getAttribute('data-id');
+        //   return 'http://youtube.com/watch?v='
+        // },
       },
       start: {
         default: 0,
@@ -166,7 +171,9 @@ export const Youtube = Node.create<YoutubeOptions>({
     });
 
     const blockWidth = HTMLAttributes["data-block-width"];
+    const id = HTMLAttributes["data-id"];
     HTMLAttributes["data-block-width"] = null;
+    HTMLAttributes["data-id"] = null;
     HTMLAttributes.src = embedUrl;
 
     return [
@@ -174,6 +181,8 @@ export const Youtube = Node.create<YoutubeOptions>({
       {
         "data-youtube-video": "",
         "data-block-width": blockWidth,
+        "data-id": id,
+
         class: "vueberg-youtube-figure",
       },
       [
@@ -206,6 +215,7 @@ export const Youtube = Node.create<YoutubeOptions>({
           ),
         ],
       ],
+      // ["figcaption", 0],
     ];
   },
 
