@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
+import sassDts from 'vite-plugin-sass-dts';
 
 export default defineConfig({
   plugins: [
@@ -8,6 +9,7 @@ export default defineConfig({
       css: true, // Dynamically inject css as a <style> tag
       compileTemplate: true, // Explicitly convert template to render function
     }),
+    sassDts(),
   ],
   resolve: {
     alias: {
@@ -36,6 +38,13 @@ export default defineConfig({
         globals: {
           vue: "Vue",
         },
+      },
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "${resolve(__dirname, 'src/style.scss')}";`
       },
     },
   },

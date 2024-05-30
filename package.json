@@ -1,6 +1,6 @@
 {
   "name": "vueberg",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "private": false,
   "type": "module",
   "files": [
@@ -14,9 +14,9 @@
       "import": "./lib/vueberg.js",
       "require": "./lib/vueberg.umd.cjs"
     },
-    "./style.scss": {
-      "import": "./lib/style.scss",
-      "require": "./lib/style.scss"
+    "./style.css": {
+      "import": "./lib/style.css",
+      "require": "./lib/style.css"
     }
   },
   "scripts": {
@@ -76,8 +76,9 @@
     "autoprefixer": "^10.4.12",
     "eslint": "^8.56.0",
     "eslint-plugin-vue": "^8.0.3",
-    "postcss": "^8.4.17",
-    "sass": "^1.77.2"
+    "postcss": "^8.4.38",
+    "sass": "^1.77.3",
+    "vite-plugin-sass-dts": "^1.3.22"
   },
   "eslintConfig": {
     "root": true,
