@@ -93,7 +93,6 @@ export default {
                   .focus()
                   .deleteRange(range)
                   .insertContent('<div data-vueberg-block="notification"><p></p></div>')
-                  // .insertContent('<div><notification type="0"></notification></div>')
                   .run();
               },
               isActiveTest: (editor) => editor.isActive("notification"),
@@ -125,7 +124,9 @@ export default {
           ]
         }
       ],
+      // content: [{"type": "paragraph"}],
       content: sampleContent,
+
     };
   },
 };
