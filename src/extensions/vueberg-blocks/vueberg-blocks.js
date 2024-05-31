@@ -43,8 +43,28 @@ export const VuebergBlocks = Extension.create({
 
   addCommands() {
     return {
+
+      getNodeIndex: (currentNode) => ({ editor }) => {
+        let nodeIndex = null;
+        const state = editor.view.state;
+        const doc = state.doc;
+        doc.descendants((node, pos, parent, index) => {
+          if (node.attrs.id === currentNode.attrs.id) {
+            nodeIndex = index;
+            return false; 
+          }
+        });
+
+        return nodeIndex;
+      },
+
       getCurrentNodeName: () => ({ editor }) => {
         let node = editor.commands.getCurrentNode();
+        if(node == null){
+          return null
+        }
+
+        // console.log(editor.state.selection.$head.parent)
         return node.type.name;
       },
 
@@ -55,7 +75,6 @@ export const VuebergBlocks = Extension.create({
         // editor.commands.updateAllowedBlocks(['paragraph', 'bulletList']);
         if(cache == true){
           this.storage.currentNode = node;
-        
         }
        
         return node;
@@ -120,20 +139,38 @@ export const VuebergBlocks = Extension.create({
         return block;
       },
 
-      hasAllowedBlocks(currentNode) {
-        const allowedBlocks = this.getAllowedBlocks(currentNode);
+      hasAllowedBlocks(currentNode, editor) {
+        const allowedBlocks = this.getAllowedBlocks(currentNode, editor);
         return allowedBlocks.length > 0;
       },
 
-      getAllowedBlocks(currentNode) {
-        // console.log(currentNode);
-        if(typeof this.allowedBlocks == Object && this.allowedBlocks.currentNode.attrs.id == currentNode.attrs.i){
-          this.allowedBlocks.currentNode.attrs.id != currentNode.attrs.i
+      getAllowedBlocks(currentNode, editor) {
+       
+        if(typeof this.allowedBlocks == Object && this.allowedBlocks.node.attrs.id == currentNode.attrs.id){
+          return this.allowedBlocks.blocks;
         }
-        
+
+        let blocks = this.loadAllowedBlocks(currentNode, this.getFlatBlocks())
+        if (currentNode.parent == null) {
+          blocks = blocks.filter((block) => {
+              const blockNodeType = editor.schema.nodes[block.name];
+              
+              if (!blockNodeType) {
+                  return false;
+              }
+              
+              const $pos = editor.state.selection.$from;
+              if($pos.node(-1)){
+                return $pos.node(-1).canReplaceWith($pos.index(-1), $pos.indexAfter(-1), blockNodeType);
+
+              }
+              return false;
+          });
+        }
+
         this.allowedBlocks = {
           node: currentNode,
-          blocks: this.loadAllowedBlocks(currentNode, this.getFlatBlocks())
+          blocks: blocks
         };
         
         // this.commands.updateInsertionPlugin(this.allowedBlocks.blocks);
@@ -169,7 +206,6 @@ export const VuebergBlocks = Extension.create({
 
         if (!contentExpr.includes('text') && !contentExpr.includes('inline')){
           const allowedBlockNames = contentExpr.match(/[\w]+/g) || [];
-          
           blocks = blocks.filter(block => allowedBlockNames.includes(block.name));
         }
 
@@ -177,15 +213,15 @@ export const VuebergBlocks = Extension.create({
        
         // Проверка разрешенных блоков у родителя, если depth > 1
         if (currentNode.depth > 1 && currentNode.parent) {
-          return this.getAllowedBlocks(currentNode.parent, blocks);
+          return this.loadAllowedBlocks(currentNode.parent, blocks);
         }
       
         return blocks;
       },
 
-      getAllowedBlocksByGroups(currentNode) {
+      getAllowedBlocksByGroups(currentNode, editor) {
         const allBlocks = this.getAllBlocks();
-        const allowedBlocks = this.getAllowedBlocks(currentNode,);
+        const allowedBlocks = this.getAllowedBlocks(currentNode, editor);
       
         const allowedBlockNames = new Set(allowedBlocks.map(block => block.name));
       

@@ -54,7 +54,7 @@ export default {
     data(){
         return {
             titleLabel: this.editor.commands.getTranslation('extensions.Modal.BlocksModal.title'),
-            blocks: this.editor.storage.vuebergBlocks.getAllowedBlocksByGroups(this.editor.storage.vuebergBlocks.currentNode)
+            blocks: this.editor.storage.vuebergBlocks.getAllowedBlocksByGroups(this.editor.storage.vuebergBlocks.currentNode, this.editor)
         }
     },
     methods: {

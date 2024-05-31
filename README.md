@@ -184,7 +184,7 @@ settings: {
 
 ## Known Bugs
 
-- [ ] Toolbar instantly destroys on first click
+- [ ] HR selection and behvior quite strange. Create custom HR extension
 - [ ] Toolbar don`t show delete icon on HR - tiptap .can().deleteNode() return false
 - [ ] [[Bug]: Cannot parse generated html from YouTube extension #4089](https://github.com/ueberdosis/tiptap/issues/4089)
 

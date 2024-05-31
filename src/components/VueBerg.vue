@@ -1,12 +1,12 @@
 <template>
   <div class="vueberg" style="position: relative;" ref="vueberg">
     <widget-container-modal />
-
     <bubble-menu
       pluginKey="mainMenu"
       :should-show="shouldShowMainToolbar"
-      :updateDelay="250"
-      v-if="editor"
+      :updateDelay="0"
+      v-if="loaded"
+      v-show="currentBlockTool"
       :editor="editor"
       :class="{
         'vueberg-bubble-menu-hidden': isTyping,
@@ -68,7 +68,7 @@ import MenuButton from "@/components/UI/MenuButton.vue";
 import MenuItem from "@/components/UI/MenuItem.vue";
 import Toolbar from "./Toolbar.vue";
 import { BubbleMenu, Editor, EditorContent, FloatingMenu } from "@tiptap/vue-3";
-import Placeholder from "@tiptap/extension-placeholder";
+// import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
 import { container as WidgetContainerModal } from "jenesius-vue-modal";
 import { GetCurrentBlockCoords, GetCurrentBlockEndCoords, GetCurrentNode } from "../utils/pm-utils.js";
@@ -87,6 +87,10 @@ import UniqueId from "../extensions/unique-id";
 export default {
   props: {
     modelValue: {},
+    defaultContent:{
+      type: [Object, Array],
+      default: [{ type: "paragraph" }]
+    },
     editable: {
       default: true,
     },
@@ -100,10 +104,10 @@ export default {
         defaultExtensions: {}
       }),
     },
-    placeholder: {
-      type: String,
-      default: "Начните писать",
-    },
+    // placeholder: {
+    //   type: [String, Function],
+    //   default: "Начните писать",
+    // },
     extensions: {
       type: Array,
       default: () => [],
@@ -140,8 +144,12 @@ export default {
       vuebergWidth: 0,
       editor: null,
       defaultSettings: {
-        defaultExtensions: {},
+        editor:{
+          autofocus: false
+        },
+        defaultExtensions: {}
       },
+      loaded: false,
       allDefaultExtensions: defaultExtensions(),
       allBlockTools: mergeArrays(defaultBlockTools(), this.blockTools),
       allInlineTools: mergeArrays(defaultInlineTools(), this.inlineTools),
@@ -223,7 +231,7 @@ export default {
         extensions: [
           ...enabledExtensions,
           VuebergBlocks.configure({ blocks: allBlockToolsFiltered }),
-          Placeholder.configure({ considerAnyAsEmpty: true, placeholder: this.placeholder }),
+          // Placeholder.configure({ considerAnyAsEmpty: true, placeholder: this.placeholder }),
           BlockWidth.configure({ types: this.blocksWithBlockWidth }),
           Variants.configure({ types: this.blocksWithVariant }),
           TextAlign.configure({ types: this.blocksWithTextAlign }),
@@ -231,11 +239,27 @@ export default {
           ModalExtension,
           ...this.extensions,
         ],
-        content: this.mode === "json" ? { type: "doc", content: this.modelValue } : this.modelValue,
+        content: this.modelValue === null ? { type: "doc", content: this.defaultContent } : (this.mode === "json" ? { type: "doc", content: this.modelValue } : this.modelValue),
         editable: this.editable,
         onUpdate: this.handleEditorUpdate,
-        onSelectionUpdate: this.updateCurrentBlockTool,
+        onCreate: this.handleEditorCreate,
+        onSelectionUpdate: this.handleSelectionUpdate,
+        autofocus: this.mergedSettings.editor.autofocus,
       });
+      
+    },
+    handleEditorCreate() {
+      // console.log('handleEditorCreate');
+      this.updateCurrentBlockTool();
+      this.$emit(
+        "update:modelValue",
+        this.mode == "json" ? this.editor.getJSON().content : this.editor.getHTML()
+      );
+      this.$emit("onCreate", this.editor);
+      this.loaded = true;
+    },
+    handleSelectionUpdate() {
+      this.updateCurrentBlockTool();
     },
     handleEditorUpdate() {
       this.updateCurrentBlockTool();
@@ -276,7 +300,11 @@ export default {
       });
     },
     shouldShowMainToolbar({editor, state, view}) {
-      return this.editable && view.hasFocus() && editor.isActive() && this.modelValue;
+      
+      // console.log(this.editable && view.hasFocus() && editor.isActive());
+
+
+      return this.editable && view.hasFocus() && editor.isActive() && this.modelValue && this.currentBlockTool;
     },
     shouldShowFloatingMenu({editor, state, view}){
       
@@ -293,13 +321,16 @@ export default {
         return false
       }
       const node = GetCurrentNode(editor);
-      const hasAllowedBlocks = editor.storage.vuebergBlocks.hasAllowedBlocks(node)
+      const hasAllowedBlocks = editor.storage.vuebergBlocks.hasAllowedBlocks(node, editor)
 
       return hasAllowedBlocks;
       
     },
     updateCurrentBlockTool() {
+      // console.log('updateCurrentBlockTool');
       this.currentBlockTool = this.editor.storage.vuebergBlocks.getBlockTool(this.editor.commands.getCurrentNodeName());
+      // console.log(this.currentBlockTool);
+
     },
     getMenuCoords() {
       return GetCurrentBlockCoords(this.editor);

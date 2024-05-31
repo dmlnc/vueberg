@@ -16,6 +16,8 @@ import Paragraph from "@tiptap/extension-paragraph";
 import Strike from "@tiptap/extension-strike";
 import Text from "@tiptap/extension-text";
 import Link from "@tiptap/extension-link";
+import Placeholder from "@tiptap/extension-placeholder";
+
 // import Blockquote from "@tiptap/extension-blockquote";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
@@ -35,6 +37,7 @@ import slashMenuSuggestion from "@/components/SlashMenu/suggestion.js";
 export default function () {
   
     return [
+        { name: 'Placeholder', extension: Placeholder.configure({ considerAnyAsEmpty: true, placeholder: 'Начните писать' }) },
         { name: 'Bold', extension: Bold },
         { name: 'BulletList', extension: BulletList },
         { name: 'Code', extension: Code },

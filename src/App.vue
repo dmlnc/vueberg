@@ -7,6 +7,7 @@
         />
         <vueberg
           v-model="content"
+          :defaultContent="[{ type: 'heading',attrs:{level: 1} },{ type: 'paragraph' }]"
           :editable="editable"
           mode="json"
           :blockTools="blockTools"
@@ -14,8 +15,42 @@
           :inlineTools="[]"
           :extensions="extensions"
           :settings="{
+            editor: {
+              autofocus: false,
+            },
             defaultExtensions: {
               SlashMenu: true,
+              Document: {
+                    options:{
+                      extend: {
+                        content: 'heading block+',
+                      }
+                    }
+              },
+              Placeholder: {
+                    options:{
+                      configure: {
+                        considerAnyAsEmpty: true, 
+                        showOnlyCurrent: true,
+                        placeholder: ({ node, editor }) => {
+                            let nodeIndex = null;
+                            const currentNode = node;
+                            const doc = editor.view.state.doc;
+                            doc.descendants((node, pos, parent, index) => {
+                              if (node.attrs.id === currentNode.attrs.id) {
+                                nodeIndex = index;
+                                return false; 
+                              }
+                            });
+                            // console.log(nodeIndex)
+                            if (node.type.name === 'heading' && nodeIndex == 0) {
+                              return 'What’s the title?'
+                            }
+                            return 'Can you add some further context?'
+                        }
+                      }
+                    }
+              },
               Heading: {
                 enabled: true,
                 options:{
@@ -38,6 +73,9 @@
           }"
         />
       </div>
+      <textarea style="min-height: 200px; width: 100%">
+        {{ content }}
+      </textarea>
   </div>
 </template>
 
@@ -45,7 +83,6 @@
 
 import Vueberg from "./components/VueBerg.vue";
 import sampleContent from "./content.json";
-import VueComponent from "./extensions/vue-component";
 import Notification from "./vueberg-blocks/notification";
 
 
@@ -124,8 +161,10 @@ export default {
           ]
         }
       ],
+      content: null,
+
       // content: [{"type": "paragraph"}],
-      content: sampleContent,
+      // content: sampleContent,
 
     };
   },

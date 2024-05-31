@@ -176,8 +176,11 @@ export default {
       if (this.currentBlockTool?.toolbar?.canBeConverted === false) {
         return [];
       }
-
-      return this.editor.storage.vuebergBlocks.getFlatBlocks().filter(tool => {
+      if(!this.editor.storage.vuebergBlocks.currentNode){
+        return [];
+      }
+      // console.log(this.currentBlockTool)
+      return this.editor.storage.vuebergBlocks.getAllowedBlocks(this.editor.storage.vuebergBlocks.currentNode, this.editor).filter(tool => {
         return this.currentBlockTool?.toolbar?.canBeConverted[tool.name] && tool.convertCommand;
       });
     },

@@ -45,7 +45,8 @@ export default {
   computed:{
     hiddenItems(){
       return this.editor.storage.vuebergBlocks.getAllowedBlocks(
-        this.editor.storage.vuebergBlocks.currentNode
+        this.editor.storage.vuebergBlocks.currentNode,
+        this.editor,
       ).length - this.items.length
     }
   },

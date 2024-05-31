@@ -7,7 +7,8 @@ export default function (count) {
   return {
     items: ({ query, editor }) => {
       const allowedBlocks = editor.storage.vuebergBlocks.getAllowedBlocks(
-        editor.storage.vuebergBlocks.currentNode
+        editor.storage.vuebergBlocks.currentNode,
+        editor
       );
     
       let filteredBlocks = allowedBlocks.filter(block => !block.settings?.hideCommand);
@@ -39,7 +40,7 @@ export default function (count) {
       return {
         onStart: (props) => {
 
-          const hasAllowedBlocks = props.editor.storage.vuebergBlocks.hasAllowedBlocks(props.editor.storage.vuebergBlocks.currentNode)
+          const hasAllowedBlocks = props.editor.storage.vuebergBlocks.hasAllowedBlocks(props.editor.storage.vuebergBlocks.currentNode, props.editor)
           if(!hasAllowedBlocks){
             return false;
           }
