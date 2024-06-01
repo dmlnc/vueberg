@@ -113,7 +113,7 @@
           :activeClass="button?.activeClass"
           @click.prevent="button?.click"
           :disabled="button?.disabled"
-          :active="button?.isActiveTest"
+          :active="button?.isActiveTest()"
         ></menu-button>
       </div>
 
