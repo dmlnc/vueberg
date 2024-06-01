@@ -38,6 +38,7 @@ VueBerg accepts several props to customize its behavior:
 - **blockTools** (`Array | Boolean`): Definitions of blocks used within the editor.
 - **inlineTools** (`Array | Boolean`): Tools for inline formatting like bold or italic.
 - **alignmentTools** (`Array | Boolean`): Tools for text alignment.
+- **customTools** (`Array | Boolean`): Definitions of custom blocks at the end of toolbar (never hide on small width).
 
 ## Examples
 

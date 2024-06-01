@@ -751,6 +751,12 @@ html{
     padding: var(--vueberg-toolbar-padding);
     box-shadow:  var(--vueberg-toolbar-shadow);
 
+    &-custom-tools{
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
     &-transform-to{
       color: var(--vueberg-color-muted);
       font-size: 12px;

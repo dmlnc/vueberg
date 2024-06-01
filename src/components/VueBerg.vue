@@ -44,6 +44,7 @@
         :inlineTools="allInlineTools"
         :alignmentTools="allAlignmentTools"
         :vuebergWidth="vuebergWidth"
+        :customTools="customTools"
       />
     </div>
 
@@ -131,7 +132,10 @@ export default {
       type: Array,
       default: () => [],
     },
-
+    customTools: {
+      type: Array,
+      default: () => [],
+    },
     blockTools: {
       type: Array,
       default: () => [],

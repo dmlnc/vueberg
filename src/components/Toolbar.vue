@@ -81,6 +81,8 @@
           ></menu-button>
         </div>
       </template>
+
+      
       <div class="vueberg-button-group vueberg-button-group-separate" v-if="editor && remainingMenuItems.length">
         <menu-item align="right" :hasDropdown="true">
           <menu-button class="vueberg-button-secondary" @click.prevent :label="moreLabel" :content="moreIcon"></menu-button>
@@ -101,6 +103,20 @@
           </template>
         </menu-item>
       </div>
+
+      <div v-if="customTools.length" class="vueberg-button-group vueberg-button-group-separate vueberg-toolbar-custom-tools">
+        <menu-button
+          v-for="(button, index) in customTools"
+          :key="index"
+          :content="button.icon"
+          :label="button.title"
+          :activeClass="button?.activeClass"
+          @click.prevent="button?.click"
+          :disabled="button?.disabled"
+          :active="button?.isActiveTest"
+        ></menu-button>
+      </div>
+
     </div>
 </template>
 
@@ -130,6 +146,10 @@ export default {
       default: () => [],
     },
     alignmentTools: {
+      type: Array,
+      default: () => [],
+    },
+    customTools: {
       type: Array,
       default: () => [],
     },
@@ -280,6 +300,12 @@ export default {
       const buttonGroupGap = 2;
       const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-group')) || 10 );
       const separatorWidth = 1; // Ширина разделителя между группами кнопок
+
+      if (this.customTools && this.customTools.length > 0){
+        width -= this.customTools.length * buttonSize;
+        width -= (this.customTools.length - 1) * buttonGroupGap;
+        width -= buttonGroupMargin + separatorWidth;
+      }
 
       // Отступ от краев
       width -= toolbarPadding*2; 
