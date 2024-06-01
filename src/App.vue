@@ -15,6 +15,9 @@
           :inlineTools="[]"
           :extensions="extensions"
           :settings="{
+            toolbar:{
+              style: 'sticky'
+            },
             editor: {
               autofocus: false,
             },

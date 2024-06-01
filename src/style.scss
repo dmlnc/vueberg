@@ -106,7 +106,7 @@ html{
   --vueberg-block-item-padding: 5px;
   
   --vueberg-sticky-menu-z-index: 10;
-  --vueberg-sticky-menu-top: 6px;
+  --vueberg-sticky-menu-top: 0px;
 
 
 }
@@ -712,6 +712,12 @@ html{
         }
 
       }
+    }
+  }
+
+  &-editor{
+    &--sticky-menu{
+      margin-top: 0.5rem;
     }
   }
 

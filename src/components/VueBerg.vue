@@ -5,7 +5,7 @@
       pluginKey="mainMenu"
       :should-show="shouldShowMainToolbar"
       :updateDelay="0"
-      v-if="loaded && mergedSettings?.toolbar?.style == 'default'"
+      v-if="editable && loaded && mergedSettings?.toolbar?.style == 'default'"
       v-show="currentBlockTool"
       :editor="editor"
       :class="{
@@ -32,12 +32,8 @@
         :vuebergWidth="vuebergWidth"
       />
     </bubble-menu>
-
     <div
-      v-if="loaded && mergedSettings?.toolbar?.style == 'sticky'"
-      :class="{
-        'vueberg-bubble-menu-hidden': !editor.view.hasFocus(),
-      }"
+      v-if="editable && loaded && mergedSettings?.toolbar?.style == 'sticky'"
       class="vueberg-sticky-menu"
     >
       <Toolbar
@@ -54,7 +50,7 @@
 
 
     <floating-menu 
-      v-if="currentBlockTool && editor" 
+      v-if="editable && currentBlockTool && editor" 
       :updateDelay="1000"
       :should-show="shouldShowFloatingMenu"
       :editor="editor" 
@@ -72,6 +68,10 @@
     </floating-menu>
 
     <editor-content
+      class="vueberg-editor"
+      :class="{
+        'vueberg-editor--sticky-menu': mergedSettings?.toolbar?.style == 'sticky',
+      }"
       @keydown="isTyping = true"
       @keydown.esc="isTyping = false"
       @keyup.esc="isTyping = false"
@@ -115,7 +115,7 @@ export default {
     },
     mode: {
       type: String,
-      default: "html",
+      default: "json",
     },
     settings: {
       type: Object,
@@ -164,7 +164,7 @@ export default {
       editor: null,
       defaultSettings: {
         toolbar: {
-          style: 'sticky'
+          style: 'default'
         },
         editor:{
           autofocus: false
