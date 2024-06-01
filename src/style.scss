@@ -105,6 +105,9 @@ html{
   --vueberg-block-item-description-size: 10px;
   --vueberg-block-item-padding: 5px;
   
+  --vueberg-sticky-menu-z-index: 10;
+  --vueberg-sticky-menu-top: 6px;
+
 
 }
 
@@ -709,6 +712,18 @@ html{
         }
 
       }
+    }
+  }
+
+  &-sticky-menu{
+    position: sticky;
+    top: var(--vueberg-sticky-menu-top);
+    left: 0;
+    width: 100%;
+    z-index: var(--vueberg-sticky-menu-z-index);
+
+    & .vueberg-toolbar{
+      max-width: 100%;
     }
   }
   

@@ -35,13 +35,14 @@ VueBerg accepts several props to customize its behavior:
 - **mode** (`String`): Determines the format of the `modelValue`. Can be either `html` or `json`.
 - **settings** (`Object`): Configuration for extensions and other features.
 - **extensions** (`Array`): Custom extensions to be added to the editor.
-- **blockTools** (`Array`): Definitions of blocks used within the editor.
+- **blockTools** (`Array | Boolean`): Definitions of blocks used within the editor.
 - **inlineTools** (`Array | Boolean`): Tools for inline formatting like bold or italic.
 - **alignmentTools** (`Array | Boolean`): Tools for text alignment.
 
 ## Examples
 
 ### Custom Block Example
+### Check vueberg-blocks/notification
 
 Here's how you can add a custom block, such as a notification block:
 
@@ -102,6 +103,7 @@ In your Vue component:
 ```
 
 ### Inline Tool Example
+### Check tools/inline-tools.js
 
 ```
 {
@@ -116,7 +118,7 @@ In your Vue component:
 ```
 
 ### Alignment Tool Example
-
+### Check tools/alignment-tools.js
 ```
 {
   name: "textAlign",
@@ -134,15 +136,31 @@ In your Vue component:
 }
 ```
 
-## Localization Example
+## Settings + Extend or configure extention example(Localization)
+### Check extensions/default-extensions.js
 
+Toolbar has 2 styles: default - gutenberg style, and sticky - just sticky toolbar
+You can aalso enabe autofous
 To localize VueBerg, adjust the language settings in the `settings` prop. This example shows how to configure the localization settings:
 
 ```
 settings: {
+  toolbar:{
+    style: "default" || "sticky"
+  },
+  editor: {
+    autofocus: Boolean
+  }
   defaultExtensions: {
+    ExtensionName: Boolean,
+    ExtensionName: {
+      options: {
+        configure: Function || Object,
+        extend: Function || Object,
+      }
+    },
     Localize: { 
-      enabled: true,
+      enabled: Boolean,
       options: {
         configure: {
           translations: {
@@ -286,4 +304,7 @@ settings: {
   --vueberg-block-item-title-size: 12px;
   --vueberg-block-item-description-size: 10px;
   --vueberg-block-item-padding: 5px;
+
+  --vueberg-sticky-menu-z-index: 10;
+  --vueberg-sticky-menu-top: 6px;
 ```

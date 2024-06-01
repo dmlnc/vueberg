@@ -221,6 +221,11 @@ export default {
         return [];
       }
       let count = this.menuCount;
+      let menuItemsCount = this.menuItems?.reduce((count, group) => count + group.buttons.length, 0);
+
+      if(count < menuItemsCount){
+        count = count - 1;
+      }
       return this.menuItems.map(group => {
         if (count <= 0) {
           return { ...group, buttons: [] };
@@ -244,6 +249,10 @@ export default {
         return [];
       }
       let count = this.menuCount;
+      let menuItemsCount = this.menuItems.reduce((count, group) => count + group.buttons.length, 0);
+      if(count < menuItemsCount){
+        count = count - 1;
+      }
       return this.menuItems.map(group => {
         if (count <= 0) {
           return group;
@@ -264,17 +273,21 @@ export default {
 
     menuCount() {
       let width = this.vuebergWidth > 700 ? 700 : this.vuebergWidth;
+
+      const toolbarPadding = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-padding')) || 6;
+
       const buttonSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-button-size')) || 30;
-      const buttonGroupGap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-gap')) || 2;
-      const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-group-margin')) || 10 );
+      const buttonGroupGap = 2;
+      const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-group')) || 10 );
       const separatorWidth = 1; // Ширина разделителя между группами кнопок
+
       // Отступ от краев
-      width -= 15; 
+      width -= toolbarPadding*2; 
+
       // Учитываем ширину кнопок ордера и текущего блока
       width -= 2 * buttonSize;
       width -= buttonGroupGap;
       width -= buttonGroupMargin + separatorWidth;
-
       // Учитываем кнопки выравнивания
       width -= (this.activeAlignmentTools.length * buttonSize);
       width -= (buttonGroupGap * (this.activeAlignmentTools.length ? this.activeAlignmentTools.length - 1 : 0));
@@ -288,18 +301,20 @@ export default {
         currentBlockToolButtonsWidth = buttonSize * currentBlockToolButtons
         currentBlockToolButtonsWidth += buttonGroupGap * (currentBlockToolButtons ? currentBlockToolButtons - 1 : 0);
       }
-
       if(width < currentBlockToolButtonsWidth + buttonGroupMargin + separatorWidth){
-        return Math.floor(( (width - buttonGroupMargin - separatorWidth)  / ( buttonSize + buttonGroupGap)))
+        return Math.floor((width - buttonGroupMargin - separatorWidth)  / ( buttonSize + buttonGroupGap))
       } else{
         count = this.currentBlockTool?.tools?.length
         width -= currentBlockToolButtonsWidth
         width -= buttonGroupMargin
         width -= separatorWidth 
       }
+
       if(count == undefined){
         count = 0;
       }
+      width -= buttonGroupMargin
+      width -= separatorWidth
       // Рассчитываем количество кнопок, которые поместятся в оставшуюся ширину
       return Math.floor(width / ( buttonGroupGap + buttonSize)) + count;
     },

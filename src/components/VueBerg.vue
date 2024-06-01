@@ -5,7 +5,7 @@
       pluginKey="mainMenu"
       :should-show="shouldShowMainToolbar"
       :updateDelay="0"
-      v-if="loaded"
+      v-if="loaded && mergedSettings?.toolbar?.style == 'default'"
       v-show="currentBlockTool"
       :editor="editor"
       :class="{
@@ -32,6 +32,25 @@
         :vuebergWidth="vuebergWidth"
       />
     </bubble-menu>
+
+    <div
+      v-if="loaded && mergedSettings?.toolbar?.style == 'sticky'"
+      :class="{
+        'vueberg-bubble-menu-hidden': !editor.view.hasFocus(),
+      }"
+      class="vueberg-sticky-menu"
+    >
+      <Toolbar
+        v-if="currentBlockTool?.nodeType !== undefined"
+        :editor="editor"
+        :currentBlockTool="currentBlockTool"
+        :settings="mergedSettings"
+        :inlineTools="allInlineTools"
+        :alignmentTools="allAlignmentTools"
+        :vuebergWidth="vuebergWidth"
+      />
+    </div>
+
 
 
     <floating-menu 
@@ -144,6 +163,9 @@ export default {
       vuebergWidth: 0,
       editor: null,
       defaultSettings: {
+        toolbar: {
+          style: 'sticky'
+        },
         editor:{
           autofocus: false
         },
