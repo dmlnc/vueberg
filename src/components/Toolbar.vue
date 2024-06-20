@@ -1,7 +1,7 @@
 <template>
     <div class="vueberg-toolbar">
-      <div class="vueberg-button-group vueberg-button-group-separate">
-        <div class="vueberg-button-group vueberg-button-group-column vueberg-toolbar-order ">
+      <div class="vueberg-button-group vueberg-button-group-separate"  v-if="settings?.toolbar?.showOrder !== false && settings?.toolbar?.showCurrentBlock !== false">
+        <div class="vueberg-button-group vueberg-button-group-column vueberg-toolbar-order " v-if="settings?.toolbar?.showOrder !== false">
           <button
             @click.prevent="moveNode('UP')"
             :disabled="!canMoveNodeUp()"
@@ -23,7 +23,7 @@
           </svg>
           </button>
         </div>
-        <div class="vueberg-button-group vueberg-button-group-separate" v-if="currentBlockTool?.icon && currentBlockTool?.name">
+        <div class="vueberg-button-group vueberg-button-group-separate" v-if="settings?.toolbar?.showCurrentBlock !== false && currentBlockTool?.icon && currentBlockTool?.name">
           <menu-item :hasDropdown="currentBlockTool?.toolbar?.canBeConverted && canBeConvertedTo.length>0">
             <menu-button
               :label="currentBlockTool?.title"
@@ -150,9 +150,13 @@ export default {
       default: () => [],
     },
     customTools: {
-      type: Array,
-      default: () => [],
+      type: [Array, Boolean],
+      default: () => false,
     },
+    settings: { 
+      type: Object,
+      default: () => [],
+    }
   },
 
   components: {
@@ -174,8 +178,6 @@ export default {
         '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-3 -3 30 30" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>',
     };
   },
-
-  
 
   mounted() {
   },
@@ -292,32 +294,53 @@ export default {
     },
 
     menuCount() {
-      let width = this.vuebergWidth > 700 ? 700 : this.vuebergWidth;
+
+      let maxWidth = 700;
+      if(this.settings?.toolbar?.style == 'minimal'){
+        maxWidth = 400;
+      }
+      let width = this.vuebergWidth > maxWidth ? maxWidth : this.vuebergWidth;
 
       const toolbarPadding = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-padding')) || 6;
 
       const buttonSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-button-size')) || 30;
       const buttonGroupGap = 2;
-      const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-group')) || 10 );
+      const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-gap')) || 10 );
       const separatorWidth = 1; // Ширина разделителя между группами кнопок
+
+     
+
+      // Отступ от краев
+      width -= toolbarPadding*2; 
+
+      // Учитываем ширину кнопок ордера и текущего блока
+      if(this.settings?.toolbar?.showOrder !== false){
+        width -= buttonSize;
+      }
+      if(this.settings?.toolbar?.showCurrentBlock !== false){
+        width -= buttonSize;
+      }
+      if(this.settings?.toolbar?.showOrder !== false && this.settings?.toolbar?.showCurrentBlock !== false){
+        width -= buttonGroupGap;
+      }
+      if(this.settings?.toolbar?.showOrder !== false || this.settings?.toolbar?.showCurrentBlock !== false){
+        width -= buttonGroupGap;
+        width -= buttonGroupMargin + separatorWidth;
+      }
+      // Учитываем кнопки выравнивания
+      if(this.activeAlignmentTools.length){
+        width -= (this.activeAlignmentTools.length * buttonSize);
+        width -= (buttonGroupGap * (this.activeAlignmentTools.length ? this.activeAlignmentTools.length - 1 : 0));
+        width -= buttonGroupMargin + separatorWidth;
+      }
+     
+
 
       if (this.customTools && this.customTools.length > 0){
         width -= this.customTools.length * buttonSize;
         width -= (this.customTools.length - 1) * buttonGroupGap;
         width -= buttonGroupMargin + separatorWidth;
       }
-
-      // Отступ от краев
-      width -= toolbarPadding*2; 
-
-      // Учитываем ширину кнопок ордера и текущего блока
-      width -= 2 * buttonSize;
-      width -= buttonGroupGap;
-      width -= buttonGroupMargin + separatorWidth;
-      // Учитываем кнопки выравнивания
-      width -= (this.activeAlignmentTools.length * buttonSize);
-      width -= (buttonGroupGap * (this.activeAlignmentTools.length ? this.activeAlignmentTools.length - 1 : 0));
-      width -= buttonGroupMargin + separatorWidth;
 
       const currentBlockToolButtons = this.currentBlockTool?.tools?.length;
       let count = 0;
@@ -402,16 +425,21 @@ export default {
         {
           type: 'control',
           condition: this.editor.can().deleteNode(this.currentBlockTool?.nodeType),
-          buttons: [
-            {
-              click: () => this.deleteNode(this.currentBlockTool?.nodeType),
-              icon: this.deleteIcon,
-              label: this.deleteLabel,
-              activeClass: 'vueberg-button-text-danger',
-              disabled: false,
-              active: true
+          buttons: (() => {
+            if (this.settings?.toolbar?.showDeleteButton !== false) {
+              return [
+                {
+                  click: () => this.deleteNode(this.currentBlockTool?.nodeType),
+                  icon: this.deleteIcon,
+                  label: this.deleteLabel,
+                  activeClass: 'vueberg-button-text-danger',
+                  disabled: false,
+                  active: true
+                }
+              ];
             }
-          ]
+            return [];
+          })() 
         }
       ];
     }

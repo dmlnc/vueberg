@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="" style="min-height: 300px; max-width: 1000px; margin: 50px auto;  padding: 15px; border: 1px solid #000; margin-top: 100px">
+    <div class="" style="min-height: 300px; max-width: 1000px; margin: 50px auto;  padding: 15px; border: 1px solid #000; margin-top: 100px;">
         <button
           @click.prevent="editable = !editable"
           v-text="editable ? 'Editable' : 'Read only'"
@@ -11,23 +11,16 @@
           :editable="editable"
           mode="json"
           :blockTools="blockTools"
-          :alignmentTools="[]"
+          :alignmentTools="false"
           :inlineTools="[]"
-          :customTools="[
-            {
-              title: 'Click',
-              icon: `<svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' stroke-width='0' stroke='currentColor' fill='currentColor'  focusable='false'><path d='M4 4v1.5h16V4H4zm8 8.5h8V11h-8v1.5zM4 20h16v-1.5H4V20zm4-8c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2 2-.9 2-2z'></path></svg>`,
-              click: (editor)=>{
-                console.log('Click')
-              }
-
-
-            }
-          ]"
+          :customTools="false"
           :extensions="extensions"
           :settings="{
             toolbar:{
-              style: 'sticky'
+              style: 'default',
+              showOrder: true,
+              showCurrentBlock: true,
+              showDeleteButton: true,
             },
             editor: {
               autofocus: false,
@@ -56,7 +49,6 @@
                                 return false; 
                               }
                             });
-                            // console.log(nodeIndex)
                             if (node.type.name === 'heading' && nodeIndex == 0) {
                               return 'What’s the title?'
                             }

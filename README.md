@@ -1,6 +1,6 @@
 # VueBerg
 
-VueBerg is a Vue 3 UI component for the Tiptap editor, inspired by the WordPress editor, Gutenberg. It has been extended from [Gutentap by johnpuddephatt](https://github.com/johnpuddephatt/gutentap) and is based on [Tiptap](https://tiptap.dev), but with additional functionalities and configurations suitable for several usage scenarios.
+[VueBerg]((https://github.com/dmlnc/vueberg)) is a Vue 3 UI component for the Tiptap editor, inspired by the WordPress editor, Gutenberg. It has been extended from [Gutentap by johnpuddephatt](https://github.com/johnpuddephatt/gutentap) and is based on [Tiptap](https://tiptap.dev), but with additional functionalities and configurations suitable for several usage scenarios.
 
 ## Project Setup
 
@@ -147,7 +147,10 @@ To localize VueBerg, adjust the language settings in the `settings` prop. This e
 ```
 settings: {
   toolbar:{
-    style: "default" || "sticky"
+    style: "default" || "sticky" || "minimal",
+    showOrder: Boolean,
+    showCurrentBlock: Boolean,
+    showDeleteButton: Boolean,
   },
   editor: {
     autofocus: Boolean

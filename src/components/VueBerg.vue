@@ -32,6 +32,34 @@
         :vuebergWidth="vuebergWidth"
       />
     </bubble-menu>
+    <bubble-menu
+      :should-show="()=> true"
+      :tippy-options="{
+        delay: [0, 30000000], 
+        duration: [300, 40000000],
+        maxWidth: 'none',
+        placement: 'top-start',
+        // getReferenceClientRect: getMenuCoords,
+        // onCreate: (instance) =>
+          // instance.popper.classList.add('vueberg-toolbar-wrapper'),
+      }"
+
+      pluginKey="mainMenu"
+      v-if="editable && loaded && mergedSettings?.toolbar?.style == 'minimal'"
+      :editor="editor"
+      class="vueberg-bubble-menu vueberg-bubble-menu-minimal"
+     
+    >
+      <Toolbar
+        v-if="currentBlockTool?.nodeType !== undefined"
+        :editor="editor"
+        :currentBlockTool="currentBlockTool"
+        :settings="mergedSettings"
+        :inlineTools="allInlineTools"
+        :alignmentTools="allAlignmentTools"
+        :vuebergWidth="vuebergWidth"
+      />
+    </bubble-menu>
     <div
       v-if="editable && loaded && mergedSettings?.toolbar?.style == 'sticky'"
       class="vueberg-sticky-menu"
@@ -133,7 +161,7 @@ export default {
       default: () => [],
     },
     customTools: {
-      type: Array,
+      type: [Array, Boolean],
       default: () => [],
     },
     blockTools: {
@@ -257,7 +285,6 @@ export default {
         extensions: [
           ...enabledExtensions,
           VuebergBlocks.configure({ blocks: allBlockToolsFiltered }),
-          // Placeholder.configure({ considerAnyAsEmpty: true, placeholder: this.placeholder }),
           BlockWidth.configure({ types: this.blocksWithBlockWidth }),
           Variants.configure({ types: this.blocksWithVariant }),
           TextAlign.configure({ types: this.blocksWithTextAlign }),
@@ -265,21 +292,41 @@ export default {
           ModalExtension,
           ...this.extensions,
         ],
-        content: this.modelValue === null ? { type: "doc", content: this.defaultContent } : (this.mode === "json" ? { type: "doc", content: this.modelValue } : this.modelValue),
+        content: this.modelValue === null ? { type: "doc", content: this.defaultContent } : (this.mode === "json" ? { type: "doc", content: this.cleanContent(this.modelValue) } : this.modelValue),
         editable: this.editable,
         onUpdate: this.handleEditorUpdate,
         onCreate: this.handleEditorCreate,
         onSelectionUpdate: this.handleSelectionUpdate,
         autofocus: this.mergedSettings.editor.autofocus,
       });
-      
     },
+
+    cleanContent(content) {
+      if (Array.isArray(content)) {
+        return content
+          .map(this.cleanContent)
+          .filter(item => item !== null);
+      } else if (content !== null && typeof content === 'object') {
+        if (content.type === 'text' && (!content.text || content.text === '')) {
+          return null;
+        }
+        const cleanedContent = {};
+        for (const key in content) {
+          const cleanedValue = this.cleanContent(content[key]);
+          if (cleanedValue !== null) {
+            cleanedContent[key] = cleanedValue;
+          }
+        }
+        return cleanedContent;
+      }
+      return content;
+    },
+
     handleEditorCreate() {
-      // console.log('handleEditorCreate');
       this.updateCurrentBlockTool();
       this.$emit(
         "update:modelValue",
-        this.mode == "json" ? this.editor.getJSON().content : this.editor.getHTML()
+        this.mode == "json" ? this.cleanContent(this.editor.getJSON().content) : this.editor.getHTML()
       );
       this.$emit("onCreate", this.editor);
       this.loaded = true;
