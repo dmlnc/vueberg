@@ -243,7 +243,7 @@ export default {
         return [];
       }
       let count = this.menuCount;
-      let menuItemsCount = this.menuItems?.reduce((count, group) => count + group.buttons.length, 0);
+      let menuItemsCount = this.menuItems?.reduce((count, group) => count + group.buttons?.length, 0);
 
       if(count < menuItemsCount){
         count = count - 1;
@@ -330,7 +330,7 @@ export default {
       // Учитываем кнопки выравнивания
       if(this.activeAlignmentTools.length){
         width -= (this.activeAlignmentTools.length * buttonSize);
-        width -= (buttonGroupGap * (this.activeAlignmentTools.length ? this.activeAlignmentTools.length - 1 : 0));
+        width -= (buttonGroupGap * (this.activeAlignmentTools?.length ? this.activeAlignmentTools?.length - 1 : 0));
         width -= buttonGroupMargin + separatorWidth;
       }
      
@@ -376,14 +376,23 @@ export default {
         {
           type: 'currentBlockTools',
           condition: this.currentBlockTool?.tools?.length,
-          buttons: this.currentBlockTool?.tools?.map(tool => ({
-            click: () => tool.command.call(0, this.editor),
-            icon: tool.icon,
-            label: tool.title,
-            activeClass: tool.isActiveClass,
-            disabled: tool.isDisabledTest?.call(0, this.editor),
-            active: tool.isActiveTest?.call(0, this.editor)
-          }))
+          buttons: (() => {
+            const tools = this.currentBlockTool?.tools;
+            if (!tools) {
+                return [];
+            }
+
+            return tools
+                .filter(tool => tool.enabled !== false)
+                .map(tool => ({
+                    click: () => tool.command.call(0, this.editor),
+                    icon: tool.icon,
+                    label: tool.title,
+                    activeClass: tool.isActiveClass,
+                    disabled: tool.isDisabledTest?.call(0, this.editor),
+                    active: tool.isActiveTest?.call(0, this.editor)
+                }));
+            })()
         },
         {
           type: 'inlineTools',

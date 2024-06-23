@@ -33,17 +33,12 @@
       />
     </bubble-menu>
     <bubble-menu
-      :should-show="()=> true"
       :tippy-options="{
-        delay: [0, 30000000], 
-        duration: [300, 40000000],
+        delay: [0, 300], 
+        duration: [300, 400],
         maxWidth: 'none',
         placement: 'top-start',
-        // getReferenceClientRect: getMenuCoords,
-        // onCreate: (instance) =>
-          // instance.popper.classList.add('vueberg-toolbar-wrapper'),
       }"
-
       pluginKey="mainMenu"
       v-if="editable && loaded && mergedSettings?.toolbar?.style == 'minimal'"
       :editor="editor"
@@ -79,7 +74,7 @@
 
 
     <floating-menu 
-      v-if="editable && currentBlockTool && editor" 
+      v-if="editable && currentBlockTool && editor && mergedSettings.floatingMenu !== false" 
       :updateDelay="1000"
       :should-show="shouldShowFloatingMenu"
       :editor="editor" 
@@ -308,7 +303,8 @@ export default {
           .filter(item => item !== null);
       } else if (content !== null && typeof content === 'object') {
         if (content.type === 'text' && (!content.text || content.text === '')) {
-          return null;
+          content.text = ' ';
+          // return null;
         }
         const cleanedContent = {};
         for (const key in content) {
@@ -326,7 +322,7 @@ export default {
       this.updateCurrentBlockTool();
       this.$emit(
         "update:modelValue",
-        this.mode == "json" ? this.cleanContent(this.editor.getJSON().content) : this.editor.getHTML()
+        this.mode == "json" ? (this.editor.getJSON().content) : this.editor.getHTML()
       );
       this.$emit("onCreate", this.editor);
       this.loaded = true;

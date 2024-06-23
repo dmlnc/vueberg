@@ -22,8 +22,9 @@
               showCurrentBlock: true,
               showDeleteButton: true,
             },
+            floatingMenu: true,
             editor: {
-              autofocus: false,
+              autofocus: true,
             },
             defaultExtensions: {
               SlashMenu: true,

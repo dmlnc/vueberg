@@ -152,6 +152,7 @@ settings: {
     showCurrentBlock: Boolean,
     showDeleteButton: Boolean,
   },
+  floatingMenu: Boolean,
   editor: {
     autofocus: Boolean
   }
