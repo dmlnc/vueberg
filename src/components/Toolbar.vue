@@ -1,133 +1,188 @@
 <template>
-    <div class="vueberg-toolbar">
-      <div class="vueberg-button-group vueberg-button-group-separate"  v-if="settings?.toolbar?.showOrder !== false && settings?.toolbar?.showCurrentBlock !== false">
-        <div class="vueberg-button-group vueberg-button-group-column vueberg-toolbar-order " v-if="settings?.toolbar?.showOrder !== false">
-          <button
-            @click.prevent="moveNode('UP')"
-            :disabled="!canMoveNodeUp()"
-            :data-tooltip="upLabel"
-            class="vueberg-button--toolbar-order vueberg-button"
+  <div class="vueberg-toolbar">
+    <div
+      class="vueberg-button-group vueberg-button-group-separate"
+      v-if="
+        settings?.toolbar?.showOrder !== false &&
+        settings?.toolbar?.showCurrentBlock !== false
+      "
+    >
+      <div
+        class="vueberg-button-group vueberg-button-group-column vueberg-toolbar-order"
+        v-if="settings?.toolbar?.showOrder !== false"
+      >
+        <button
+          @click.prevent="moveNode('UP')"
+          :disabled="!canMoveNodeUp()"
+          :data-tooltip="upLabel"
+          class="vueberg-button--toolbar-order vueberg-button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            focusable="false"
+            viewBox="6.5 8 11 5.6"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false" viewBox="6.5 8 11 5.6">
-              <path d="M6.5 12.4L12 8l5.5 4.4-.9 1.2L12 10l-4.5 3.6-1-1.2z"></path>
-            </svg>
-          </button>
-          <button
-            @click.prevent="moveNode('DOWN')"
-            :disabled="!canMoveNodeDown()"
-            :data-tooltip="downLabel"
-            class="vueberg-button--toolbar-order vueberg-button"
-          >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" viewBox="6.5 10.4 11 5.6">
-            <path d="M17.5 11.6 12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"></path>
+            <path
+              d="M6.5 12.4L12 8l5.5 4.4-.9 1.2L12 10l-4.5 3.6-1-1.2z"
+            ></path>
           </svg>
-          </button>
-        </div>
-        <div class="vueberg-button-group vueberg-button-group-separate" v-if="settings?.toolbar?.showCurrentBlock !== false && currentBlockTool?.icon && currentBlockTool?.name">
-          <menu-item :hasDropdown="currentBlockTool?.toolbar?.canBeConverted && canBeConvertedTo.length>0">
-            <menu-button
-              :label="currentBlockTool?.title"
-              :content="currentBlockTool?.icon"
-             
-              :class="(currentBlockTool?.toolbar?.canBeConverted && canBeConvertedTo.length) ? 'vueberg-button-secondary' : ''"
-            />
-            <template #dropdown>
-              <div class="vueberg-toolbar-transform-to">{{transformToLabel}}</div>
-              <menu-button
-                v-for="tool in canBeConvertedTo"
-                :content="tool.icon + ' ' + tool.title"
-                :key="tool.title"
-                @click.prevent="runConvertCommand(tool)"
-                class="vueberg-button-text vueberg-button-md"
-              />
-            </template>
-          </menu-item>
-        </div>
+        </button>
+        <button
+          @click.prevent="moveNode('DOWN')"
+          :disabled="!canMoveNodeDown()"
+          :data-tooltip="downLabel"
+          class="vueberg-button--toolbar-order vueberg-button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            aria-hidden="true"
+            viewBox="6.5 10.4 11 5.6"
+          >
+            <path
+              d="M17.5 11.6 12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"
+            ></path>
+          </svg>
+        </button>
       </div>
-      <div class="vueberg-button-group vueberg-button-group-separate" v-if="activeAlignmentTools.length">
+      <div
+        class="vueberg-button-group vueberg-button-group-separate"
+        v-if="
+          settings?.toolbar?.showCurrentBlock !== false &&
+          currentBlockTool?.icon &&
+          currentBlockTool?.name
+        "
+      >
         <menu-item
-          :hasDropdown="true"
-          v-for="(alignmentToolGroup, key) in activeAlignmentTools"
-          :key="key"
+          :hasDropdown="
+            currentBlockTool?.toolbar?.canBeConverted &&
+            canBeConvertedTo.length > 0
+          "
         >
           <menu-button
-            @click.prevent
-            :label="getActiveAlignmentTool(alignmentToolGroup.tools).title"
-            :content="getActiveAlignmentTool(alignmentToolGroup.tools).icon"
+            :label="currentBlockTool?.title"
+            :content="currentBlockTool?.icon"
+            :class="
+              currentBlockTool?.toolbar?.canBeConverted &&
+              canBeConvertedTo.length
+                ? 'vueberg-button-secondary'
+                : ''
+            "
           />
           <template #dropdown>
+            <div class="vueberg-toolbar-transform-to">
+              {{ transformToLabel }}
+            </div>
             <menu-button
-              class="vueberg-button-text vueberg-button-md"
-              v-for="tool in alignmentToolGroup.tools"
-              :key="tool.title"
+              v-for="tool in canBeConvertedTo"
               :content="tool.icon + ' ' + tool.title"
-              @click.prevent="tool.command(editor)"
-              :active="tool.isActiveTest(editor, currentBlockTool?.nodeType)"
+              :key="tool.title"
+              @click.prevent="runConvertCommand(tool)"
+              class="vueberg-button-text vueberg-button-md"
             />
           </template>
         </menu-item>
       </div>
-      <template v-for="group in firstMenuItems">
-        <div v-if="group.condition"  :key="group.type" class="vueberg-button-group vueberg-button-group-separate">
-          <menu-button
-            v-for="(button, index) in group.buttons"
-            :key="index"
-            :content="button.icon"
-            :label="button.label"
-            :activeClass="button.activeClass"
-            @click.prevent="button.click"
-            :disabled="button.disabled"
-            :active="button.active"
-          ></menu-button>
-        </div>
-      </template>
-
-      
-      <div class="vueberg-button-group vueberg-button-group-separate" v-if="editor && remainingMenuItems.length">
-        <menu-item align="right" :hasDropdown="true">
-          <menu-button class="vueberg-button-secondary" @click.prevent :label="moreLabel" :content="moreIcon"></menu-button>
-          <template #dropdown>
-            <template v-for="group in remainingMenuItems">
-              <menu-button
-                v-if="group.condition"
-                v-for="(button, index) in group.buttons"
-                :key="index"
-                class="vueberg-button-md vueberg-button-text"
-                :content="button.icon + button.label"
-                :activeClass="button.activeClass"
-                @click.prevent="button.click"
-                :disabled="button.disabled"
-                :active="button.active"
-              />
-            </template>
-          </template>
-        </menu-item>
-      </div>
-
-      <div v-if="customTools.length" class="vueberg-button-group vueberg-button-group-separate vueberg-toolbar-custom-tools">
+    </div>
+    <div
+      class="vueberg-button-group vueberg-button-group-separate"
+      v-if="activeAlignmentTools.length"
+    >
+      <menu-item
+        :hasDropdown="true"
+        v-for="(alignmentToolGroup, key) in activeAlignmentTools"
+        :key="key"
+      >
         <menu-button
-          v-for="(button, index) in customTools"
+          @click.prevent
+          :label="getActiveAlignmentTool(alignmentToolGroup.tools).title"
+          :content="getActiveAlignmentTool(alignmentToolGroup.tools).icon"
+        />
+        <template #dropdown>
+          <menu-button
+            class="vueberg-button-text vueberg-button-md"
+            v-for="tool in alignmentToolGroup.tools"
+            :key="tool.title"
+            :content="tool.icon + ' ' + tool.title"
+            @click.prevent="tool.command(editor)"
+            :active="tool.isActiveTest(editor, currentBlockTool?.nodeType)"
+          />
+        </template>
+      </menu-item>
+    </div>
+    <template v-for="group in firstMenuItems">
+      <div
+        v-if="group.condition"
+        :key="group.type"
+        class="vueberg-button-group vueberg-button-group-separate"
+      >
+        <menu-button
+          v-for="(button, index) in group.buttons"
           :key="index"
           :content="button.icon"
-          :label="button.title"
-          :activeClass="button?.activeClass"
-          @click.prevent="button?.click"
-          :disabled="button?.disabled"
-          :active="button?.isActiveTest()"
+          :label="button.label"
+          :activeClass="button.activeClass"
+          @click.prevent="button.click"
+          :disabled="button.disabled"
+          :active="button.active"
         ></menu-button>
       </div>
+    </template>
 
+    <div
+      class="vueberg-button-group vueberg-button-group-separate"
+      v-if="editor && remainingMenuItems.length"
+    >
+      <menu-item align="right" :hasDropdown="true">
+        <menu-button
+          class="vueberg-button-secondary"
+          @click.prevent
+          :label="moreLabel"
+          :content="moreIcon"
+        ></menu-button>
+        <template #dropdown>
+          <template v-for="group in remainingMenuItems">
+            <menu-button
+              v-if="group.condition"
+              v-for="(button, index) in group.buttons"
+              :key="index"
+              class="vueberg-button-md vueberg-button-text"
+              :content="button.icon + button.label"
+              :activeClass="button.activeClass"
+              @click.prevent="button.click"
+              :disabled="button.disabled"
+              :active="button.active"
+            />
+          </template>
+        </template>
+      </menu-item>
     </div>
-</template>
 
+    <div
+      v-if="customTools.length"
+      class="vueberg-button-group vueberg-button-group-separate vueberg-toolbar-custom-tools"
+    >
+      <menu-button
+        v-for="(button, index) in customTools"
+        :key="index"
+        :content="button.icon"
+        :label="button.title"
+        :activeClass="button?.activeClass"
+        @click.prevent="button?.click"
+        :disabled="button?.disabled"
+        :active="button?.isActiveTest()"
+      ></menu-button>
+    </div>
+  </div>
+</template>
 
 <script>
 import MenuButton from "@/components/UI/MenuButton.vue";
 import MenuItem from "@/components/UI/MenuItem.vue";
 
-import {
-  MoveNode,
-} from "../utils/pm-utils.js";
+import { MoveNode } from "../utils/pm-utils.js";
 export default {
   props: {
     editor: {
@@ -153,10 +208,10 @@ export default {
       type: [Array, Boolean],
       default: () => false,
     },
-    settings: { 
+    settings: {
       type: Object,
       default: () => [],
-    }
+    },
   },
 
   components: {
@@ -166,11 +221,13 @@ export default {
 
   data() {
     return {
-      transformToLabel: this.editor.commands.getTranslation('toolbar.transformTo'),
-      deleteLabel: this.editor.commands.getTranslation('control.delete'),
-      moreLabel: this.editor.commands.getTranslation('toolbar.more'),
-      upLabel: this.editor.commands.getTranslation('toolbar.up'),
-      downLabel: this.editor.commands.getTranslation('toolbar.down'),
+      transformToLabel: this.editor.commands.getTranslation(
+        "toolbar.transformTo"
+      ),
+      deleteLabel: this.editor.commands.getTranslation("control.delete"),
+      moreLabel: this.editor.commands.getTranslation("toolbar.more"),
+      upLabel: this.editor.commands.getTranslation("toolbar.up"),
+      downLabel: this.editor.commands.getTranslation("toolbar.down"),
 
       moreIcon:
         '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" aria-hidden="true" fill="currentColor" focusable="false"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"></path></svg>',
@@ -179,32 +236,37 @@ export default {
     };
   },
 
-  mounted() {
-  },
+  mounted() {},
 
-  watch: {
-  },
+  watch: {},
 
   computed: {
-    
-    currentNode(){
-      if(!this.editor){
+    currentNode() {
+      if (!this.editor) {
         return null;
       }
-      return this.editor.storage.vuebergBlocks.currentNode
+      return this.editor.storage.vuebergBlocks.currentNode;
     },
 
-    canBeConvertedTo(){
+    canBeConvertedTo() {
       if (this.currentBlockTool?.toolbar?.canBeConverted === false) {
         return [];
       }
-      if(!this.editor.storage.vuebergBlocks.currentNode){
+      if (!this.editor.storage.vuebergBlocks.currentNode) {
         return [];
       }
       // console.log(this.currentBlockTool)
-      return this.editor.storage.vuebergBlocks.getAllowedBlocks(this.editor.storage.vuebergBlocks.currentNode, this.editor).filter(tool => {
-        return this.currentBlockTool?.toolbar?.canBeConverted[tool.name] && tool.convertCommand;
-      });
+      return this.editor.storage.vuebergBlocks
+        .getAllowedBlocks(
+          this.editor.storage.vuebergBlocks.currentNode,
+          this.editor
+        )
+        .filter((tool) => {
+          return (
+            this.currentBlockTool?.toolbar?.canBeConverted[tool.name] &&
+            tool.convertCommand
+          );
+        });
     },
 
     activeAlignmentTools() {
@@ -228,10 +290,13 @@ export default {
           );
       }
 
-      if (typeof this.currentBlockTool.toolbar?.alignTools === 'object') {
+      if (typeof this.currentBlockTool.toolbar?.alignTools === "object") {
         return this.alignmentTools
           .filter(filterAlignmentTools)
-          .filter((alignmentToolGroup) => this.currentBlockTool.toolbar?.alignTools[alignmentToolGroup.name])
+          .filter(
+            (alignmentToolGroup) =>
+              this.currentBlockTool.toolbar?.alignTools[alignmentToolGroup.name]
+          )
           .filter((alignmentToolGroup) => alignmentToolGroup.tools.length > 0);
       }
 
@@ -243,27 +308,34 @@ export default {
         return [];
       }
       let count = this.menuCount;
-      let menuItemsCount = this.menuItems?.reduce((count, group) => count + group.buttons?.length, 0);
+      let menuItemsCount = this.menuItems?.reduce(
+        (count, group) => count + group.buttons?.length,
+        0
+      );
 
-      if(count < menuItemsCount){
+      if (count < menuItemsCount) {
         count = count - 1;
       }
-      return this.menuItems.map(group => {
-        if (count <= 0) {
-          return { ...group, buttons: [] };
-        }
-        if(!group.buttons){
-          return { ...group, buttons: [] };
-        }
-        if (group.buttons.length <= count) {
-          count -= group.buttons.length;
-          return group;
-        } else {
-          const buttons = group.buttons.slice(0, count);
-          count = 0;
-          return { ...group, buttons };
-        }
-      }).filter(group => group && group.buttons && group?.buttons?.length > 0);
+      return this.menuItems
+        .map((group) => {
+          if (count <= 0) {
+            return { ...group, buttons: [] };
+          }
+          if (!group.buttons) {
+            return { ...group, buttons: [] };
+          }
+          if (group.buttons.length <= count) {
+            count -= group.buttons.length;
+            return group;
+          } else {
+            const buttons = group.buttons.slice(0, count);
+            count = 0;
+            return { ...group, buttons };
+          }
+        })
+        .filter(
+          (group) => group && group.buttons && group?.buttons?.length > 0
+        );
     },
 
     remainingMenuItems() {
@@ -271,72 +343,100 @@ export default {
         return [];
       }
       let count = this.menuCount;
-      let menuItemsCount = this.menuItems.reduce((count, group) => count + group.buttons.length, 0);
-      if(count < menuItemsCount){
+      let menuItemsCount = this.menuItems.reduce(
+        (count, group) => count + group.buttons.length,
+        0
+      );
+      if (count < menuItemsCount) {
         count = count - 1;
       }
-      return this.menuItems.map(group => {
-        if (count <= 0) {
-          return group;
-        }
-        if(!group.buttons){
-          return group;
-        }
-        if (group.buttons.length <= count) {
-          count -= group.buttons.length;
-          return { ...group, buttons: [] };
-        } else {
-          const buttons = group.buttons.slice(count);
-          count = 0;
-          return { ...group, buttons };
-        }
-      }).filter(group => group && group.buttons && group?.buttons?.length > 0);
+      return this.menuItems
+        .map((group) => {
+          if (count <= 0) {
+            return group;
+          }
+          if (!group.buttons) {
+            return group;
+          }
+          if (group.buttons.length <= count) {
+            count -= group.buttons.length;
+            return { ...group, buttons: [] };
+          } else {
+            const buttons = group.buttons.slice(count);
+            count = 0;
+            return { ...group, buttons };
+          }
+        })
+        .filter(
+          (group) => group && group.buttons && group?.buttons?.length > 0
+        );
     },
 
     menuCount() {
-
       let maxWidth = 700;
-      if(this.settings?.toolbar?.style == 'minimal'){
+      if (this.settings?.toolbar?.style == "minimal") {
         maxWidth = 400;
       }
       let width = this.vuebergWidth > maxWidth ? maxWidth : this.vuebergWidth;
 
-      const toolbarPadding = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-padding')) || 6;
+      const toolbarPadding =
+        parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            "--vueberg-toolbar-padding"
+          )
+        ) || 6;
 
-      const buttonSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-button-size')) || 30;
+      const buttonSize =
+        parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            "--vueberg-button-size"
+          )
+        ) || 30;
       const buttonGroupGap = 2;
-      const buttonGroupMargin = 2 * ( parseInt(getComputedStyle(document.documentElement).getPropertyValue('--vueberg-toolbar-gap')) || 10 );
+      const buttonGroupMargin =
+        2 *
+        (parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            "--vueberg-toolbar-gap"
+          )
+        ) || 10);
       const separatorWidth = 1; // Ширина разделителя между группами кнопок
 
-     
-
       // Отступ от краев
-      width -= toolbarPadding*2; 
+      width -= toolbarPadding * 2;
 
       // Учитываем ширину кнопок ордера и текущего блока
-      if(this.settings?.toolbar?.showOrder !== false){
+      if (this.settings?.toolbar?.showOrder !== false) {
         width -= buttonSize;
       }
-      if(this.settings?.toolbar?.showCurrentBlock !== false){
+      if (this.settings?.toolbar?.showCurrentBlock !== false) {
         width -= buttonSize;
       }
-      if(this.settings?.toolbar?.showOrder !== false && this.settings?.toolbar?.showCurrentBlock !== false){
+      if (
+        this.settings?.toolbar?.showOrder !== false &&
+        this.settings?.toolbar?.showCurrentBlock !== false
+      ) {
         width -= buttonGroupGap;
       }
-      if(this.settings?.toolbar?.showOrder !== false || this.settings?.toolbar?.showCurrentBlock !== false){
+      if (
+        this.settings?.toolbar?.showOrder !== false ||
+        this.settings?.toolbar?.showCurrentBlock !== false
+      ) {
         width -= buttonGroupGap;
         width -= buttonGroupMargin + separatorWidth;
       }
       // Учитываем кнопки выравнивания
-      if(this.activeAlignmentTools.length){
-        width -= (this.activeAlignmentTools.length * buttonSize);
-        width -= (buttonGroupGap * (this.activeAlignmentTools?.length ? this.activeAlignmentTools?.length - 1 : 0));
+      if (this.activeAlignmentTools.length) {
+        width -= this.activeAlignmentTools.length * buttonSize;
+        width -=
+          buttonGroupGap *
+          (this.activeAlignmentTools?.length
+            ? this.activeAlignmentTools?.length - 1
+            : 0);
         width -= buttonGroupMargin + separatorWidth;
       }
-     
 
-
-      if (this.customTools && this.customTools.length > 0){
+      if (this.customTools && this.customTools.length > 0) {
         width -= this.customTools.length * buttonSize;
         width -= (this.customTools.length - 1) * buttonGroupGap;
         width -= buttonGroupMargin + separatorWidth;
@@ -345,64 +445,72 @@ export default {
       const currentBlockToolButtons = this.currentBlockTool?.tools?.length;
       let count = 0;
       let currentBlockToolButtonsWidth = 0;
-      
-      if(this.currentBlockTool?.tools?.length){
-        currentBlockToolButtonsWidth = buttonSize * currentBlockToolButtons
-        currentBlockToolButtonsWidth += buttonGroupGap * (currentBlockToolButtons ? currentBlockToolButtons - 1 : 0);
+
+      if (this.currentBlockTool?.tools?.length) {
+        currentBlockToolButtonsWidth = buttonSize * currentBlockToolButtons;
+        currentBlockToolButtonsWidth +=
+          buttonGroupGap *
+          (currentBlockToolButtons ? currentBlockToolButtons - 1 : 0);
       }
-      if(width < currentBlockToolButtonsWidth + buttonGroupMargin + separatorWidth){
-        return Math.floor((width - buttonGroupMargin - separatorWidth)  / ( buttonSize + buttonGroupGap))
-      } else{
-        count = this.currentBlockTool?.tools?.length
-        width -= currentBlockToolButtonsWidth
-        width -= buttonGroupMargin
-        width -= separatorWidth 
+      if (
+        width <
+        currentBlockToolButtonsWidth + buttonGroupMargin + separatorWidth
+      ) {
+        return Math.floor(
+          (width - buttonGroupMargin - separatorWidth) /
+            (buttonSize + buttonGroupGap)
+        );
+      } else {
+        count = this.currentBlockTool?.tools?.length;
+        width -= currentBlockToolButtonsWidth;
+        width -= buttonGroupMargin;
+        width -= separatorWidth;
       }
 
-      if(count == undefined){
+      if (count == undefined) {
         count = 0;
       }
-      width -= buttonGroupMargin
-      width -= separatorWidth
+      width -= buttonGroupMargin;
+      width -= separatorWidth;
       // Рассчитываем количество кнопок, которые поместятся в оставшуюся ширину
-      return Math.floor(width / ( buttonGroupGap + buttonSize)) + count;
+      return Math.floor(width / (buttonGroupGap + buttonSize)) + count;
     },
 
     menuItems() {
-      if(!this.currentBlockTool){
+      if (!this.currentBlockTool) {
         return [];
       }
       return [
         {
-          type: 'currentBlockTools',
+          type: "currentBlockTools",
           condition: this.currentBlockTool?.tools?.length,
           buttons: (() => {
             const tools = this.currentBlockTool?.tools;
             if (!tools) {
-                return [];
+              return [];
             }
 
             return tools
-                .filter(tool => tool.enabled !== false)
-                .map(tool => ({
-                    click: () => tool.command.call(0, this.editor),
-                    icon: tool.icon,
-                    label: tool.title,
-                    activeClass: tool.isActiveClass,
-                    disabled: tool.isDisabledTest?.call(0, this.editor),
-                    active: tool.isActiveTest?.call(0, this.editor)
-                }));
-            })()
+              .filter((tool) => tool.enabled !== false)
+              .map((tool) => ({
+                click: () => tool.command.call(0, this.editor),
+                icon: tool.icon,
+                label: tool.title,
+                activeClass: tool.isActiveClass,
+                disabled: tool.isDisabledTest?.call(0, this.editor),
+                active: tool.isActiveTest?.call(0, this.editor),
+              }));
+          })(),
         },
         {
-          type: 'inlineTools',
+          type: "inlineTools",
           condition: this.currentBlockTool?.toolbar?.inlineTools,
           buttons: (() => {
             const inlineTools = this.currentBlockTool?.toolbar?.inlineTools;
 
             if (inlineTools === true) {
               // Возвращаем все инструменты, если inlineTools равно true
-              return this.inlineTools.map(tool => ({
+              return this.inlineTools.map((tool) => ({
                 click: () => tool.command(this.editor),
                 icon: tool.icon,
                 label: tool.title,
@@ -410,15 +518,19 @@ export default {
                 disabled: false,
                 active: tool.isActiveTest(this.editor),
               }));
-            } else if (typeof inlineTools === 'object') {
+            } else if (typeof inlineTools === "object") {
               // Получаем ключи из inlineTools в порядке их определения
-              const toolKeys = Object.keys(inlineTools).filter(key => inlineTools[key]);
+              const toolKeys = Object.keys(inlineTools).filter(
+                (key) => inlineTools[key]
+              );
 
               // Фильтруем и упорядочиваем инструменты в соответствии с toolKeys
               return toolKeys
-                .map(toolKey => this.inlineTools.find(tool => tool.name === toolKey))
-                .filter(tool => tool) // Исключаем возможные undefined значения
-                .map(tool => ({
+                .map((toolKey) =>
+                  this.inlineTools.find((tool) => tool.name === toolKey)
+                )
+                .filter((tool) => tool) // Исключаем возможные undefined значения
+                .map((tool) => ({
                   click: () => tool.command(this.editor),
                   icon: tool.icon,
                   label: tool.title,
@@ -429,11 +541,13 @@ export default {
             }
             // Если ни одно из условий не выполняется, возвращаем пустой массив
             return [];
-          })()
+          })(),
         },
         {
-          type: 'control',
-          condition: this.editor.can().deleteNode(this.currentBlockTool?.nodeType),
+          type: "control",
+          condition: this.editor
+            .can()
+            .deleteNode(this.currentBlockTool?.nodeType),
           buttons: (() => {
             if (this.settings?.toolbar?.showDeleteButton !== false) {
               return [
@@ -441,23 +555,22 @@ export default {
                   click: () => this.deleteNode(this.currentBlockTool?.nodeType),
                   icon: this.deleteIcon,
                   label: this.deleteLabel,
-                  activeClass: 'vueberg-button-text-danger',
+                  activeClass: "vueberg-button-text-danger",
                   disabled: false,
-                  active: true
-                }
+                  active: true,
+                },
               ];
             }
             return [];
-          })() 
-        }
+          })(),
+        },
       ];
-    }
+    },
   },
 
   methods: {
-
     getActiveAlignmentTool(tools) {
-      const activeTool = tools.find(tool =>
+      const activeTool = tools.find((tool) =>
         tool.isActiveTest(this.editor, this.currentBlockTool?.nodeType)
       );
       return activeTool ? activeTool : tools[0];
@@ -467,9 +580,11 @@ export default {
       this.editor.chain().deleteNode(node).blur().run();
     },
 
-    runConvertCommand(tool){
+    runConvertCommand(tool) {
       tool.convertCommand(this.editor);
-      this.editor.storage.vuebergBlocks.getBlockTool(this.editor.commands.getCurrentNodeName());
+      this.editor.storage.vuebergBlocks.getBlockTool(
+        this.editor.commands.getCurrentNodeName()
+      );
     },
 
     moveNode(dir = "UP") {
@@ -492,9 +607,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-// @import "@/style.scss";
-
-
-</style>

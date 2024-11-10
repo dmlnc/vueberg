@@ -22,117 +22,117 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import Highlight from "@tiptap/extension-highlight";
-import Typography from '@tiptap/extension-typography'
+import Typography from "@tiptap/extension-typography";
 import { Youtube } from "./youtube";
 import { TrailingNode } from "./trailing-node";
 import Localize from "./localize";
 
-
-
-
 import SlashMenu from "@/components/SlashMenu/slash-menu.js";
 import slashMenuSuggestion from "@/components/SlashMenu/suggestion.js";
 
-
 export default function () {
-  
-    return [
-        { name: 'Placeholder', extension: Placeholder.configure({ considerAnyAsEmpty: true, placeholder: 'Начните писать' }) },
-        { name: 'Bold', extension: Bold },
-        { name: 'BulletList', extension: BulletList },
-        { name: 'Code', extension: Code },
-        { name: 'CodeBlock', extension: CodeBlock },
-        { name: 'Document', extension: Document },
-        // { name: 'Dropcursor', extension: Dropcursor },
-        { name: 'Gapcursor', extension: Gapcursor },
-        { name: 'HardBreak', extension: HardBreak },
-        { name: 'Heading', extension: Heading },
-        { name: 'History', extension: History },
-        { name: 'HorizontalRule', extension: HorizontalRule },
-        { name: 'Italic', extension: Italic },
-        { name: 'ListItem', extension: ListItem },
-        { name: 'OrderedList', extension: OrderedList },
-        { name: 'Paragraph', extension: Paragraph },
-        { name: 'Strike', extension: Strike },
-        { name: 'Text', extension: Text },
-        // {
-        //   name: 'Blockquote',
-        //   extension: Blockquote.extend({ content: "paragraph" }),
-        // },
-        { name: 'TrailingNode', extension: TrailingNode },
-        { name: 'Subscript', extension: Subscript },
-        { name: 'Superscript', extension: Superscript },
-        { name: 'Highlight', extension: Highlight },
-        {
-          name: 'Link',
-          extension: Link.configure({ openOnClick: false })
-        },
-        {
-          name: 'slashMenu',
-          extension: SlashMenu.configure({
-            suggestion: slashMenuSuggestion(5),
-          })
-        },
-        
-        { name: 'Typography', extension: Typography },
-        {
-          name: 'Youtube',
-          extension: Youtube.configure({
-              inline: false,
+  return [
+    {
+      name: "Placeholder",
+      extension: Placeholder.configure({
+        considerAnyAsEmpty: true,
+        placeholder: "Начните писать",
+      }),
+    },
+    { name: "Bold", extension: Bold },
+    { name: "BulletList", extension: BulletList },
+    { name: "Code", extension: Code },
+    { name: "CodeBlock", extension: CodeBlock },
+    { name: "Document", extension: Document },
+    // { name: 'Dropcursor', extension: Dropcursor },
+    { name: "Gapcursor", extension: Gapcursor },
+    { name: "HardBreak", extension: HardBreak },
+    { name: "Heading", extension: Heading },
+    { name: "History", extension: History },
+    { name: "HorizontalRule", extension: HorizontalRule },
+    { name: "Italic", extension: Italic },
+    { name: "ListItem", extension: ListItem },
+    { name: "OrderedList", extension: OrderedList },
+    { name: "Paragraph", extension: Paragraph },
+    { name: "Strike", extension: Strike },
+    { name: "Text", extension: Text },
+    // {
+    //   name: 'Blockquote',
+    //   extension: Blockquote.extend({ content: "paragraph" }),
+    // },
+    { name: "TrailingNode", extension: TrailingNode },
+    { name: "Subscript", extension: Subscript },
+    { name: "Superscript", extension: Superscript },
+    { name: "Highlight", extension: Highlight },
+    {
+      name: "Link",
+      extension: Link.configure({ openOnClick: false }),
+    },
+    {
+      name: "slashMenu",
+      extension: SlashMenu.configure({
+        suggestion: slashMenuSuggestion(5),
+      }),
+    },
+
+    { name: "Typography", extension: Typography },
+    {
+      name: "Youtube",
+      extension: Youtube.configure({
+        inline: false,
+      }),
+    },
+    {
+      name: "Localize",
+      extension: Localize.configure({
+        translations: {
+          control: {
+            save: "Сохранить",
+            cancel: "Отменить",
+            delete: "Удалить",
+          },
+          inlineTools: {
+            link: {
+              modal: {
+                title: "Введите ссылку",
+              },
+              form: {
+                label: "Ссылка:",
+                placeholder: "https://google.com",
+              },
             },
-          ),
+          },
+          blockTools: {
+            youtube: {
+              modal: {
+                title: "Введите ссылку на видео в Youtube",
+              },
+              form: {
+                label: "Ссылка",
+                placeholder: "https://www.youtube.com/watch?v=...",
+                error: "Невалидный адрес Youtube",
+              },
+            },
+          },
+          extensions: {
+            SlashMenu: {
+              nothingFound: "Ничего не найдено",
+              showAll: "Все блоки",
+            },
+            Modal: {
+              BlocksModal: {
+                title: "Все блоки",
+              },
+            },
+          },
+          toolbar: {
+            more: "Еще",
+            up: "Вверх",
+            down: "Вниз",
+            transformTo: "Заменить:",
+          },
         },
-        {
-          name: 'Localize',
-          extension: Localize.configure({
-            translations: {
-              control: {
-                'save': 'Сохранить',
-                'cancel': 'Отменить', 
-                'delete': 'Удалить'
-              },
-              inlineTools: {
-                link:{
-                  modal:{
-                    title: 'Введите ссылку',
-                  },
-                  form:{
-                    label: 'Ссылка:',
-                    placeholder: 'https://google.com'
-                  }
-                }
-              },
-              blockTools: {
-                youtube:{
-                  modal:{
-                    title: 'Введите ссылку на видео в Youtube',
-                  },
-                  form:{
-                    label: 'Ссылка',
-                    placeholder: 'https://www.youtube.com/watch?v=...',
-                    error: 'Невалидный адрес Youtube',
-                  },
-                }
-              },
-              extensions:{
-                SlashMenu: {
-                  nothingFound: 'Ничего не найдено',
-                  showAll: 'Все блоки'
-                },
-                Modal: {
-                  BlocksModal: {
-                    title: 'Все блоки'
-                  }
-                }
-              },
-              toolbar: {
-                more: 'Еще',
-                up: 'Вверх',
-                down: 'Ввниз',
-                transformTo: 'Заменить:'
-              }
-            }
-          })
-        },
-    ]
+      }),
+    },
+  ];
 }
